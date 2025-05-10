@@ -42,5 +42,5 @@ down: ## Down dev
 .PHONY: down
 
 bash: ## Bash dev
-	docker exec -it magento-api-platform-php-1 bash
+	docker exec -it crm-api-platform-php-1 bash
 .PHONY: bash
