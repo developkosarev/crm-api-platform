@@ -6,6 +6,7 @@ Refer to the [Getting Started Guide](https://api-platform.com/docs/distribution)
 
 ## Commands
 ```
+php bin/console lexik:jwt:generate-keypair
 php bin/console app:create-user user@example.com password123 ROLE_ADMIN
 ```
  
