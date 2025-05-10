@@ -15,11 +15,13 @@ use App\Repository\UserRepository;
 use App\State\UserPasswordHasher;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Uid\Ulid;
 
 #[ApiResource(
     uriTemplate: '/api/users{._format}',
@@ -30,7 +32,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     ],
     normalizationContext: ['groups' => ['user:read']],
     denormalizationContext: ['groups' => ['user:create', 'user:update']],
-    //security: "is_granted('ROLE_ADMIN')"
+    security: "is_granted('ROLE_ADMIN')"
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -41,11 +43,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     final public const string ROLE_ADMIN = 'ROLE_ADMIN';
     final public const string ROLE_USER = 'ROLE_USER';
 
+    //#[Groups(['user:read'])]
+    //#[ORM\Id]
+    //#[ORM\GeneratedValue]
+    //#[ORM\Column(type: Types::INTEGER)]
+    //private ?int $id = null;
+
     #[Groups(['user:read'])]
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: Types::INTEGER)]
-    private ?int $id = null;
+    #[ORM\Column(type: UlidType::NAME, unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: 'doctrine.ulid_generator')]
+    private ?Ulid $id;
 
     #[Assert\NotBlank]
     #[Assert\Email]
@@ -60,7 +69,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [self::ROLE_USER];
 
     /**
-     * @var string The hashed password
+     * @var ?string The hashed password
      */
     #[ORM\Column]
     private ?string $password = null;
@@ -69,7 +78,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['user:create', 'user:update'])]
     private ?string $plainPassword = null;
 
-    public function getId(): ?int
+    //public function getId(): ?int
+    //{
+    //    return $this->id;
+    //}
+    public function getId(): ?Ulid
     {
         return $this->id;
     }
