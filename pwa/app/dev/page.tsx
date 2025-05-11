@@ -1,3 +1,5 @@
+import '../../styles/api-platform.css'
+
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,7 +17,7 @@ import "@fontsource/poppins/700.css";
 const Welcome = () => (
   <div className="w-full overflow-x-hidden">
     <Head>
-      <title>Contact!</title>
+      <title>dev!</title>
     </Head>
     <section className="w-full bg-spider-cover relative">
       <a
@@ -53,7 +55,7 @@ const Welcome = () => (
         <div className="flex flex-1 flex-col items-center text-center | md:text-left md:items-start">
           <h1>
             <span className="block text-4xl text-cyan-200 font-bold mb-2">
-              Welcome to CRM
+              Welcome to CRM dev
             </span>
             <Image alt="API Platform" src={logo} />
           </h1>
