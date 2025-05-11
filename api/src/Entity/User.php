@@ -36,7 +36,7 @@ use Symfony\Component\Uid\Ulid;
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-#[ORM\Table(name: 'app_user')]
+#[ORM\Table(name: 'user_entity')]
 #[UniqueEntity('email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {

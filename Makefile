@@ -1,5 +1,7 @@
 DOCKER_COMPOSE_DEV = docker compose
 
+CONTAINER_NAME_CRM = crm-api-platform-php-1
+
 args = `arg="$(filter-out $(firstword $(MAKECMDGOALS)),$(MAKECMDGOALS))" && echo $${arg:-${1}}`
 
 green  = $(shell printf "\e[32;01m$1\e[0m")
@@ -24,6 +26,8 @@ help:
 	@echo "$(call format,stop,'Stop dev')"
 	@echo "$(call format,down,'Down dev')"
 	@echo "$(call format,bash,'Bash dev')"
+	@echo "$(call red,===============================)"
+	@echo "$(call format,crm-fixture,'Crm fixture load')"
 
 build: ## Start dev
 	$(DOCKER_COMPOSE_DEV) build --no-cache
@@ -44,3 +48,9 @@ down: ## Down dev
 bash: ## Bash dev
 	docker exec -it crm-api-platform-php-1 bash
 .PHONY: bash
+
+
+## Tests
+crm-fixture:
+	docker exec -it $(CONTAINER_NAME_CRM) php bin/console doctrine:fixtures:load
+.PHONY:
