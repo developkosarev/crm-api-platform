@@ -19,7 +19,7 @@ security:
             provider: app_user_provider
             entry_point: jwt
             json_login:
-                check_path: auth # The name in routes.yaml is enough for mapping
+                check_path: /api/login #auth # The name in routes.yaml is enough for mapping
                 username_path: email
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
@@ -27,7 +27,6 @@ security:
             jwt: ~
             refresh_jwt:
                 check_path: /api/token/refresh # or, you may use the `api_refresh_token` route name
-                provider: app_user_provider
             #    # or if you have more than one user provider
             #    # provider: user_provider_name
 
@@ -38,20 +37,14 @@ security:
             # https://symfony.com/doc/current/security.html#the-firewall
 
             # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-        #api_token_refresh:
-        #    pattern: ^/api/token/refresh
-        #    stateless: true
-        #    user_checker: app_user_provider
-        #    refresh_jwt: ~    
+            # switch_user: true        
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/auth, roles: PUBLIC_ACCESS }
+        # - { path: ^/auth, roles: PUBLIC_ACCESS }
         - { path: ^/api/(login|token/refresh), roles: PUBLIC_ACCESS }
 
 when@test:

@@ -9,7 +9,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * This is a dummy entity. Remove it!
  */
-#[ApiResource(mercure: true)]
+#[ApiResource(
+    mercure: true,
+    security: "is_granted('ROLE_USER')"
+)]
 #[ORM\Entity]
 class Greeting
 {
