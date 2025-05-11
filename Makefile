@@ -1,6 +1,7 @@
 DOCKER_COMPOSE_DEV = docker compose
 
 CONTAINER_NAME_CRM = crm-api-platform-php-1
+CONTAINER_NAME_PWA = crm-api-platform-pwa-1
 
 args = `arg="$(filter-out $(firstword $(MAKECMDGOALS)),$(MAKECMDGOALS))" && echo $${arg:-${1}}`
 
@@ -27,6 +28,9 @@ help:
 	@echo "$(call format,down,'Down dev')"
 	@echo "$(call format,bash,'Bash dev')"
 	@echo "$(call red,===============================)"
+	@echo "$(call format,restart-pwa,'Restart pwa dev')"
+	@echo "$(call format,bash-pwa,   'Bash pwa dev')"
+	@echo "$(call red,===============================)"
 	@echo "$(call format,crm-fixture,'Crm fixture load')"
 
 build: ## Start dev
@@ -46,8 +50,18 @@ down: ## Down dev
 .PHONY: down
 
 bash: ## Bash dev
-	docker exec -it crm-api-platform-php-1 bash
+	docker exec -it $(CONTAINER_NAME_CRM) bash
 .PHONY: bash
+
+
+## PWA
+restart-pwa:
+	$(DOCKER_COMPOSE_DEV) restart pwa
+.PHONY:
+
+bash-pwa:
+	docker exec -it $(CONTAINER_NAME_PWA) bash
+.PHONY:
 
 
 ## Tests
