@@ -1,4 +1,4 @@
-import type { AuthOptions } from 'next-auth'
+import type { AuthOptions, User } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 export const authConfig: AuthOptions = {
@@ -6,11 +6,11 @@ export const authConfig: AuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: { label: "Username", type: "email", required: true, placeholder: "jsmith" },
+        email: { label: "Username", type: "email", required: true, placeholder: "jsmith" },
         password: { label: "Password", type: "password", required: true }
       },
       async authorize(credentials, req) {
-        if (!credentials?.username || !credentials.password) return null;
+        if (!credentials?.email || !credentials.password) return null;
 
         // You need to provide your own logic here that takes the credentials
         // submitted and returns either a object representing a user or value
@@ -18,23 +18,16 @@ export const authConfig: AuthOptions = {
         // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
-        const res = await fetch("/your/endpoint", {
+        const res = await fetch("http://php/api/login", {
           method: 'POST',
           body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" }
+          headers: { "Content-Type": "application/ld+json" }
         })
-        const user = await res.json()
-
-        console.log(credentials)
-        return {
-          token : '111111'
-        }
-
-        console.log(user)
+        const token = await res.json()
 
         // If no error and we have user data, return it
-        if (res.ok && user) {
-          return user
+        if (res.ok && token) {
+          return token
         }
         // Return null if user data could not be retrieved
         return null
