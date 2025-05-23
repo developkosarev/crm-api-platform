@@ -2,14 +2,14 @@
 
 import { useRef, useState } from 'react';
 import Link from 'next/link';
-import { IconRss } from '@tabler/icons-react';
-import { useOnClickOutside } from '~/hooks/useOnClickOutside';
-import ToggleDarkMode from '~/components/atoms/ToggleDarkMode';
+//import { IconRss } from '@tabler/icons-react';
+import { useOnClickOutside } from '@/src/hooks/useOnClickOutside';
+import ToggleDarkMode from '@/src/components/atoms/ToggleDarkMode';
 import Logo from '@/src/components/atoms/Logo';
-import ToggleMenu from '../atoms/ToggleMenu';
-import CTA from '../common/CTA';
-import { CallToActionType } from '~/shared/types';
-import { headerData } from '~/shared/data/global.data';
+import ToggleMenu from '@/src/components/atoms/ToggleMenu';
+import CTA from '@/src/common/CTA';
+import { CallToActionType } from '@/src/shared/types';
+import { headerData } from '@/src/shared/data/global.data';
 
 const Header = () => {
   const { links, actions, isSticky, showToggleTheme, showRssFeed, position } = headerData;
@@ -157,7 +157,9 @@ const Header = () => {
                 aria-label="RSS Feed"
                 href=""
               >
+                {/*
                 <IconRss className="h-5 w-5" />
+                */}
               </Link>
             )}
             {actions && actions.length > 0 && (
