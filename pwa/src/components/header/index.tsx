@@ -10,8 +10,11 @@ import ToggleMenu from '@/src/components/atoms/ToggleMenu';
 import CTA from '@/src/common/CTA';
 import { CallToActionType } from '@/src/shared/types';
 import { headerData } from '@/src/shared/data/global.data';
+import { useSession, signOut } from 'next-auth/react';
 
 const Header = () => {
+  const session = useSession();
+
   const { links, actions, isSticky, showToggleTheme, showRssFeed, position } = headerData;
 
   const ref = useRef(null);
@@ -81,6 +84,7 @@ const Header = () => {
             <ToggleMenu handleToggleMenuOnClick={handleToggleMenuOnClick} isToggleMenuOpen={isToggleMenuOpen} />
           </div>
         </div>
+
         <nav
           className={`${isToggleMenuOpen ? 'block px-3' : 'hidden'} h-screen md:w-full ${
             position === 'right' ? 'justify-end' : position === 'left' ? 'justify-start' : 'justify-center'
@@ -140,6 +144,7 @@ const Header = () => {
               ))}
           </ul>
         </nav>
+
         <div
           className={`${
             isToggleMenuOpen ? 'block' : 'hidden'
@@ -167,6 +172,16 @@ const Header = () => {
                 ))}
               </div>
             )}
+
+            {session?.data && (
+              <Link href="/dashboard">Dashboard</Link>
+            )}
+
+            {session?.data ?
+              <Link href="#" onClick={() => signOut({ callbackUrl: "/"})}>Sign Out</Link> :
+              <Link href="/api/auth/signin">Sign In</Link>
+            }
+
           </div>
         </div>
       </div>
