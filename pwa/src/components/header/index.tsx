@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import Link from 'next/link';
-//import { IconRss } from '@tabler/icons-react';
+import { IconRss } from '@tabler/icons-react';
 import { useOnClickOutside } from '@/src/hooks/useOnClickOutside';
 import ToggleDarkMode from '@/src/components/atoms/ToggleDarkMode';
 import Logo from '@/src/components/atoms/Logo';
@@ -16,11 +16,9 @@ const Header = () => {
 
   const ref = useRef(null);
 
-  const updatedIsDropdownOpen =
-    links &&
-    links.map(() => {
+  const updatedIsDropdownOpen = links && links.map(() => {
       return false;
-    });
+  });
 
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean[]>(updatedIsDropdownOpen as boolean[]);
   const [isToggleMenuOpen, setIsToggleMenuOpen] = useState<boolean>(false);
@@ -111,11 +109,9 @@ const Header = () => {
                           />
                         )}
                       </button>
-                      <ul
-                        className={`${
-                          isDropdownOpen[index] ? 'block' : 'md:hidden'
-                        } rounded pl-4 font-medium drop-shadow-xl md:absolute md:min-w-[200px] md:bg-white/90 md:pl-0 md:backdrop-blur-md dark:md:bg-slate-900/90 md:border md:border-gray-200 md:dark:border-slate-700`}
-                      >
+
+                      {/* Links */}
+                      <ul className={`${isDropdownOpen[index] ? 'block' : 'md:hidden'} rounded pl-4 font-medium drop-shadow-xl md:absolute md:min-w-[200px] md:bg-white/90 md:pl-0 md:backdrop-blur-md dark:md:bg-slate-900/90 md:border md:border-gray-200 md:dark:border-slate-700`}>
                         {links.map(({ label: label2, href: href2 }, index2) => (
                           <li key={`item-link-${index2}`}>
                             <Link
@@ -157,9 +153,7 @@ const Header = () => {
                 aria-label="RSS Feed"
                 href=""
               >
-                {/*
                 <IconRss className="h-5 w-5" />
-                */}
               </Link>
             )}
             {actions && actions.length > 0 && (

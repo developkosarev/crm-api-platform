@@ -1,7 +1,7 @@
 import '@/app/ui/global.css';
 import { inter } from '@/app/ui/fonts';
-import Header from '@/src/components/widgets/Header';
-import Footer from '@/src/components/widgets/Footer';
+import Header from '@/src/components/header';
+import Footer from '@/src/components/footer';
 
 export default function RootLayout({
   children,
