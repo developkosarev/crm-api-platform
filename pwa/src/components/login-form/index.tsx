@@ -1,3 +1,5 @@
+"use client";
+
 import { lusitana } from '@/app/ui/fonts';
 import {
   AtSymbolIcon,
@@ -7,9 +9,33 @@ import {
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from './button';
 
+import { useRouter } from 'next/navigation';
+import { signIn } from "next-auth/react";
+import type { FormEventHandler } from "react";
+
 export default function LoginForm() {
+  const router = useRouter();
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+
+    const res = await signIn("credentials", {
+      email: formData.get("email"),
+      password: formData.get("password"),
+      redirect: false,
+    });
+
+    if (res && !res.error) {
+      router.push("/dashboard");
+    } else {
+      console.log(res);
+    }
+  };
+
   return (
-    <form className="space-y-3">
+    <form className="space-y-3" onSubmit={handleSubmit}>
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
         <h1 className={`${lusitana.className} mb-3 text-2xl`}>
           Please log in to continue.
