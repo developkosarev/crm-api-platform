@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import Link from 'next/link';
-//import { IconRss } from '@tabler/icons-react';
+import { IconRss } from '@tabler/icons-react';
 import { useOnClickOutside } from '@/src/hooks/useOnClickOutside';
 import ToggleDarkMode from '@/src/components/atoms/ToggleDarkMode';
 import Logo from '@/src/components/atoms/Logo';
@@ -10,17 +10,18 @@ import ToggleMenu from '@/src/components/atoms/ToggleMenu';
 import CTA from '@/src/common/CTA';
 import { CallToActionType } from '@/src/shared/types';
 import { headerData } from '@/src/shared/data/global.data';
+import { useSession, signOut } from 'next-auth/react';
 
 const Header = () => {
+  const session = useSession();
+
   const { links, actions, isSticky, showToggleTheme, showRssFeed, position } = headerData;
 
   const ref = useRef(null);
 
-  const updatedIsDropdownOpen =
-    links &&
-    links.map(() => {
+  const updatedIsDropdownOpen = links && links.map(() => {
       return false;
-    });
+  });
 
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean[]>(updatedIsDropdownOpen as boolean[]);
   const [isToggleMenuOpen, setIsToggleMenuOpen] = useState<boolean>(false);
@@ -83,6 +84,7 @@ const Header = () => {
             <ToggleMenu handleToggleMenuOnClick={handleToggleMenuOnClick} isToggleMenuOpen={isToggleMenuOpen} />
           </div>
         </div>
+
         <nav
           className={`${isToggleMenuOpen ? 'block px-3' : 'hidden'} h-screen md:w-full ${
             position === 'right' ? 'justify-end' : position === 'left' ? 'justify-start' : 'justify-center'
@@ -111,11 +113,9 @@ const Header = () => {
                           />
                         )}
                       </button>
-                      <ul
-                        className={`${
-                          isDropdownOpen[index] ? 'block' : 'md:hidden'
-                        } rounded pl-4 font-medium drop-shadow-xl md:absolute md:min-w-[200px] md:bg-white/90 md:pl-0 md:backdrop-blur-md dark:md:bg-slate-900/90 md:border md:border-gray-200 md:dark:border-slate-700`}
-                      >
+
+                      {/* Links */}
+                      <ul className={`${isDropdownOpen[index] ? 'block' : 'md:hidden'} rounded pl-4 font-medium drop-shadow-xl md:absolute md:min-w-[200px] md:bg-white/90 md:pl-0 md:backdrop-blur-md dark:md:bg-slate-900/90 md:border md:border-gray-200 md:dark:border-slate-700`}>
                         {links.map(({ label: label2, href: href2 }, index2) => (
                           <li key={`item-link-${index2}`}>
                             <Link
@@ -144,6 +144,7 @@ const Header = () => {
               ))}
           </ul>
         </nav>
+
         <div
           className={`${
             isToggleMenuOpen ? 'block' : 'hidden'
@@ -157,9 +158,7 @@ const Header = () => {
                 aria-label="RSS Feed"
                 href=""
               >
-                {/*
                 <IconRss className="h-5 w-5" />
-                */}
               </Link>
             )}
             {actions && actions.length > 0 && (
@@ -173,6 +172,16 @@ const Header = () => {
                 ))}
               </div>
             )}
+
+            {session?.data && (
+              <Link href="/dashboard">Dashboard</Link>
+            )}
+
+            {session?.data ?
+              <Link href="#" onClick={() => signOut({ callbackUrl: "/"})}>Sign Out</Link> :
+              <Link href="/api/auth/signin">Sign In</Link>
+            }
+
           </div>
         </div>
       </div>

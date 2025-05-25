@@ -29,7 +29,10 @@ export const authConfig: AuthOptions = {
         // If no error and we have user data, return it
         if (res.ok && data.token) {
           const decoded = decodeJwt(data.token)
+          console.log('0000-decode')
           console.log(decoded)
+          console.log('0000-data')
+          console.log(data)
 
           if (!decoded) { return null }
 
@@ -37,7 +40,8 @@ export const authConfig: AuthOptions = {
             id: decoded.sub || decoded.id,
             name: decoded.username,
             email: decoded.email,
-            token: data.token
+            token: data.token,
+            refreshToken: data.refresh_token,
           } as User
         }
 
@@ -49,10 +53,12 @@ export const authConfig: AuthOptions = {
 
   callbacks: {
     async jwt({ token, user }) {
-      console.log(3333)
+      console.log('1111-user')
       console.log(user)
+      console.log('1111-token')
       console.log(token)
 
+      console.log(2222)
       if (user) {
         return {
           ...token,
@@ -64,24 +70,33 @@ export const authConfig: AuthOptions = {
         }
       }
 
+      return token
+
+      console.log(3333)
+      console.log(Date.now())
+      console.log(token.accessTokenExpires)
       // Проверяем актуальность токена
       if (Date.now() < token.accessTokenExpires) {
         return token
       }
 
+      console.log(4444)
       // Обновляем токен
       return await refreshAccessToken(token)
     },
 
-    async session({ session, token }) {
-      console.log(4444)
-
-      session.user.name = token.name
-      session.user.email = token.email
-      (session as any).accessToken = token.accessToken
-      (session as any).error = token.error
-      return session
-    }
+    //async session({ session, token }) {
+    //  console.log(4444)
+    //
+    //  session.user.name = token.name
+    //  session.user.email = token.name
+    //  (session as any).accessToken = token.accessToken
+    //  (session as any).error = token.error
+    //
+    //  console.log(5555)
+    //
+    //  return session
+    //}
   },
 
   session: {
@@ -89,6 +104,9 @@ export const authConfig: AuthOptions = {
   },
 
   secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: '/login'
+  }
 }
 
 async function refreshAccessToken(token: any) {

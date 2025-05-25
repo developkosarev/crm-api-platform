@@ -57,16 +57,20 @@ export const headerData: HeaderProps = {
     },
   ],
   actions: [
+    //{
+    //  text: 'Download',
+    //  href: 'https://github.com/onwidget/tailnext',
+    //  targetBlank: true,
+    //},
     {
-      text: 'Download',
-      href: 'https://github.com/onwidget/tailnext',
-      targetBlank: true,
+      text: 'Login',
+      href: '/api/auth/signin'
     },
   ],
-  isSticky: true,
+  isSticky: false,
   showToggleTheme: true,
   showRssFeed: false,
-  position: 'right',
+  position: 'left',
 };
 
 // Footer data
