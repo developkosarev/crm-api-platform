@@ -11,6 +11,7 @@ import CTA from '@/src/common/CTA';
 import { CallToActionType } from '@/src/shared/types';
 import { headerData } from '@/src/shared/data/global.data';
 import { useSession, signOut } from 'next-auth/react';
+import Login from "./Login";
 
 const Header = () => {
   const session = useSession();
@@ -114,7 +115,7 @@ const Header = () => {
                         )}
                       </button>
 
-                      {/* Links */}
+                      {/* <!-- Links --> */}
                       <ul className={`${isDropdownOpen[index] ? 'block' : 'md:hidden'} rounded pl-4 font-medium drop-shadow-xl md:absolute md:min-w-[200px] md:bg-white/90 md:pl-0 md:backdrop-blur-md dark:md:bg-slate-900/90 md:border md:border-gray-200 md:dark:border-slate-700`}>
                         {links.map(({ label: label2, href: href2 }, index2) => (
                           <li key={`item-link-${index2}`}>
@@ -142,6 +143,18 @@ const Header = () => {
                   )}
                 </li>
               ))}
+
+            {/* <!-- Dashboard --> */}
+            {session?.data && (
+              <Link
+                  className="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
+                  href="/dashboard"
+                  onClick={() => (isToggleMenuOpen ? handleToggleMenuOnClick() : handleDropdownOnClick(index))}
+              >
+                Dashboard
+              </Link>
+            )}
+
           </ul>
         </nav>
 
@@ -151,6 +164,8 @@ const Header = () => {
           } fixed bottom-0 left-0 w-full justify-end p-3 md:static md:mb-0 md:flex md:w-auto md:self-center md:p-0 md:bg-transparent md:dark:bg-transparent md:border-none bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-600`}
         >
           <div className="flex w-full items-center justify-between md:w-auto">
+
+            {/*
             {showToggleTheme && <ToggleDarkMode />}
             {showRssFeed && (
               <Link
@@ -161,6 +176,9 @@ const Header = () => {
                 <IconRss className="h-5 w-5" />
               </Link>
             )}
+            */}
+
+            {/*
             {actions && actions.length > 0 && (
               <div className="ml-4 rtl:ml-0 rtl:mr-4 flex w-max flex-wrap justify-end">
                 {actions.map((callToAction, index) => (
@@ -172,15 +190,10 @@ const Header = () => {
                 ))}
               </div>
             )}
+            */}
 
-            {session?.data && (
-              <Link href="/dashboard">Dashboard</Link>
-            )}
-
-            {session?.data ?
-              <Link href="#" onClick={() => signOut({ callbackUrl: "/"})}>Sign Out</Link> :
-              <Link href="/api/auth/signin">Sign In</Link>
-            }
+            {/* <!-- Login --> */}
+            <Login></Login>
 
           </div>
         </div>
