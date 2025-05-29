@@ -11,26 +11,44 @@ import { Button } from './button';
 
 import { useRouter } from 'next/navigation';
 import { signIn } from "next-auth/react";
+import { useState } from 'react';
 import type { FormEventHandler } from "react";
 
 export default function LoginForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
   const router = useRouter();
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
+    setIsSubmitting(true)
+    setError(null)
 
     const formData = new FormData(event.currentTarget);
 
-    const res = await signIn("credentials", {
-      email: formData.get("email"),
-      password: formData.get("password"),
-      redirect: false,
-    });
+    try {
+      console.log('Sending form')
 
-    if (res && !res.error) {
-      router.push("/dashboard");
-    } else {
-      console.log(res);
+      const res = await signIn("credentials", {
+        email: formData.get("email"),
+        password: formData.get("password"),
+        redirect: false,
+      });
+
+      if (res && !res.error) {
+        router.push("/dashboard");
+      } else {
+        console.log('res');
+        console.log(res);
+
+        setError(`${res.error} status ${res.status}.` || 'Something went wrong');
+      }
+    } catch (err) {
+      console.log('catch')
+      console.log(err)
+      setError(err.error || 'Something went wrong');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -66,13 +84,21 @@ export default function LoginForm() {
           </div>
         </div>
 
-        <Button className="mt-4 w-full">
-          Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+        <Button
+          className="mt-4 w-full"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Sending...' : 'Log in'}
+          <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
         </Button>
 
-        <div className="flex h-8 items-end space-x-1">
-          {/* Add form errors here */}
-        </div>
+        {/* Add form errors here */}
+        {error && (
+          <div className="flex h-8 items-end space-x-1">
+            {error}
+          </div>
+        )}
+
       </div>
     </form>
   );
