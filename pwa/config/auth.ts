@@ -65,7 +65,7 @@ export const authConfig: AuthOptions = {
       if (user) {
         return {
           ...token,
-          //accessToken: user.token,
+          token: user.token,
           //refreshToken: user.refreshToken,
           accessTokenExpires: user.accessTokenExpires,
           name: user.email,

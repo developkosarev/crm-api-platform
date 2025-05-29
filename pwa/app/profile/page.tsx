@@ -1,5 +1,7 @@
 import { getServerSession } from 'next-auth/next'
 import {authConfig} from "@/config/auth";
+import ClientGreetingButton from "@/src/components/greeting";
+
 export default async function Page() {
   const session = await getServerSession(authConfig)
 
@@ -14,6 +16,9 @@ export default async function Page() {
           <li>Email: {session?.user?.email}</li>
         </ul>
         <pre>{JSON.stringify(session, null, 2)}</pre>
+        <div>
+          <ClientGreetingButton />
+        </div>
       </div>
     </div>
   );
