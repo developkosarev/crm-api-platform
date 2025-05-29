@@ -1,6 +1,6 @@
 "use client";
 
-import { lusitana } from '@/app/ui/fonts';
+import { inter } from '@/app/ui/fonts';
 import {
   AtSymbolIcon,
   KeyIcon,
@@ -36,7 +36,7 @@ export default function LoginForm() {
       });
 
       if (res && !res.error) {
-        router.push("/dashboard");
+        router.push("/profile");
       } else {
         console.log('res');
         console.log(res);
@@ -55,7 +55,7 @@ export default function LoginForm() {
   return (
     <form className="space-y-3" onSubmit={handleSubmit}>
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
-        <h1 className={`${lusitana.className} mb-3 text-2xl`}>
+        <h1 className={`${inter.className} mb-3 text-2xl`}>
           Please log in to continue.
         </h1>
 
@@ -85,8 +85,9 @@ export default function LoginForm() {
         </div>
 
         <Button
-          className="mt-4 w-full"
+          type="submit"
           disabled={isSubmitting}
+          className="mt-4 w-full"
         >
           {isSubmitting ? 'Sending...' : 'Log in'}
           <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />

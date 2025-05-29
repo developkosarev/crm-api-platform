@@ -7,7 +7,7 @@ export const authConfig: AuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: "Username", type: "email", required: true, placeholder: "jsmith" },
+        email: { label: "Username", type: "email", required: true, placeholder: "user@example.com" },
         password: { label: "Password", type: "password", required: true }
       },
       async authorize(credentials, req) {
@@ -29,19 +29,22 @@ export const authConfig: AuthOptions = {
         // If no error and we have user data, return it
         if (res.ok && data.token) {
           const decoded = decodeJwt(data.token)
-          console.log('0000-decode')
+          console.log('00-authorize-decode')
           console.log(decoded)
-          console.log('0000-data')
+          console.log('00-authorize-data')
           console.log(data)
 
           if (!decoded) { return null }
 
           return {
-            id: decoded.sub || decoded.id,
-            name: decoded.username,
-            email: decoded.email,
+            id: decoded.username,
+            email: decoded.username,
+            roles: decoded.roles,
+            iat: decoded.iat,
+            exp: decoded.exp,
+
             token: data.token,
-            refreshToken: data.refresh_token,
+            refreshToken: data.refresh_token
           } as User
         }
 
@@ -53,19 +56,19 @@ export const authConfig: AuthOptions = {
 
   callbacks: {
     async jwt({ token, user }) {
-      console.log('1111-user')
+      console.log('01-callbacks-jwt-user')
       console.log(user)
-      console.log('1111-token')
+      console.log('01-callbacks-jwt-token')
       console.log(token)
 
       console.log(2222)
       if (user) {
         return {
           ...token,
-          accessToken: user.token,
-          refreshToken: user.refreshToken,
+          //accessToken: user.token,
+          //refreshToken: user.refreshToken,
           accessTokenExpires: user.accessTokenExpires,
-          name: user.name,
+          name: user.email,
           email: user.email,
         }
       }
@@ -84,6 +87,15 @@ export const authConfig: AuthOptions = {
       // Обновляем токен
       return await refreshAccessToken(token)
     },
+
+    async session({ session, token }) {
+      console.log('05-session-session')
+      console.log(session)
+      console.log('05-session-token')
+      console.log(token)
+
+      return {...session, ...token}
+    }
 
     //async session({ session, token }) {
     //  console.log(4444)
@@ -114,7 +126,7 @@ async function refreshAccessToken(token: any) {
     const response = await fetch('http://php/api/token/refresh', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/ld+json'
       },
       body: JSON.stringify({
         refresh_token: token.refreshToken,
