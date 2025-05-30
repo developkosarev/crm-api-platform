@@ -107,7 +107,6 @@ export const footerData: FooterProps = {
     { label: 'RSS', icon: IconRss, href: '#' },
     { label: 'Github', icon: IconBrandGithub, href: 'https://github.com/onwidget/tailnext' },
   ],
-   */
   footNote: (
     <div className="mr-4 rtl:mr-0 rtl:ml-4 text-sm">
       <span className="float-left rtl:float-right mr-1.5 rtl:mr-0 rtl:ml-1.5 h-5 w-5 rounded-sm bg-[url(https://onwidget.com/favicon/favicon-32x32.png)] bg-cover md:-mt-0.5 md:h-6 md:w-6"></span>
@@ -124,4 +123,5 @@ export const footerData: FooterProps = {
       </span>
     </div>
   ),
+  */
 };
