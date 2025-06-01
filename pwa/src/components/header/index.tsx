@@ -12,6 +12,7 @@ import { CallToActionType } from '@/src/shared/types';
 import { headerData } from '@/src/shared/data/global.data';
 //import { useSession, signOut } from 'next-auth/react';
 import Login from "./Login";
+import Logout from "./Logout";
 
 const Header = () => {
   //const session = useSession();
@@ -199,6 +200,7 @@ const Header = () => {
 
             {/* <!-- Login --> */}
             <Login></Login>
+            <Logout></Logout>
 
           </div>
         </div>
