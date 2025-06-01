@@ -51,6 +51,7 @@ export const authConfig: AuthOptions = {
             roles: decoded.roles,
             iat: decoded.iat,
             exp: decoded.exp,
+            accessTokenExpires: decoded.exp,
 
             token: data.token,
             refreshToken: data.refresh_token
@@ -64,39 +65,39 @@ export const authConfig: AuthOptions = {
   ],
 
   callbacks: {
-    async jwt({ token, user, profile }) {
+    async jwt({ token, user }) {
       console.log('=============== 01 ======================');
       //user as User
       console.log('01-callbacks-jwt-user')
       console.log(user)
       console.log('01-callbacks-jwt-token')
       console.log(token)
-      console.log('01-callbacks-jwt-profile')
-      console.log(profile)
 
       console.log(2222)
       if (user) {
         return {
           ...token,
           token: user.token,
-          //refreshToken: user.refreshToken,
+          refreshToken: user.refreshToken,
+
           accessTokenExpires: user.accessTokenExpires,
           name: user.email,
           email: user.email,
         }
       }
 
-      return token
-
+      const now = Math.floor(Date.now() / 1000);
       console.log(3333)
-      console.log(Date.now())
+      console.log(now)
       console.log(token.accessTokenExpires)
       // Проверяем актуальность токена
-      if (Date.now() < token.accessTokenExpires) {
+      if (now < token.accessTokenExpires) {
         return token
       }
 
-      console.log(4444)
+      //return token
+
+      console.log('01-callbacks-token-expires')
       // Обновляем токен
       return await refreshAccessToken(token)
     },
@@ -108,6 +109,10 @@ export const authConfig: AuthOptions = {
       console.log(session)
       console.log('05-session-token')
       console.log(token)
+
+      if (!token?.email) {
+        return null;
+      }
 
       return {...session, ...token}
     }
@@ -148,6 +153,10 @@ export const authConfig: AuthOptions = {
 }
 
 async function refreshAccessToken(token: any) {
+  console.log('=============== 07 ======================');
+  console.log(token);
+  const refreshToken = token.refreshToken;
+
   try {
     const response = await fetch('http://php/api/token/refresh', {
       method: 'POST',
@@ -155,19 +164,23 @@ async function refreshAccessToken(token: any) {
         'Content-Type': 'application/ld+json'
       },
       body: JSON.stringify({
-        refresh_token: token.refreshToken,
+        refresh_token: refreshToken,
       })
     })
 
     const refreshedTokens = await response.json()
+    console.log('07-refreshed-token');
+    console.log(refreshedTokens);
 
     if (!response.ok) throw refreshedTokens
 
+    const decoded = decodeJwt(refreshedTokens.token)
+
     return {
       ...token,
-      accessToken: refreshedTokens.token,
+      token: refreshedTokens.token,
       refreshToken: refreshedTokens.refresh_token,
-      accessTokenExpires: Date.now() + refreshedTokens.expires_in * 1000,
+      accessTokenExpires: decoded.exp,
     }
 
   } catch (error) {
