@@ -36,6 +36,15 @@ export const authConfig: AuthOptions = {
 
           if (!decoded) { return null }
 
+          const decodeIat = new Date(decoded.iat * 1000);
+          const iatFormatted = `${decodeIat.getDate()}.${decodeIat.getMonth() + 1}.${decodeIat.getFullYear()} ${decodeIat.getHours()}:${decodeIat.getMinutes()}:${decodeIat.getSeconds()}`;
+
+          const decodeExp = new Date(decoded.exp * 1000);
+          const expFormatted = `${decodeExp.getDate()}.${decodeExp.getMonth() + 1}.${decodeExp.getFullYear()} ${decodeExp.getHours()}:${decodeExp.getMinutes()}:${decodeExp.getSeconds()}`;
+          console.log(`00-authorize-iat: ${iatFormatted}`);
+          console.log(`00-authorize-exp: ${expFormatted}`);
+          console.log('=============== 00 ======================');
+
           return {
             id: decoded.username,
             email: decoded.username,
@@ -55,11 +64,15 @@ export const authConfig: AuthOptions = {
   ],
 
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, profile }) {
+      console.log('=============== 01 ======================');
+      //user as User
       console.log('01-callbacks-jwt-user')
       console.log(user)
       console.log('01-callbacks-jwt-token')
       console.log(token)
+      console.log('01-callbacks-jwt-profile')
+      console.log(profile)
 
       console.log(2222)
       if (user) {
@@ -88,7 +101,9 @@ export const authConfig: AuthOptions = {
       return await refreshAccessToken(token)
     },
 
+    //client
     async session({ session, token }) {
+      console.log('=============== 05 ======================');
       console.log('05-session-session')
       console.log(session)
       console.log('05-session-token')
@@ -109,10 +124,21 @@ export const authConfig: AuthOptions = {
     //
     //  return session
     //}
+
+    //async signIn({ user, account, profile, email, credentials }) {
+    //  console.log('=============== 00.01 ======================');
+    //  console.log('00.01-signIn-user')
+    //  console.log(user)
+    //
+    //  return true;
+    //}
   },
 
   session: {
     strategy: 'jwt',
+
+    // Seconds - How long until an idle session expires and is no longer valid.
+    //maxAge: 30 * 24 * 60 * 60, // 30 days
   },
 
   secret: process.env.NEXTAUTH_SECRET,
