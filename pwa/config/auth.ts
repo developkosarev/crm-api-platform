@@ -36,12 +36,22 @@ export const authConfig: AuthOptions = {
 
           if (!decoded) { return null }
 
+          const decodeIat = new Date(decoded.iat * 1000);
+          const iatFormatted = `${decodeIat.getDate()}.${decodeIat.getMonth() + 1}.${decodeIat.getFullYear()} ${decodeIat.getHours()}:${decodeIat.getMinutes()}:${decodeIat.getSeconds()}`;
+
+          const decodeExp = new Date(decoded.exp * 1000);
+          const expFormatted = `${decodeExp.getDate()}.${decodeExp.getMonth() + 1}.${decodeExp.getFullYear()} ${decodeExp.getHours()}:${decodeExp.getMinutes()}:${decodeExp.getSeconds()}`;
+          console.log(`00-authorize-iat: ${iatFormatted}`);
+          console.log(`00-authorize-exp: ${expFormatted}`);
+          console.log('=============== 00 ======================');
+
           return {
             id: decoded.username,
             email: decoded.username,
             roles: decoded.roles,
             iat: decoded.iat,
             exp: decoded.exp,
+            accessTokenExpires: decoded.exp,
 
             token: data.token,
             refreshToken: data.refresh_token
@@ -56,6 +66,8 @@ export const authConfig: AuthOptions = {
 
   callbacks: {
     async jwt({ token, user }) {
+      console.log('=============== 01 ======================');
+      //user as User
       console.log('01-callbacks-jwt-user')
       console.log(user)
       console.log('01-callbacks-jwt-token')
@@ -66,33 +78,41 @@ export const authConfig: AuthOptions = {
         return {
           ...token,
           token: user.token,
-          //refreshToken: user.refreshToken,
+          refreshToken: user.refreshToken,
+
           accessTokenExpires: user.accessTokenExpires,
           name: user.email,
           email: user.email,
         }
       }
 
-      return token
-
+      const now = Math.floor(Date.now() / 1000);
       console.log(3333)
-      console.log(Date.now())
+      console.log(now)
       console.log(token.accessTokenExpires)
       // Проверяем актуальность токена
-      if (Date.now() < token.accessTokenExpires) {
+      if (now < token.accessTokenExpires) {
         return token
       }
 
-      console.log(4444)
+      //return token
+
+      console.log('01-callbacks-token-expires')
       // Обновляем токен
       return await refreshAccessToken(token)
     },
 
+    //client
     async session({ session, token }) {
+      console.log('=============== 05 ======================');
       console.log('05-session-session')
       console.log(session)
       console.log('05-session-token')
       console.log(token)
+
+      if (!token?.email) {
+        return null;
+      }
 
       return {...session, ...token}
     }
@@ -109,10 +129,21 @@ export const authConfig: AuthOptions = {
     //
     //  return session
     //}
+
+    //async signIn({ user, account, profile, email, credentials }) {
+    //  console.log('=============== 00.01 ======================');
+    //  console.log('00.01-signIn-user')
+    //  console.log(user)
+    //
+    //  return true;
+    //}
   },
 
   session: {
     strategy: 'jwt',
+
+    // Seconds - How long until an idle session expires and is no longer valid.
+    //maxAge: 30 * 24 * 60 * 60, // 30 days
   },
 
   secret: process.env.NEXTAUTH_SECRET,
@@ -122,6 +153,10 @@ export const authConfig: AuthOptions = {
 }
 
 async function refreshAccessToken(token: any) {
+  console.log('=============== 07 ======================');
+  console.log(token);
+  const refreshToken = token.refreshToken;
+
   try {
     const response = await fetch('http://php/api/token/refresh', {
       method: 'POST',
@@ -129,19 +164,23 @@ async function refreshAccessToken(token: any) {
         'Content-Type': 'application/ld+json'
       },
       body: JSON.stringify({
-        refresh_token: token.refreshToken,
+        refresh_token: refreshToken,
       })
     })
 
     const refreshedTokens = await response.json()
+    console.log('07-refreshed-token');
+    console.log(refreshedTokens);
 
     if (!response.ok) throw refreshedTokens
 
+    const decoded = decodeJwt(refreshedTokens.token)
+
     return {
       ...token,
-      accessToken: refreshedTokens.token,
+      token: refreshedTokens.token,
       refreshToken: refreshedTokens.refresh_token,
-      accessTokenExpires: Date.now() + refreshedTokens.expires_in * 1000,
+      accessTokenExpires: decoded.exp,
     }
 
   } catch (error) {

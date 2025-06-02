@@ -10,11 +10,12 @@ import ToggleMenu from '@/src/components/atoms/ToggleMenu';
 import CTA from '@/src/common/CTA';
 import { CallToActionType } from '@/src/shared/types';
 import { headerData } from '@/src/shared/data/global.data';
-import { useSession, signOut } from 'next-auth/react';
+//import { useSession, signOut } from 'next-auth/react';
 import Login from "./Login";
+import Logout from "./Logout";
 
 const Header = () => {
-  const session = useSession();
+  //const session = useSession();
 
   const { links, actions, isSticky, showToggleTheme, showRssFeed, position } = headerData;
 
@@ -65,6 +66,7 @@ const Header = () => {
       id="header"
     >
       <div className="mx-auto w-full max-w-7xl md:flex md:justify-between md:py-3.5 md:px-4">
+
         <div
           className={`flex justify-between py-3 px-3 md:py-0 md:px-0 ${
             isToggleMenuOpen
@@ -145,6 +147,8 @@ const Header = () => {
               ))}
 
             {/* <!-- Dashboard --> */}
+
+            {/*
             {session?.data && (
               <Link
                   className="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
@@ -154,8 +158,10 @@ const Header = () => {
                 Dashboard
               </Link>
             )}
+            */}
 
           </ul>
+
         </nav>
 
         <div
@@ -194,9 +200,11 @@ const Header = () => {
 
             {/* <!-- Login --> */}
             <Login></Login>
+            <Logout></Logout>
 
           </div>
         </div>
+
       </div>
     </header>
   );

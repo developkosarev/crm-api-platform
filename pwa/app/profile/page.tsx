@@ -5,6 +5,11 @@ import ClientGreetingButton from "@/src/components/greeting";
 export default async function Page() {
   const session = await getServerSession(authConfig)
 
+  const sessionIat = new Date(session?.iat * 1000);
+  const iatFormatted = `${sessionIat.getDate()}.${sessionIat.getMonth() + 1}.${sessionIat.getFullYear()} ${sessionIat.getHours()}:${sessionIat.getMinutes()}:${sessionIat.getSeconds()}`;
+  const sessionExp = new Date(session?.exp * 1000);
+
+
   console.log('session')
   console.log(session)
 
@@ -14,6 +19,9 @@ export default async function Page() {
         <p>Profile</p>
         <ul>
           <li>Email: {session?.user?.email}</li>
+          <li>iat: {sessionIat.toLocaleString()}</li>
+          <li>exp: {sessionExp.toLocaleString()}</li>
+          <li>iat: {iatFormatted}</li>
         </ul>
         <pre>{JSON.stringify(session, null, 2)}</pre>
         <div>
