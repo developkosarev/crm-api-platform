@@ -1,21 +1,21 @@
 import { getServerSession } from 'next-auth/next'
-import {authConfig} from "@/config/auth";
+import { authConfig } from "@/config/auth";
 import ClientGreetingButton from "@/src/components/greeting";
 
 
 export default async function Page() {
   const session = await getServerSession(authConfig)
 
-  if (session?.error === "RefreshAccessTokenError") {
-    console.log('===================222=========================')
-
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
+  //if (session?.error === "RefreshAccessTokenError") {
+  //  console.log('===================222=========================')
+  //
+  //  return {
+  //    redirect: {
+  //      destination: "/login",
+  //      permanent: false,
+  //    },
+  //  };
+  //}
 
   const sessionIat = new Date(session?.iat * 1000);
   const iatFormatted = `${sessionIat.getDate()}.${sessionIat.getMonth() + 1}.${sessionIat.getFullYear()} ${sessionIat.getHours()}:${sessionIat.getMinutes()}:${sessionIat.getSeconds()}`;
