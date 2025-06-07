@@ -17,3 +17,10 @@ php bin/console app:create-user user@example.com password123 ROLE_ADMIN
 ```
 php bin/console debug:router
 ```
+
+## Migration 
+```
+php bin/console doctrine:migrations:diff
+php bin/console doctrine:migrations:execute --up 'DoctrineMigrations\Version20250607125120'
+php bin/console doctrine:migrations:execute --down 'DoctrineMigrations\Version20250607125120'
+```
