@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\OpenApi\Model;
 use App\Dto\BulkCompanyDto;
 use App\State\BulkCompanyProcessor;
 use Doctrine\ORM\Mapping as ORM;
@@ -21,9 +22,43 @@ use Symfony\Component\Uid\Ulid;
         new Post(uriTemplate: '/company'),
         new Post(
             uriTemplate: '/company/bulk',
+            openapi: new Model\Operation(
+                summary: 'Bulk create companies',
+                description: 'Creates multiple companies in a single request',
+
+                requestBody: new Model\RequestBody(
+                    content: new \ArrayObject([
+                        'application/json' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'items' => [
+                                        'type' => 'array',
+                                        'items' => [
+                                            'type' => 'object',
+                                            'properties' => [
+                                                'name' => ['type' => 'string']
+                                            ],
+                                            'required' => ['name']
+                                        ]
+                                    ]
+                                ],
+                                'required' => ['items']
+                            ],
+                            'example' => [
+                                'items' => [
+                                    ['name' => 'Company A'],
+                                    ['name' => 'Company B'],
+                                ]
+                            ]
+                        ]
+                    ])
+                )
+
+            ),
             input: BulkCompanyDto::class,
             output: BulkCompanyDto::class,
-            processor: BulkCompanyProcessor::class,
+            processor: BulkCompanyProcessor::class
         )
     ],
     security: "is_granted('ROLE_ADMIN')"
