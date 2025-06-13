@@ -24,8 +24,8 @@ class BulkCompanyDto
         //   ],
         //]
     )]
-    //#[Assert\Valid]
-    //#[Assert\Count(min: 1)]
+    #[Assert\Valid]
+    #[Assert\Count(min: 1)]
     #[Assert\All([
         new Assert\Type(type: Company::class)
     ])]
