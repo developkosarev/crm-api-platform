@@ -20,23 +20,29 @@ class BulkCompanyProcessor implements ProcessorInterface
             return $data;
         }
 
-        $createdCompanies = [];
+        $output = new BulkCompanyDto();
 
-        foreach ($data->items as $companyData) {
-            $company = new Company();
-            $company->name = $companyData['name'] ?? '';
+        //$createdCompanies = [];
+
+        foreach ($data->items as $company) {
+            //$company = new Company();
+            //$company->name = $companyData['name'] ?? '';
 
             $this->entityManager->persist($company);
             $this->entityManager->flush();
 
-            $createdCompanies[] = [
-                'id' => (string)$company->getId(),
-                'name' => $company->name,
-            ];
+            //$createdCompanies[] = [
+            //    'id' => (string)$company->getId(),
+            //    'name' => $company->name,
+            //];
+            //
+            //$createdCompanies[] = $company;
+
+            $output->addItem($company);
         }
 
-        $output = new BulkCompanyDto();
-        $output->items = $createdCompanies;
+        //$output = new BulkCompanyDto();
+        //$output->items = $createdCompanies;
 
         return $output;
     }
