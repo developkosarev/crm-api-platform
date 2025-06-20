@@ -24,3 +24,9 @@ php bin/console doctrine:migrations:diff
 php bin/console doctrine:migrations:execute --up 'DoctrineMigrations\Version20250607125120'
 php bin/console doctrine:migrations:execute --down 'DoctrineMigrations\Version20250607125120'
 ```
+
+## Tags
+```
+git tag v0.0.3
+git push --tags
+```
