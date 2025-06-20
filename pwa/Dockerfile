@@ -38,7 +38,7 @@ RUN pnpm fetch --prod
 
 COPY --link . .
 
-RUN	pnpm install --frozen-lockfile --offline --prod --yes && \
+RUN	pnpm install --frozen-lockfile --offline --prod --force && \
 	pnpm run build
 
 
