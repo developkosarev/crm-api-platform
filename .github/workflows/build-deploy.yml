@@ -1,4 +1,4 @@
-name: Publish Docker image
+name: Publish Docker image API
 env:
   DEPLOY_PACKAGE_NAME : "crm-api-platform-${{ github.sha }}"
   DEPLOY_VERSION : "v0.0.1"
