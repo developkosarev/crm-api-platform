@@ -3,13 +3,13 @@
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { IconRss } from '@tabler/icons-react';
-import { useOnClickOutside } from '@/src/hooks/useOnClickOutside';
+import { useOnClickOutside } from './../../../src/hooks/useOnClickOutside';
 import ToggleDarkMode from '@/src/components/atoms/ToggleDarkMode';
-import Logo from '@/src/components/atoms/Logo';
-import ToggleMenu from '@/src/components/atoms/ToggleMenu';
+import Logo from './../../../src/components/atoms/Logo';
+import ToggleMenu from './../../../src/components/atoms/ToggleMenu';
 import CTA from '@/src/common/CTA';
 import { CallToActionType } from '@/src/shared/types';
-import { headerData } from '@/src/shared/data/global.data';
+import { headerData } from './../../../src/shared/data/global.data';
 //import { useSession, signOut } from 'next-auth/react';
 import Login from "./Login";
 import Logout from "./Logout";
