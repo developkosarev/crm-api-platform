@@ -2,6 +2,12 @@
 http://localhost:3000/api/auth/signin
 http://localhost:3000/api/auth/signout
 
+## Build
+```
+docker build --tag crm-app-pwa:v0.0.1 --file Dockerfile .
+docker build --tag crm-app-pwa:v0.0.1 --target builder --file Dockerfile .
+```
+
 # Progressive Web App
 
 Contains a [Next.js](https://nextjs.org/) project bootstrapped with [pnpm](https://pnpm.io/) and [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).

@@ -18,27 +18,33 @@ RUN npm install -g corepack@latest && \
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Delete the following line in case you want to enable telemetry during dev and build.
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED=1
 
 
 # Development image
-FROM base as dev
+FROM base AS dev
 
 EXPOSE 3000
-ENV PORT 3000
-ENV HOSTNAME localhost
+ENV PORT=3000
+ENV HOSTNAME=localhost
 
 CMD ["sh", "-c", "pnpm install; pnpm dev"]
 
 
 FROM base AS builder
 
-COPY --link pnpm-lock.yaml ./
+ENV CI=true
+
+COPY --link pnpm-lock.yaml package.json tsconfig.json next.config.js ./
 RUN pnpm fetch --prod
 
 COPY --link . .
 
-RUN	pnpm install --frozen-lockfile --offline --prod --force && \
+# RUN ls -al
+
+# --offline
+# --prod
+RUN	pnpm install --frozen-lockfile && \
 	pnpm run build
 
 
