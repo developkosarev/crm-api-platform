@@ -1,7 +1,7 @@
 import { footerData } from '../../shared/data/global.data';
 
 const Footer = () => {
-  const { links, columns, socials, footNote } = footerData;
+  const { links, columns, footNote } = footerData;
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6">

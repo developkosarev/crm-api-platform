@@ -99,7 +99,7 @@ const Header = () => {
             className="flex w-full flex-col mt-2 mb-36 md:m-0 text-xl md:w-auto md:flex-row md:self-center md:pt-0 md:text-base"
           >
             {links &&
-              links.map(({ label, href, icon: Icon, links }, index) => (
+              links.map(({ label, href, links }, index) => (
                 <li key={`item-link-${index}`} className={links?.length ? 'dropdown' : ''}>
                   {links && links.length ? (
                     <>
@@ -108,6 +108,7 @@ const Header = () => {
                         onClick={() => handleDropdownOnClick(index)}
                       >
                         {label}{' '}
+                        {/*
                         {Icon && (
                           <Icon
                             className={`${
@@ -115,6 +116,7 @@ const Header = () => {
                             } ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden h-3.5 w-3.5 md:inline`}
                           />
                         )}
+                        */}
                       </button>
 
                       {/* <!-- Links --> */}
