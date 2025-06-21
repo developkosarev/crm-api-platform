@@ -60,8 +60,8 @@ jobs:
           #cache-from: type=registry,ref=${{ github.repository }}:my-app:cache
           #cache-to: type=registry,ref=${{ github.repository }}:my-app:cache,mode=max
   
-  deploy-зцф:
-    name: Deploy
+  deploy-pwa:
+    name: Deploy pwa
     needs: push_to_registries
     runs-on: ubuntu-latest
     
