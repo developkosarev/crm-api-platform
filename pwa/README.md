@@ -5,7 +5,7 @@ http://localhost:3000/api/auth/signout
 ## Build
 ```
 docker build --tag crm-app-pwa:v0.0.1 --file Dockerfile .
-docker build --tag crm-app-pwa:v0.0.1 --target builder --file Dockerfile .
+docker build --tag crm-app-pwa:v0.0.1 --progress=plain --target builder --file Dockerfile .
 ```
 
 # Progressive Web App

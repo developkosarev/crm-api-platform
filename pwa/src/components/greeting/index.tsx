@@ -13,7 +13,8 @@ export default function ClientGreetingButton() {
     console.log('ClientGreetingButton')
     console.log(session)
 
-    const token = session?.data?.token;
+    //const token = session?.data?.token;
+    const token = (session?.data as { token?: string })?.token;
 
     try {
       const res = await fetch('/greetings', {

@@ -36,13 +36,17 @@ export const authConfig: AuthOptions = {
 
           if (!decoded) { return null }
 
-          const decodeIat = new Date(decoded.iat * 1000);
-          const iatFormatted = `${decodeIat.getDate()}.${decodeIat.getMonth() + 1}.${decodeIat.getFullYear()} ${decodeIat.getHours()}:${decodeIat.getMinutes()}:${decodeIat.getSeconds()}`;
+          if (decoded.iat !== undefined) {
+            const decodeIat = new Date(decoded.iat * 1000);
+            const iatFormatted = `${decodeIat.getDate()}.${decodeIat.getMonth() + 1}.${decodeIat.getFullYear()} ${decodeIat.getHours()}:${decodeIat.getMinutes()}:${decodeIat.getSeconds()}`;
+            console.log(`00-authorize-iat: ${iatFormatted}`);
+          }
 
-          const decodeExp = new Date(decoded.exp * 1000);
-          const expFormatted = `${decodeExp.getDate()}.${decodeExp.getMonth() + 1}.${decodeExp.getFullYear()} ${decodeExp.getHours()}:${decodeExp.getMinutes()}:${decodeExp.getSeconds()}`;
-          console.log(`00-authorize-iat: ${iatFormatted}`);
-          console.log(`00-authorize-exp: ${expFormatted}`);
+          if (decoded.exp !== undefined) {
+            const decodeExp = new Date(decoded.exp * 1000);
+            const expFormatted = `${decodeExp.getDate()}.${decodeExp.getMonth() + 1}.${decodeExp.getFullYear()} ${decodeExp.getHours()}:${decodeExp.getMinutes()}:${decodeExp.getSeconds()}`;
+            console.log(`00-authorize-exp: ${expFormatted}`);
+          }
           console.log('=============== 00 ======================');
 
           return {
@@ -75,12 +79,15 @@ export const authConfig: AuthOptions = {
 
       console.log(2222)
       if (user) {
+        const userToken = (user as { token?: string })?.token;
+        const userRefreshToken = (user as { refreshToken?: string })?.refreshToken;
+        const userAccessTokenExpires = (user as { accessTokenExpires?: number })?.accessTokenExpires;
+
         return {
           ...token,
-          token: user.token,
-          refreshToken: user.refreshToken,
-
-          accessTokenExpires: user.accessTokenExpires,
+          token: userToken, //user.token,
+          refreshToken: userRefreshToken, //user.refreshToken,
+          accessTokenExpires: userAccessTokenExpires, //user.accessTokenExpires,
           name: user.email,
           email: user.email,
         }
@@ -90,8 +97,12 @@ export const authConfig: AuthOptions = {
       console.log(3333)
       console.log(now)
       console.log(token.accessTokenExpires)
+
+      const tokenAccessTokenExpires = (token as { accessTokenExpires?: number })?.accessTokenExpires ?? 0;
+
       // Проверяем актуальность токена
-      if (now < token.accessTokenExpires) {
+      //if (now < token.accessTokenExpires) {
+      if (now < tokenAccessTokenExpires) {
         return token
       }
 
@@ -111,7 +122,7 @@ export const authConfig: AuthOptions = {
       console.log(token)
 
       if (!token?.email) {
-        return null;
+        return session;
       }
 
       return {...session, ...token}

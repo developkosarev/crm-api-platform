@@ -45,7 +45,7 @@ export default function LoginForm() {
       } else {
         setError('Something went wrong');
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.log('catch')
       console.log(err)
 
