@@ -1,6 +1,6 @@
 'use client';
 
-import ClientGreetingButton from "@/src/components/greeting";
+import ClientGreetingButton from "../../src/components/greeting";
 import { useSession, signOut } from 'next-auth/react';
 import { useEffect } from "react";
 
@@ -16,7 +16,8 @@ export default function Page() {
       console.log("Сессия недействительна или истекла, выходим...");
       signOut({ callbackUrl: "/" });
     }
-    if (status === 'authenticated' && session.error) {
+    //if (status === 'authenticated' && session.error) {
+    if (status === 'authenticated') {
       signOut({ callbackUrl: "/" });
     }
     console.log('status: ' + status)
