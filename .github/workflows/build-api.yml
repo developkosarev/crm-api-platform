@@ -49,6 +49,7 @@ jobs:
           echo "Deploy version: ${{ env.DEPLOY_VERSION }}"
           echo "Tags: ${{ steps.meta.outputs.tags }}"
           echo "Labels: ${{ steps.meta.outputs.labels }}"
+          echo "Cache: ${{ github.repository }}:crm-api-platform-api:cache"
 
       - name: 08. Build and push Docker images
         uses: docker/build-push-action@v6
