@@ -1,4 +1,4 @@
-import '../../styles/api-platform.css'
+import '../../src/styles/api-platform.css'
 
 import Head from "next/head";
 import Image from "next/image";
