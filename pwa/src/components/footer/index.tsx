@@ -1,7 +1,7 @@
 import { footerData } from '../../shared/data/global.data';
 
 const Footer = () => {
-  const { links, columns, socials, footNote } = footerData;
+  const { links, columns } = footerData;
 
   return (
     <footer className="w-full bg-gray-800 text-white text-center">

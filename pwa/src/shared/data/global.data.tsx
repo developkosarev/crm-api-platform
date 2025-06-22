@@ -15,7 +15,7 @@ export const headerData: HeaderProps = {
   links: [
     {
       label: 'Pages',
-      icon: IconChevronDown,
+      //icon: IconChevronDown,
       links: [
         {
           label: 'Services',

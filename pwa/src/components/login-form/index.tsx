@@ -16,7 +16,7 @@ import type { FormEventHandler } from "react";
 
 export default function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
@@ -37,16 +37,20 @@ export default function LoginForm() {
 
       if (res && !res.error) {
         router.push("/profile");
-      } else {
+      } else if (res) {
         console.log('res');
         console.log(res);
 
-        setError(`${res.error} status ${res.status}.` || 'Something went wrong');
+        setError(`${res.error} status ${res.status}.`);
+      } else {
+        setError('Something went wrong');
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.log('catch')
       console.log(err)
-      setError(err.error || 'Something went wrong');
+
+      const error = err as { error?: string };
+      setError(error.error || 'Something went wrong');
     } finally {
       setIsSubmitting(false);
     }
