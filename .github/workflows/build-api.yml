@@ -53,8 +53,7 @@ jobs:
 
       - name: 08. Build and push Docker images
         uses: docker/build-push-action@v6
-        with:
-          #github-token: ${{ secrets.GITHUB_TOKEN }}
+        with:          
           context: ./api
           push: true
           tags: ${{ steps.meta.outputs.tags }}
