@@ -18,7 +18,6 @@ on:
 jobs:    
   deploy-app:
     name: Deploy APP
-    needs: push_to_registries
     runs-on: ubuntu-latest
     
     steps:
