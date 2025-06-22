@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { fetchGreeting } from '../../lib/api/greeting';
 
 export default function ClientGreetingButton() {
   const [count, setCount] = useState(0);
@@ -13,17 +14,10 @@ export default function ClientGreetingButton() {
     console.log('ClientGreetingButton')
     console.log(session)
 
-    //const token = session?.data?.token;
     const token = (session?.data as { token?: string })?.token;
 
     try {
-      const res = await fetch('/greetings', {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          "Content-Type": "application/ld+json"
-        }
-      });
-      const data = await res.json();
+      const data = await fetchGreeting(token!);
       console.log(JSON.stringify(data, null, 2));
     } catch (err) {
       console.log(err);
