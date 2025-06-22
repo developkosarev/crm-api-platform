@@ -1,37 +1,41 @@
-//import {signIn} from "next-auth/react";
+import { signIn } from 'next-auth/react';
 
-export async function getCompanies() {
-  // try {
-  //   console.log('Sending form')
-  //
-  //   const res = await signIn("credentials", {
-  //     email: formData.get("email"),
-  //     password: formData.get("password"),
-  //     redirect: false,
-  //   });
-  //
-  //   if (res && !res.error) {
-  //     router.push("/profile");
-  //   } else if (res) {
-  //     console.log('res');
-  //     console.log(res);
-  //
-  //     setError(`${res.error} status ${res.status}.`);
-  //   } else {
-  //     setError('Something went wrong');
-  //   }
-  // } catch (err: unknown) {
-  //   console.log('catch')
-  //   console.log(err)
-  //
-  //   const error = err as { error?: string };
-  //   setError(error.error || 'Something went wrong');
-  // } finally {
-  //   setIsSubmitting(false);
-  // }
+export async function signInWithCredentials(email: string, password: string) {
+  return signIn('credentials', {
+    email,
+    password,
+    redirect: false,
+  });
+}
 
-
-  //const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/companies`);
-  //if (!res.ok) throw new Error('Failed to fetch companies');
-  //return res.json();
+export async function loginUser({
+  email,
+  password,
+  router,
+  setError,
+  setIsSubmitting,
+}: {
+  email: string;
+  password: string;
+  router: any;
+  setError: (err: string | null) => void;
+  setIsSubmitting: (val: boolean) => void;
+}) {
+  setIsSubmitting(true);
+  setError(null);
+  try {
+    const res = await signInWithCredentials(email, password);
+    if (res && !res.error) {
+      router.push('/profile');
+    } else if (res) {
+      setError(`${res.error} status ${res.status}.`);
+    } else {
+      setError('Something went wrong');
+    }
+  } catch (err: unknown) {
+    const error = err as { error?: string };
+    setError(error.error || 'Something went wrong');
+  } finally {
+    setIsSubmitting(false);
+  }
 }
