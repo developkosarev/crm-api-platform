@@ -55,6 +55,10 @@ export const headerData: HeaderProps = {
       label: 'Contact',
       href: '/contact',
     },
+    {
+      label: 'Login',
+      href: '/login',
+    },
   ],
   actions: [
     //{
