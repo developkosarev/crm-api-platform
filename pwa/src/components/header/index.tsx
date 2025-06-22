@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { IconRss } from '@tabler/icons-react';
 import { useOnClickOutside } from './../../../src/hooks/useOnClickOutside';
 import ToggleDarkMode from '@/src/components/atoms/ToggleDarkMode';
-import Logo from './../../../src/components/atoms/Logo';
-import ToggleMenu from './../../../src/components/atoms/ToggleMenu';
+import Logo from './Logo';
+import ToggleMenu from './ToggleMenu';
 import CTA from '@/src/common/CTA';
 import { CallToActionType } from '@/src/shared/types';
 import { headerData } from './../../../src/shared/data/global.data';
@@ -54,6 +54,14 @@ const Header = () => {
 
   const handleToggleMenuOnClick = () => {
     setIsToggleMenuOpen(!isToggleMenuOpen);
+  };
+
+  const handleLinkOnClick = (index: number) => {
+    if (isToggleMenuOpen) {
+      handleToggleMenuOnClick()
+    } else {
+      handleDropdownOnClick(index)
+    }
   };
 
   useOnClickOutside(ref, () => {
@@ -128,9 +136,7 @@ const Header = () => {
                             <Link
                               className="whitespace-no-wrap block py-2 px-5 first:rounded-t last:rounded-b dark:hover:bg-gray-700 md:hover:bg-gray-200"
                               href={href2 as string}
-                              onClick={() =>
-                                isToggleMenuOpen ? handleToggleMenuOnClick() : handleCloseDropdownOnClick(index)
-                              }
+                              onClick={() => handleLinkOnClick(index)}
                             >
                               {label2}
                             </Link>
@@ -142,7 +148,7 @@ const Header = () => {
                     <Link
                       className="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
                       href={href as string}
-                      onClick={() => (isToggleMenuOpen ? handleToggleMenuOnClick() : handleDropdownOnClick(index))}
+                      onClick={() => handleLinkOnClick(index)}
                     >
                       {label}
                     </Link>
@@ -150,16 +156,10 @@ const Header = () => {
                 </li>
               ))}
 
-            <LoginLi 
-              isToggleMenuOpen={isToggleMenuOpen}
-              handleToggleMenuOnClick={handleToggleMenuOnClick}
-              handleDropdownOnClick={handleDropdownOnClick}
-            />
-
+            <LoginLi handleLinkOnClick={handleLinkOnClick} />
             <LogoutLi></LogoutLi>
 
             {/* <!-- Dashboard --> */}
-
             {/*
             {session?.data && (
               <Link
@@ -175,6 +175,7 @@ const Header = () => {
 
         </nav>
 
+        {/* remove */}
         <div
           className={`${
             isToggleMenuOpen ? 'block' : 'hidden'
