@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth/next'
-import { authConfig } from "./../../config/auth";
+import { authConfig } from "./../../src/config/auth";
 import ClientGreetingButton from "./../../src/components/greeting";
 
 
