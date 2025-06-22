@@ -24,10 +24,10 @@ jobs:
       contents: read
     steps:
       - name: 01. Check out the repo
-        uses: actions/checkout@v4                  
+        uses: actions/checkout@v4
 
       - name: 02. Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3  
+        uses: docker/setup-buildx-action@v3
 
       - name: 05. Log in to the Container registry
         uses: docker/login-action@v3
