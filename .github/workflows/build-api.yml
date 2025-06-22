@@ -24,7 +24,7 @@ jobs:
       contents: read
     steps:
       - name: 01. Check out the repo
-        uses: actions/checkout@v3                  
+        uses: actions/checkout@v4                  
 
       - name: 05. Log in to the Container registry
         uses: docker/login-action@v2
