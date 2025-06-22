@@ -54,9 +54,10 @@ jobs:
       - name: 08. Build and push Docker images
         uses: docker/build-push-action@v6
         with:
+          #github-token: ${{ secrets.GITHUB_TOKEN }}
           context: ./api
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          #cache-from: type=registry,ref=${{ github.repository }}:api:cache
-          #cache-to: type=registry,ref=${{ github.repository }}:api,mode=max
+          cache-from: type=registry,ref=${{ github.repository }}:api:cache
+          cache-to: type=registry,ref=${{ github.repository }}:api,mode=max
