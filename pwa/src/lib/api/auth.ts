@@ -1,4 +1,13 @@
 import { signIn } from 'next-auth/react';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+
+interface LoginUserParams {
+  email: string;
+  password: string;
+  router: AppRouterInstance;
+  setError: (err: string | null) => void;
+  setIsSubmitting: (val: boolean) => void;
+}
 
 export async function signInWithCredentials(email: string, password: string) {
   return signIn('credentials', {
@@ -8,19 +17,8 @@ export async function signInWithCredentials(email: string, password: string) {
   });
 }
 
-export async function loginUser({
-  email,
-  password,
-  router,
-  setError,
-  setIsSubmitting,
-}: {
-  email: string;
-  password: string;
-  router: any;
-  setError: (err: string | null) => void;
-  setIsSubmitting: (val: boolean) => void;
-}) {
+export async function loginUser({email, password, router, setError, setIsSubmitting}: LoginUserParams)
+{
   setIsSubmitting(true);
   setError(null);
   try {
