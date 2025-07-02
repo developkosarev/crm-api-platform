@@ -2,6 +2,15 @@ import type { AuthOptions, User } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { decodeJwt } from 'jose'
 
+enum Roles {
+  Admin = 'ROLE_ADMIN',
+  User = 'ROLE_USER',
+}
+
+interface CrmUser extends User {
+  roles: Roles[]
+}
+
 export const authConfig: AuthOptions = {
   providers: [
     CredentialsProvider({
