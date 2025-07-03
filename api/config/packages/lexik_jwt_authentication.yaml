@@ -6,4 +6,4 @@ lexik_jwt_authentication:
 
 when@dev:
     lexik_jwt_authentication:        
-        token_ttl: 3600 # in seconds, default is 60
+        token_ttl: 60 # in seconds, default is 60

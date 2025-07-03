@@ -2,13 +2,19 @@ import type { AuthOptions, User } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { decodeJwt } from 'jose'
 
+
+const ROUTE_LOGIN = 'http://php/api/login';
+const ROUTE_REFRESH = 'http://php/api/token/refresh';
 enum Roles {
   Admin = 'ROLE_ADMIN',
   User = 'ROLE_USER',
 }
 
 interface CrmUser extends User {
-  roles: Roles[]
+  //roles: Roles[]
+  token: string | null,
+  refreshToken: string | null,
+  error?: string | null,
 }
 
 export const authConfig: AuthOptions = {
@@ -28,7 +34,7 @@ export const authConfig: AuthOptions = {
         // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
-        const res = await fetch("http://php/api/login", {
+        const res = await fetch(ROUTE_LOGIN, {
           method: 'POST',
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/ld+json" }
@@ -103,7 +109,8 @@ export const authConfig: AuthOptions = {
       }
 
       const now = Math.floor(Date.now() / 1000);
-      console.log(3333)
+      console.log('01-empty-user')
+      console.log(token)
       console.log(now)
       console.log(token.accessTokenExpires)
 
@@ -178,7 +185,7 @@ async function refreshAccessToken(token: any) {
   const refreshToken = token.refreshToken;
 
   try {
-    const response = await fetch('http://php/api/token/refresh', {
+    const response = await fetch(ROUTE_REFRESH, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/ld+json'
