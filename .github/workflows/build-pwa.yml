@@ -10,8 +10,8 @@ env:
 
 on:
   workflow_dispatch: {}
-  #push:
-  #  #branches: [main]
+  push:
+    branches: [main]
   #  tags:
   #      - 'v*'
 
@@ -61,48 +61,48 @@ jobs:
           cache-from: type=registry,ref=ghcr.io/${{ github.repository }}-pwa:cache
           cache-to: type=registry,ref=ghcr.io/${{ github.repository }}-pwa:cache,mode=max
   
-  #deploy-pwa:
-  #  name: Deploy pwa
-  #  needs: push_to_registries
-  #  runs-on: ubuntu-latest
-  #  
-  #  steps:
-  #    - name: 01. Execure few commands
-  #      run: |
-  #        echo "Deploy application"
-  #        echo "Appication name: ${{ env.DEPLOY_PACKAGE_NAME }}"
-  #    
-  #    #IP6
-  #    - name: 02. Setup WARP
-  #      uses: fscarmen/warp-on-actions@v1.3
-  #      with:
-  #        stack: dual
-  #        mode: client
-  #    
-  #    #IP6
-  #    - name: 03. Execute ls on remote server
-  #      uses: appleboy/ssh-action@v1
-  #      with:
-  #        host: ${{ vars.SSH_HOST_NEXT_IP6 }}
-  #        username: ${{ secrets.SSH_USER }}
-  #        key: ${{ secrets.SSH_PRIVATE_KEY }}
-  #        protocol: tcp6
-  #        port: 22
-  #        script: |
-  #          whoami
-  #          ls -la
-  #    
-  #    #IP6
-  #    - name: 04. Restart container
-  #      uses: appleboy/ssh-action@v1
-  #      with:
-  #        host: ${{ vars.SSH_HOST_NEXT_IP6 }}
-  #        username: ${{ secrets.SSH_USER }}
-  #        key: ${{ secrets.SSH_PRIVATE_KEY }}
-  #        protocol: tcp6
-  #        port: 22
-  #        script: |
-  #          cd /home/${{ secrets.SSH_USER }}/${{ env.DEPLOY_FOLDER }}
-  #          docker compose -f compose-crm-api-platform.yml pull
-  #          docker compose -f compose-crm-api-platform.yml down
-  #          docker compose -f compose-crm-api-platform.yml up -d 
+  deploy-pwa:
+    name: Deploy pwa
+    needs: push_to_registries
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 01. Execure few commands
+        run: |
+          echo "Deploy application"
+          echo "Appication name: ${{ env.DEPLOY_PACKAGE_NAME }}"
+      
+      #IP6
+      - name: 02. Setup WARP
+        uses: fscarmen/warp-on-actions@v1.3
+        with:
+          stack: dual
+          mode: client
+      
+      #IP6
+      - name: 03. Execute ls on remote server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ vars.SSH_HOST_NEXT_IP6 }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          protocol: tcp6
+          port: 22
+          script: |
+            whoami
+            ls -la
+      
+      #IP6
+      - name: 04. Restart container
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ vars.SSH_HOST_NEXT_IP6 }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          protocol: tcp6
+          port: 22
+          script: |
+            cd /home/${{ secrets.SSH_USER }}/${{ env.DEPLOY_FOLDER }}
+            docker compose -f compose-crm-api-platform.yml pull
+            docker compose -f compose-crm-api-platform.yml down
+            docker compose -f compose-crm-api-platform.yml up -d 
