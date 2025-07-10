@@ -1,6 +1,28 @@
 import type { AuthOptions, User } from 'next-auth'
+import { JWT } from "next-auth/jwt";
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { decodeJwt } from 'jose'
+
+
+const ROUTE_LOGIN = 'http://php/api/login';
+const ROUTE_REFRESH = 'http://php/api/token/refresh';
+const CONTENT_TYPE = 'application/ld+json';
+enum Roles {
+  Admin = 'ROLE_ADMIN',
+  User = 'ROLE_USER',
+}
+
+interface CrmUser extends User {
+  roles: Roles[]
+  token: string | null,
+  refreshToken: string | null,
+  error?: string | null
+}
+
+interface CrmJWT extends JWT {
+  refreshToken: string | null,
+  error?: string | null
+}
 
 export const authConfig: AuthOptions = {
   providers: [
@@ -11,6 +33,8 @@ export const authConfig: AuthOptions = {
         password: { label: "Password", type: "password", required: true }
       },
       async authorize(credentials, req) {
+        //console.log('=============== 00 authorize ======================');
+
         if (!credentials?.email || !credentials.password) return null;
 
         // You need to provide your own logic here that takes the credentials
@@ -19,47 +43,47 @@ export const authConfig: AuthOptions = {
         // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
-        const res = await fetch("http://php/api/login", {
+        const res = await fetch(ROUTE_LOGIN, {
           method: 'POST',
           body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/ld+json" }
+          headers: { 'Content-Type': CONTENT_TYPE }
         })
         const data = await res.json()
 
         // If no error and we have user data, return it
         if (res.ok && data.token) {
           const decoded = decodeJwt(data.token)
-          console.log('00-authorize-decode')
-          console.log(decoded)
-          console.log('00-authorize-data')
-          console.log(data)
+          //console.log('00-authorize-decode')
+          //console.log(decoded)
+          //console.log('00-authorize-data')
+          //console.log(data)
 
           if (!decoded) { return null }
 
-          if (decoded.iat !== undefined) {
-            const decodeIat = new Date(decoded.iat * 1000);
-            const iatFormatted = `${decodeIat.getDate()}.${decodeIat.getMonth() + 1}.${decodeIat.getFullYear()} ${decodeIat.getHours()}:${decodeIat.getMinutes()}:${decodeIat.getSeconds()}`;
-            console.log(`00-authorize-iat: ${iatFormatted}`);
-          }
+          //if (decoded.iat !== undefined) {
+          //  const decodeIat = new Date(decoded.iat * 1000);
+          //  const iatFormatted = `${decodeIat.getDate()}.${decodeIat.getMonth() + 1}.${decodeIat.getFullYear()} ${decodeIat.getHours()}:${decodeIat.getMinutes()}:${decodeIat.getSeconds()}`;
+          //  console.log(`00-authorize-iat: ${iatFormatted}`);
+          //}
 
-          if (decoded.exp !== undefined) {
-            const decodeExp = new Date(decoded.exp * 1000);
-            const expFormatted = `${decodeExp.getDate()}.${decodeExp.getMonth() + 1}.${decodeExp.getFullYear()} ${decodeExp.getHours()}:${decodeExp.getMinutes()}:${decodeExp.getSeconds()}`;
-            console.log(`00-authorize-exp: ${expFormatted}`);
-          }
-          console.log('=============== 00 ======================');
+          //if (decoded.exp !== undefined) {
+          //  const decodeExp = new Date(decoded.exp * 1000);
+          //  const expFormatted = `${decodeExp.getDate()}.${decodeExp.getMonth() + 1}.${decodeExp.getFullYear()} ${decodeExp.getHours()}:${decodeExp.getMinutes()}:${decodeExp.getSeconds()}`;
+          //  console.log(`00-authorize-exp: ${expFormatted}`);
+          //}
 
           return {
             id: decoded.username,
             email: decoded.username,
             roles: decoded.roles,
+
             iat: decoded.iat,
-            exp: decoded.exp,
+            exp: decoded.exp, //accessTokenExpires
             accessTokenExpires: decoded.exp,
 
             token: data.token,
             refreshToken: data.refresh_token
-          } as User
+          } as CrmUser
         }
 
         // Return null if user data could not be retrieved
@@ -70,14 +94,14 @@ export const authConfig: AuthOptions = {
 
   callbacks: {
     async jwt({ token, user }) {
-      console.log('=============== 01 ======================');
-      //user as User
-      console.log('01-callbacks-jwt-user')
-      console.log(user)
-      console.log('01-callbacks-jwt-token')
-      console.log(token)
+      //console.log('=============== 01 callbacks ======================');
+      ////user as User
+      //console.log('01-callbacks-jwt-user')
+      //console.log(user)
+      //console.log('01-callbacks-jwt-token')
+      //console.log(token)
 
-      console.log(2222)
+      //console.log(2222)
       if (user) {
         const userToken = (user as { token?: string })?.token;
         const userRefreshToken = (user as { refreshToken?: string })?.refreshToken;
@@ -94,13 +118,13 @@ export const authConfig: AuthOptions = {
       }
 
       const now = Math.floor(Date.now() / 1000);
-      console.log(3333)
-      console.log(now)
-      console.log(token.accessTokenExpires)
+      //console.log('01-empty-user')
+      //console.log(token)
+      //console.log(now)
+      //console.log(token.accessTokenExpires)
 
       const tokenAccessTokenExpires = (token as { accessTokenExpires?: number })?.accessTokenExpires ?? 0;
 
-      // Проверяем актуальность токена
       //if (now < token.accessTokenExpires) {
       if (now < tokenAccessTokenExpires) {
         return token
@@ -108,18 +132,18 @@ export const authConfig: AuthOptions = {
 
       //return token
 
-      console.log('01-callbacks-token-expires')
+      //console.log('01-callbacks-token-expires')
       // Обновляем токен
       return await refreshAccessToken(token)
     },
 
     //client
     async session({ session, token }) {
-      console.log('=============== 05 ======================');
-      console.log('05-session-session')
-      console.log(session)
-      console.log('05-session-token')
-      console.log(token)
+      //console.log('=============== 02 ======================');
+      //console.log('02-session-session')
+      //console.log(session)
+      //console.log('02-session-token')
+      //console.log(token)
 
       if (!token?.email) {
         return session;
@@ -163,16 +187,16 @@ export const authConfig: AuthOptions = {
   }
 }
 
-async function refreshAccessToken(token: any) {
-  console.log('=============== 07 ======================');
-  console.log(token);
+async function refreshAccessToken(token: JWT) {
+  //console.log('=============== 07 refreshAccessToken ======================');
+  //console.log(token);
   const refreshToken = token.refreshToken;
 
   try {
-    const response = await fetch('http://php/api/token/refresh', {
+    const response = await fetch(ROUTE_REFRESH, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/ld+json'
+        'Content-Type': CONTENT_TYPE
       },
       body: JSON.stringify({
         refresh_token: refreshToken,
@@ -180,8 +204,8 @@ async function refreshAccessToken(token: any) {
     })
 
     const refreshedTokens = await response.json()
-    console.log('07-refreshed-token');
-    console.log(refreshedTokens);
+    //console.log('07-refreshed-token');
+    //console.log(refreshedTokens);
 
     if (!response.ok) throw refreshedTokens
 
@@ -195,7 +219,7 @@ async function refreshAccessToken(token: any) {
     }
 
   } catch (error) {
-    console.error('Error refreshing access token:', error)
+    //console.error('07-error-refreshing-access-token:', error)
 
     return {
       ...token,

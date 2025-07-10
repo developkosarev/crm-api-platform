@@ -1,7 +1,19 @@
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
+import { Session } from 'next-auth';
+//import { getServerSession } from 'next-auth/next';
+//import { authConfig } from "@/src/config/auth";
 
-const LogoutLi = () => {
+interface LogoutLiProps {
+  session?: Session | null;
+}
+
+const LogoutLi = ({ session }: LogoutLiProps) => {
+  //const session = await getServerSession(authConfig)
+
+  if (!session) {
+    return null;
+  }
 
   return (
     <li>

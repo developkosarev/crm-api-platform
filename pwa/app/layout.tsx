@@ -1,7 +1,7 @@
 import './../src/styles/globals.css';
 import { inter } from './../src/styles/fonts';
-import { Providers } from "./../src/common/Providers";
-import Header from './../src/components/header';
+//import { Providers } from "./../src/common/Providers";
+import ServerHeader from './../src/components/header/ServerHeader';
 import Footer from './../src/components/footer';
 
 export default function RootLayout({
@@ -10,14 +10,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
 
+
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <Providers>
-          <Header />
+        {/*<Providers>*/}
+          <ServerHeader />
           {children}
           <Footer />
-        </Providers>
+        {/*</Providers>*/}
       </body>
     </html>
   );

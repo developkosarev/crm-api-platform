@@ -21,6 +21,7 @@ export default function LoginForm() {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
+
     const formData = new FormData(event.currentTarget);
     await loginUser({
       email: String(formData.get("email")),
@@ -32,7 +33,7 @@ export default function LoginForm() {
   };
 
   return (
-    <form className="space-y-3" onSubmit={handleSubmit}>
+    <form className="space-y-3" onSubmit={handleSubmit} method="POST">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
         <h1 className={`${inter.className} mb-3 text-2xl`}>
           Please log in to continue.

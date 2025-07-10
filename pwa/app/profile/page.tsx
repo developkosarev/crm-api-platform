@@ -22,8 +22,8 @@ export default async function Page() {
   //const sessionExp = new Date(session?.exp * 1000);
 
 
-  console.log('session')
-  console.log(session)
+  //console.log('session')
+  //console.log(session)
 
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
@@ -35,9 +35,9 @@ export default async function Page() {
           {/* <li>exp: {sessionExp.toLocaleString()}</li> */}
           {/* <li>iat: {iatFormatted}</li> */}
         </ul>
-        <pre>{JSON.stringify(session, null, 2)}</pre>
+        {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
         <div>
-          <ClientGreetingButton />
+          {/*<ClientGreetingButton />*/}
         </div>
       </div>
     </div>
