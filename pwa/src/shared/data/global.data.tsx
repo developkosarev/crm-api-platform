@@ -21,40 +21,40 @@ export const headerData: HeaderProps = {
           label: 'Services',
           href: '/services',
         },
-        {
-          label: 'Pricing',
-          href: '/pricing',
-        },
-        {
-          label: 'About us',
-          href: '/about',
-        },
-        {
-          label: 'Contact us',
-          href: '/contact',
-        },
-        {
-          label: 'FAQs',
-          href: '/faqs',
-        },
-        {
-          label: 'Terms & Conditions',
-          href: '/terms',
-        },
-        {
-          label: 'Privacy Policy',
-          href: '/privacy',
-        },
+        // {
+        //   label: 'Pricing',
+        //   href: '/pricing',
+        // },
+        // {
+        //   label: 'About us',
+        //   href: '/about',
+        // },
+        // {
+        //   label: 'Contact us',
+        //   href: '/contact',
+        // },
+        // {
+        //   label: 'FAQs',
+        //   href: '/faqs',
+        // },
+        // {
+        //   label: 'Terms & Conditions',
+        //   href: '/terms',
+        // },
+        // {
+        //   label: 'Privacy Policy',
+        //   href: '/privacy',
+        // },
       ],
     },
-    {
-      label: 'Blog',
-      href: '/blog',
-    },
+    //{
+    //  label: 'Blog',
+    //  href: '/blog',
+    //},
     {
       label: 'Contact',
       href: '/contact',
-    }    
+    }
   ],
   actions: [
     //{
