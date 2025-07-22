@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth/next'
-import { authConfig } from "./../../src/config/auth";
-import ClientGreetingButton from "./../../src/components/greeting";
+import { authConfig } from "@/src/config/auth";
+//import ClientGreetingButton from "@/src/components/greeting";
 
 
 export default async function Page() {
