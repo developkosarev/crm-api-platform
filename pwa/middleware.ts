@@ -34,7 +34,7 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ['/profile', '/profile-client', '/dashboard/:path*'],
+  matcher: ['/profile', '/profile-client'], //'/dashboard/:path*'
 };
 
 //export { default } from 'next-auth/middleware'
