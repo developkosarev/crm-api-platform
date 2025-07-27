@@ -3,8 +3,8 @@ import { Suspense } from 'react';
 
 export default function LoginPage() {
   return (
-    <div className="bg-gray-200">
-      <div className="flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="bg-gray-200 min-h-screen">
+      <div className="bg-subtle dark:bg-default flex flex-col justify-center min-h-screen py-12 sm:px-6 lg:px-8">
 
         <h3 className="logo mx-auto mb-auto">
           CRM
