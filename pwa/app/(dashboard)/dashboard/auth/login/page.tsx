@@ -1,5 +1,4 @@
-import LoginForm from '@/src/components/login-form';
-import { Suspense } from 'react';
+import Link from "next/link";
 
 export default function LoginPage() {
   return (
@@ -67,7 +66,9 @@ export default function LoginPage() {
                     </div>
 
                     <div className="absolute -top-[2px] ltr:right-0 rtl:left-0">
-                      <a tabIndex="-1" className="text-default text-sm font-medium" href="/dashboard/auth/forgot-password">Forgot?</a>
+                      <Link className="text-default text-sm font-medium" tabIndex="-1" href="/dashboard/auth/forgot-password">
+                        Forgot?
+                      </Link>
                     </div>
 
                   </div>
@@ -85,7 +86,9 @@ export default function LoginPage() {
           </div>
 
           <div className="text-default mt-8 text-center text-sm">
-            <a className="text-brand-500 font-medium" href="http://localhost:3000/signup">Don't have an account?</a>
+            <Link className="text-brand-500 font-medium" href="/dashboard/auth/signup">
+              Don't have an account?
+            </Link>
           </div>
         </div>
 

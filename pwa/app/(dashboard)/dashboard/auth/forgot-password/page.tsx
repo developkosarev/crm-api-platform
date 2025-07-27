@@ -1,5 +1,4 @@
-import LoginForm from '@/src/components/login-form';
-import { Suspense } from 'react';
+import Link from "next/link";
 
 export default function ForgotPasswordPage() {
   return (
@@ -44,10 +43,13 @@ export default function ForgotPasswordPage() {
             </form>
           </div>
           <div className="text-default mt-8 text-center text-sm">
-            <a className="text-emphasis font-medium" href="/dashboard/auth/login">Back to sign in</a>
+
+            <Link className="text-emphasis font-medium" href="/dashboard/auth/login">
+              Back to sign in
+            </Link>
+
           </div>
         </div>
-
 
       </div>
     </div>
