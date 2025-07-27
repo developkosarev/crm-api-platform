@@ -1,6 +1,6 @@
 "use client";
 
-import { inter } from './../../../src/styles/fonts';
+import { inter } from '@/src/styles/fonts';
 import {
   AtSymbolIcon,
   KeyIcon,
