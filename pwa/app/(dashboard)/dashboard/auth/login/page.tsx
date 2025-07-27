@@ -4,21 +4,20 @@ import { Suspense } from 'react';
 export default function LoginPage() {
   return (
     <div className="bg-gray-200 min-h-screen">
-      <div className="bg-subtle dark:bg-default flex flex-col justify-center min-h-screen py-12 sm:px-6 lg:px-8">
+      <div className="flex flex-col justify-center min-h-screen py-12 sm:px-6 lg:px-8">
 
-        <h3 className="logo mx-auto mb-auto">
+        <h3 className="logo text-2xl font-bold mx-auto mb-auto">
           CRM
         </h3>
 
         <div className="text-center sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 className="font-cal text-emphasis text-center text-3xl">
+          <h2 className="font-cal font-bold text-emphasis text-center text-3xl">
             Welcome back
           </h2>
         </div>
 
-        {/*
         <div className="mb-auto mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-default dark:bg-muted border-subtle mx-2 rounded-md border px-4 py-10 sm:px-10">
+          <div className="bg-white border-white border-subtle mx-2 rounded-md border px-4 py-10 sm:px-10">
             <div className="space-y-3"></div>
 
             <form noValidate="" data-testid="login-form">
@@ -68,7 +67,7 @@ export default function LoginPage() {
                     </div>
 
                     <div className="absolute -top-[2px] ltr:right-0 rtl:left-0">
-                      <a tabIndex="-1" className="text-default text-sm font-medium" href="/auth/forgot-password">Forgot?</a>
+                      <a tabIndex="-1" className="text-default text-sm font-medium" href="/dashboard/auth/forgot-password">Forgot?</a>
                     </div>
 
                   </div>
@@ -89,7 +88,6 @@ export default function LoginPage() {
             <a className="text-brand-500 font-medium" href="http://localhost:3000/signup">Don't have an account?</a>
           </div>
         </div>
-      */}
 
       </div>
     </div>
