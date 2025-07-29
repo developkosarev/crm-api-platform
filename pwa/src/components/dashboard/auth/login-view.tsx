@@ -1,16 +1,11 @@
 "use client";
 
-import { inter } from '@/src/styles/fonts';
-import {
-  AtSymbolIcon,
-  KeyIcon,
-} from '@heroicons/react/24/outline';
-
 import { useRouter } from 'next/navigation';
 import { loginUser } from '@/src/lib/api/auth';
 
 import { useState } from 'react';
 import type { FormEventHandler } from "react";
+import Link from "next/link";
 
 export default function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,52 +26,95 @@ export default function LoginForm() {
   };
 
   return (
-    <form className="space-y-3" onSubmit={handleSubmit} method="POST">
-      <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
-        <h1 className={`${inter.className} mb-3 text-2xl`}>
-          Please log in to continue.
-        </h1>
+    <div className="mb-auto mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="bg-white border-white border-subtle mx-2 rounded-md border px-4 py-10 sm:px-10">
+        <div className="space-y-3"></div>
 
-        <div className="w-full">
-          <div>
-            <label className="mb-3 mt-5 block text-xs font-medium text-gray-900" htmlFor="email">Email</label>
-            <div className="relative">
-              <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                id="email"
-                type="email"  name="email" placeholder="Enter your email address" required
-              />
-              <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+        <form onSubmit={handleSubmit} method="POST">
+          <div className="space-y-6">
+            <div className="space-y-6">
+
+              <div>
+                <label className="text-emphasis mb-2 block text-sm font-medium leading-none" htmlFor="email">Email address</label>
+                <div className="relative">
+                  <input
+                    className="rounded-[10px] border font-normal bg-default border-default text-default placeholder:text-muted hover:border-emphasis focus:ring-0 focus:shadow-outline-gray-focused shadow-outline-gray-rested transition h-8 px-3 py-2 text-sm w-full disabled:bg-subtle disabled:hover:border-subtle disabled:cursor-not-allowed"
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="john.doe@example.com"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="relative">
+                <div>
+                  <label className="text-emphasis mb-2 block text-sm font-medium leading-none" htmlFor="password">Password</label>
+                  <div dir="ltr"
+                       className="rounded-[10px] border font-normal bg-default border-default text-default placeholder:text-muted hover:border-emphasis focus:ring-0 focus:shadow-outline-gray-focused disabled:bg-subtle disabled:hover:border-default disabled:cursor-not-allowed shadow-outline-gray-rested transition h-8 px-3 py-2 text-sm group relative mb-1 flex min-w-0 items-center gap-1 [&amp;:focus-within]:border-subtle [&amp;:focus-within]:ring-brand-default [&amp;:focus-within]:ring-2 [&amp;:has(:disabled)]:bg-subtle [&amp;:has(:disabled)]:hover:border-default [&amp;:has(:disabled)]:cursor-not-allowed">
+                    <input data-testid="input-field"
+                           id="password"
+                           type="password"
+                           placeholder="•••••••••••••"
+                           className="w-full min-w-0 truncate border-0 bg-transparent focus:outline-none focus:ring-0 text-default rounded-lg text-sm font-medium leading-none placeholder:text-muted disabled:cursor-not-allowed disabled:bg-transparent pl-0 addon-wrapper ltr:border-r-0 ltr:pr-10 rtl:border-l-0 rtl:pl-10 mb-0"
+                           autoComplete="current-password"
+                           required=""
+                           name="password"
+                    />
+
+                    <div className="flex flex-shrink-0 items-center justify-center whitespace-nowrap">
+                      <span className="text-sm font-medium leading-none text-muted peer-disabled:opacity-50">
+                        <button className="text-emphasis h-9" tabIndex="-1" type="button" data-state="closed">
+                          <svg height="16"
+                               width="16"
+                               className="fill-transparent h-4 w-4 stroke-[2.5px]"
+                               aria-hidden="true"><use href="#eye"></use>
+                          </svg>
+                          <span className="sr-only">Show password</span>
+                        </button>
+                      </span>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div className="absolute -top-[2px] ltr:right-0 rtl:left-0">
+                  <Link className="text-default text-sm font-medium" tabIndex="-1" href="/dashboard/auth/forgot-password">
+                    Forgot?
+                  </Link>
+                </div>
+              </div>
+
             </div>
-          </div>
-          <div className="mt-4">
-            <label className="mb-3 mt-5 block text-xs font-medium text-gray-900" htmlFor="password">Password</label>
-            <div className="relative">
-              <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                id="password"
-                type="password" name="password" placeholder="Enter password" required minLength={6}
-              />
-              <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-            </div>
-          </div>
-        </div>
 
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="mt-4 w-full"
-        >
-          {isSubmitting ? 'Sending...' : 'Log in'}
-        </button>
+            <button className="group whitespace-nowrap inline-flex items-center font-medium relative rounded-[10px] disabled:cursor-not-allowed gap-1 bg-default text-default border border-default enabled:hover:bg-muted enabled:hover:text-emphasis disabled:opacity-30 focus-visible:bg-subtle focus-visible:outline-none focus-visible:ring-0 focus-visible:shadow-outline-gray-focused shadow-outline-gray-rested enabled:hover:shadow-outline-gray-hover enabled:active:shadow-outline-gray-active transition-shadow duration-200 px-2.5 py-2 text-sm leading-none w-full justify-center"
+                    type="submit"
+                    disabled={isSubmitting}
+            >
+              <div className="contents visible group-active:translate-y-[0.5px]">
+                <span>{isSubmitting ? 'Sending...' : 'Sign in'}</span>
+                <span className="absolute right-3 text-xs text-gray-600">Last used</span>
+              </div>
+            </button>
 
-        {error && (
-          <div className="flex h-8 items-end space-x-1">
-            {error}
+            {error && (
+              <div className="flex h-8 items-end space-x-1">
+                {error}
+              </div>
+            )}
+
           </div>
-        )}
+
+        </form>
 
       </div>
-    </form>
+
+      <div className="text-default mt-8 text-center text-sm">
+        <Link className="text-brand-500 font-medium" href="/dashboard/auth/signup">
+          Don't have an account?
+        </Link>
+      </div>
+    </div>
   );
 }
