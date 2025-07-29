@@ -1,24 +1,14 @@
-import './../src/styles/globals.css';
-import { inter } from './../src/styles/fonts';
-//import { Providers } from "./../src/common/Providers";
-import ServerHeader from './../src/components/header/ServerHeader';
-import Footer from './../src/components/footer';
+import React from "react";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+import '@/src/styles/globals.css';
+import { inter } from '@/src/styles/fonts';
 
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        {/*<Providers>*/}
-          <ServerHeader />
-          {children}
-          <Footer />
-        {/*</Providers>*/}
+        {children}
       </body>
     </html>
   );
