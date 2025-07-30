@@ -112,7 +112,7 @@ export default function LoginForm() {
 
       <div className="text-default mt-8 text-center text-sm">
         <Link className="text-brand-500 font-medium" href="/dashboard/auth/signup">
-          Don't have an account?
+          Don&#39;t have an account?
         </Link>
       </div>
     </div>

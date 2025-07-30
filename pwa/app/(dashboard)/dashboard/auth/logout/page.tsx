@@ -21,7 +21,7 @@ export default function LogoutPage() {
               */}
               <div className="mt-3 text-center sm:mt-5">
                 <h3 className="text-emphasis text-lg font-medium leading-6" id="modal-title">
-                  You've been logged out
+                  You&#39;ve been logged out
                 </h3>
                 <div className="mt-2">
                   <p className="text-subtle text-sm">We hope to see you again soon!</p>
