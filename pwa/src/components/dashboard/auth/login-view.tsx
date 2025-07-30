@@ -59,13 +59,13 @@ export default function LoginForm() {
                            placeholder="•••••••••••••"
                            className="w-full min-w-0 truncate border-0 bg-transparent focus:outline-none focus:ring-0 text-default rounded-lg text-sm font-medium leading-none placeholder:text-muted disabled:cursor-not-allowed disabled:bg-transparent pl-0 addon-wrapper ltr:border-r-0 ltr:pr-10 rtl:border-l-0 rtl:pl-10 mb-0"
                            autoComplete="current-password"
-                           required=""
+                           required
                            name="password"
                     />
 
                     <div className="flex flex-shrink-0 items-center justify-center whitespace-nowrap">
                       <span className="text-sm font-medium leading-none text-muted peer-disabled:opacity-50">
-                        <button className="text-emphasis h-9" tabIndex="-1" type="button" data-state="closed">
+                        <button className="text-emphasis h-9" type="button" data-state="closed">
                           <svg height="16"
                                width="16"
                                className="fill-transparent h-4 w-4 stroke-[2.5px]"
@@ -80,7 +80,7 @@ export default function LoginForm() {
                 </div>
 
                 <div className="absolute -top-[2px] ltr:right-0 rtl:left-0">
-                  <Link className="text-default text-sm font-medium" tabIndex="-1" href="/dashboard/auth/forgot-password">
+                  <Link className="text-default text-sm font-medium" href="/dashboard/auth/forgot-password">
                     Forgot?
                   </Link>
                 </div>

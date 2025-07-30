@@ -20,17 +20,21 @@ export default function ForgotPasswordPage() {
           <div className="bg-white border-white border-subtle mx-2 rounded-md border px-4 py-10 sm:px-10">
             <div className="space-y-6"></div>
             <form className="space-y-6" action="#">
+              {/*
               <input hidden="" type="hidden" value="a78aa0a1af04356c9eaa3ebf5dba3b833db785974e81e8db096bd60f1d03ec2a"
                      name="csrfToken"/>
+              */}
               <div className=""><label className="text-emphasis mb-2 block text-sm font-medium leading-none"
                                        htmlFor="«r9»">Email address</label>
                 <input id="email"
                       placeholder="john.doe@example.com"
                       autoCapitalize="none"
                       autoComplete="email" autoCorrect="off"
-                      inputMode="email" required=""
+                      inputMode="email"
+                      required
                       className="rounded-[10px] border font-normal bg-default border-default text-default placeholder:text-muted hover:border-emphasis focus:ring-0 focus:shadow-outline-gray-focused shadow-outline-gray-rested transition h-8 px-3 py-2 text-sm w-full disabled:bg-subtle disabled:hover:border-subtle disabled:cursor-not-allowed"
-                      type="email" name="email"/>
+                      type="email"
+                      name="email"/>
               </div>
 
               <div className="space-y-2">
