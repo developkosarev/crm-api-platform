@@ -13,6 +13,7 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Repository\UserRepository;
 use App\State\UserPasswordHasher;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Types\UlidType;
@@ -32,7 +33,7 @@ use Symfony\Component\Uid\Ulid;
     ],
     normalizationContext: ['groups' => ['user:read']],
     denormalizationContext: ['groups' => ['user:create', 'user:update']],
-    security: "is_granted('ROLE_ADMIN')"
+    //security: "is_granted('ROLE_ADMIN')"
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -42,6 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     final public const string ROLE_ADMIN = 'ROLE_ADMIN';
     final public const string ROLE_USER = 'ROLE_USER';
+    final public const string ROLE_CUSTOMER = 'ROLE_CUSTOMER';
 
     //#[Groups(['user:read'])]
     //#[ORM\Id]
@@ -77,6 +79,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank(groups: ['user:create'])]
     #[Groups(['user:create', 'user:update'])]
     private ?string $plainPassword = null;
+
+    #[Groups(['user:create', 'user:update'])]
+    #[ORM\Column(name: 'created_at', type: 'datetime', nullable: true)]
+    protected ?DateTime $createdAt;
+
+    #region Construct
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    #endregion
+
 
     //public function getId(): ?int
     //{

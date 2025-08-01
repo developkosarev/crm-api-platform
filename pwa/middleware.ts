@@ -29,8 +29,7 @@ export default withAuth(
   },
   {
     pages: {
-      //signIn: "/login",
-      signIn: "/dashboard/auth/login",
+      signIn: "/dashboard/auth/login", //signIn: "/login",
     },
   }
 );
