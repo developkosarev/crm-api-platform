@@ -1,5 +1,6 @@
 import { authConfig } from "@/src/config/auth";
 import { getServerSession } from "next-auth/next";
+import { redirect, RedirectType } from 'next/navigation'
 
 import LoginForm from '@/src/components/dashboard/auth/login-view';
 import { Suspense } from 'react';
@@ -9,7 +10,7 @@ export default async function LoginPage() {
 
   if (!session?.user?.email) {
     console.log('===================redirect=========================')
-    //redirect("/auth/login");
+    redirect('/dashboard', RedirectType.replace);
   }
 
   return (
