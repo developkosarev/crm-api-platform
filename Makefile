@@ -24,6 +24,7 @@ help:
 	@echo "$(call red,===============================)"
 	@echo "$(call format,build,'Build dev')"
 	@echo "$(call format,start,'Start dev')"
+	@echo "$(call format,start-xdebug,'Start dev xdebug')"
 	@echo "$(call format,stop,'Stop dev')"
 	@echo "$(call format,down,'Down dev')"
 	@echo "$(call format,bash,'Bash dev')"
@@ -40,6 +41,10 @@ build: ## Start dev
 start: ## Start dev
 	$(DOCKER_COMPOSE_DEV) up --wait
 .PHONY: start
+
+start-xdebug: ## Start dev
+	XDEBUG_MODE=debug XDEBUG_SESSION=1 $(DOCKER_COMPOSE_DEV) up --wait
+.PHONY: start-xdebug
 
 stop: ## Stop dev
 	$(DOCKER_COMPOSE_DEV) stop
