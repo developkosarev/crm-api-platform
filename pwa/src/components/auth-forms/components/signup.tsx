@@ -1,8 +1,10 @@
+import Image from 'next/image';
+
 export const SignupForm = () => {
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img src="/icons/belvexa_logo.svg" alt="Belvexa"
+        <Image src="/icons/belvexa_logo.svg" alt="Belvexa" width={160} height={64}
              className="mx-auto h-16 w-auto"/>
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Sign up</h2>
       </div>
