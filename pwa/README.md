@@ -8,7 +8,7 @@ docker build --tag crm-app-pwa:v0.0.1 --file Dockerfile .
 docker build --tag crm-app-pwa:v0.0.1 --progress=plain --target builder --file Dockerfile .
 ```
 
-# Progressive Web App
+# Progressive Web App1
 
 Contains a [Next.js](https://nextjs.org/) project bootstrapped with [pnpm](https://pnpm.io/) and [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
