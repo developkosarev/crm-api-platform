@@ -16,4 +16,5 @@ use App\State\UserResetPasswordProcessor;
 )]
 class UserResetPassword
 {
+    public string $token;
 }
