@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DOCKER_COMPOSE="{{ docker_compose }}"
+
+WORKER_CONTAINER_NAME="docker-crm-api-platform_worker_php_1"
+
+MAX_WAIT=60
+
+#echo '#################### 00.01 Prune ####################'
+docker image prune --all --force
+
+#aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 801404438871.dkr.ecr.eu-central-1.amazonaws.com
+
+# Pull the latest images
+echo '#################### 01.01 Pull the latest images ####################'
+$DOCKER_COMPOSE -f compose.yaml pull --quiet
+echo '01.02 Done'
+
+
+echo '#################### 04.01 Down ####################'
+# Bring down the current containers
+$DOCKER_COMPOSE -f compose.yaml down
+
+echo '#################### 05.01 Up ####################'
+# Bring the containers back up
+$DOCKER_COMPOSE -f compose.yaml up -d
+
+sleep 5
+
+docker exec -i $SCHEDULER_CONTAINER_NAME php bin/console doctrine:migrations:migrate --no-interaction
