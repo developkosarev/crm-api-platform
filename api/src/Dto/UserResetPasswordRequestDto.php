@@ -5,7 +5,7 @@ namespace App\Dto;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class UserResetPasswordDto
+final class UserResetPasswordRequestDto
 {
     #[Assert\Email]
     public string $email;

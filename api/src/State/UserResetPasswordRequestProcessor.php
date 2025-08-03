@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\State;
 
-use App\ApiResource\UserResetPassword;
-use App\Dto\UserResetPasswordDto;
+use App\ApiResource\UserResetPasswordRequest;
+use App\Dto\UserResetPasswordRequestDto;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Entity\User;
@@ -15,9 +15,9 @@ use SymfonyCasts\Bundle\ResetPassword\Exception\TooManyPasswordRequestsException
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 /**
- * @implements ProcessorInterface<UserResetPasswordDto, User>
+ * @implements ProcessorInterface<UserResetPasswordRequestDto, User>
  */
-final class UserResetPasswordProcessor implements ProcessorInterface
+final class UserResetPasswordRequestProcessor implements ProcessorInterface
 {
     public function __construct(
         private readonly ResetPasswordHelperInterface $resetPasswordHelper,
@@ -27,13 +27,13 @@ final class UserResetPasswordProcessor implements ProcessorInterface
     }
 
     /**
-     * @param UserResetPasswordDto $data
+     * @param UserResetPasswordRequestDto $data
      *
      * @throws NotFoundHttpException
      */
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): ?UserResetPassword
+    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): ?UserResetPasswordRequest
     {
-        if (!$data instanceof UserResetPasswordDto) {
+        if (!$data instanceof UserResetPasswordRequestDto) {
             throw new NotFoundHttpException('Data not found.');
         }
 
@@ -61,7 +61,7 @@ final class UserResetPasswordProcessor implements ProcessorInterface
         //    throw new NotFoundHttpException($e->getMessage());
         //}
 
-        $output = new UserResetPassword();
+        $output = new UserResetPasswordRequest();
         $output->token = $resetToken->getToken();
 
         return $output;
