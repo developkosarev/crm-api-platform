@@ -30,3 +30,13 @@ php bin/console doctrine:migrations:execute --down 'DoctrineMigrations\Version20
 git tag v0.0.3
 git push --tags
 ```
+
+
+## Patch
+```
+"patches": {
+    "gesdinet/jwt-refresh-token-bundle": {
+        "Fix nullable type hint in RefreshTokenAuthenticator (https://gist.github.com/LucianoVandi/5fc0b9e6bfb5155e69ddcd019cbd4a3e)": "patches/gesdinet/jwt-refresh-token-bundle/fix-nullable-type.patch"
+    }
+}
+```
