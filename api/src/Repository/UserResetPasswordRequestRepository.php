@@ -50,4 +50,16 @@ class UserResetPasswordRequestRepository extends ServiceEntityRepository impleme
 
         return null;
     }
+
+    public function removeResetPasswordRequest(ResetPasswordRequestInterface $resetPasswordRequest): void
+    {
+        $this->createQueryBuilder('t')
+            ->delete()
+            ->where('t.user = :user')
+            //->setParameter('user', $resetPasswordRequest->getUser())
+            ->setParameter('user', $resetPasswordRequest->getUser()->getId(), 'uuid')
+            ->getQuery()
+            ->execute()
+        ;
+    }
 }

@@ -26,6 +26,7 @@ use Symfony\Component\Uid\Ulid;
 
 #[ApiResource(
     uriTemplate: '/api/users{._format}',
+    shortName: 'User',
     operations: [
         //new GetCollection(security: "is_granted('ROLE_ADMIN')"),
         //new Get(uriTemplate: '/api/users/{id}', security: "is_granted('ROLE_ADMIN')"),
@@ -182,6 +183,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 }
