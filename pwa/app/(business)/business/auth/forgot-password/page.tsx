@@ -48,7 +48,7 @@ export default function ForgotPasswordPage() {
           </div>
           <div className="text-default mt-8 text-center text-sm">
 
-            <Link className="text-emphasis font-medium" href="/dashboard/auth/login">
+            <Link className="text-emphasis font-medium" href="/business/auth/login">
               Back to sign in
             </Link>
 

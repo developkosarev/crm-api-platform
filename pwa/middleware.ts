@@ -11,7 +11,7 @@ export default withAuth(
     if ((token as any)?.error === "RefreshAccessTokenError") {
       console.log("=============== 99 ======================");
       //return NextResponse.redirect(new URL("/login", req.url));
-      return NextResponse.redirect(new URL("/dashboard/auth/login", req.url));
+      return NextResponse.redirect(new URL("/business/auth/login", req.url));
     }
 
     //const error = req.cookies.get("auth_error")?.value;
@@ -29,17 +29,17 @@ export default withAuth(
   },
   {
     pages: {
-      signIn: "/dashboard/auth/login", //signIn: "/login",
+      signIn: "/business/auth/login", //signIn: "/login",
     },
   }
 );
 
 export const config = {
-  matcher: ['/profile', '/profile-client', '/dashboard/profile'], //'/dashboard/:path*'
+  matcher: ['/profile', '/profile-client', '/business/profile'], //'/business/:path*'
 };
 
 //export { default } from 'next-auth/middleware'
 //
 //export const config = {
-//  matcher: ['/profile', '/profile-client', '/dashboard/:path*']
+//  matcher: ['/profile', '/profile-client', '/business/:path*']
 //}

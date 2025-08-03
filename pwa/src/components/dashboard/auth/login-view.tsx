@@ -80,7 +80,7 @@ export default function LoginForm() {
                 </div>
 
                 <div className="absolute -top-[2px] ltr:right-0 rtl:left-0">
-                  <Link className="text-default text-sm font-medium" href="/dashboard/auth/forgot-password">
+                  <Link className="text-default text-sm font-medium" href="/business/auth/forgot-password">
                     Forgot?
                   </Link>
                 </div>
@@ -111,7 +111,7 @@ export default function LoginForm() {
       </div>
 
       <div className="text-default mt-8 text-center text-sm">
-        <Link className="text-brand-500 font-medium" href="/dashboard/auth/signup">
+        <Link className="text-brand-500 font-medium" href="/business/auth/signup">
           Don&#39;t have an account?
         </Link>
       </div>

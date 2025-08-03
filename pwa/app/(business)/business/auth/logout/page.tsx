@@ -31,7 +31,7 @@ export default function LogoutPage() {
 
             <div className="mt-5 sm:mt-6">
               <Link className="group whitespace-nowrap inline-flex items-center font-medium relative rounded-[10px] disabled:cursor-not-allowed gap-1 bg-default text-default border border-default enabled:hover:bg-muted enabled:hover:text-emphasis disabled:opacity-30 focus-visible:bg-subtle focus-visible:outline-none focus-visible:ring-0 focus-visible:shadow-outline-gray-focused shadow-outline-gray-rested enabled:hover:shadow-outline-gray-hover enabled:active:shadow-outline-gray-active transition-shadow duration-200 px-2.5 py-2 text-sm leading-none w-full justify-center"
-                    href="/dashboard/auth/login"
+                    href="/business/auth/login"
               >
                 Go back to login page
               </Link>
