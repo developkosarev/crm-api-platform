@@ -45,3 +45,9 @@ It means that you can:
 ## Credits
 
 Created by [Kévin Dunglas](https://dunglas.fr). Commercial support is available at [Les-Tilleuls.coop](https://les-tilleuls.coop).
+
+## Git
+```
+git remote add origin-belvexa git@github.com:belvexa/crm-api-platform.git
+git push origin-belvexa master
+```
