@@ -53,7 +53,7 @@ final class UserResetPasswordProcessor implements ProcessorInterface
         $hashedPassword = $this->passwordHasher->hashPassword($user, $data->plainPassword);
 
         $user->setPassword($hashedPassword);
-        //$user->eraseCredentials();
+        $user->eraseCredentials();
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
