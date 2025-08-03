@@ -2,16 +2,16 @@ import { authConfig } from "@/src/config/auth";
 import { getServerSession } from "next-auth/next";
 import { redirect, RedirectType } from 'next/navigation'
 
-import { LoginForm } from '@/src/components/auth-forms';
+import LoginForm from '@/src/components/dashboard/auth/login-view';
 import { Suspense } from 'react';
 
 export default async function LoginPage() {
-  const session = await getServerSession(authConfig)
+ /* const session = await getServerSession(authConfig)
 
   if (!session?.user?.email) {
     console.log('===================redirect=========================')
     redirect('/dashboard', RedirectType.replace);
-  }
+  }*/
 
   return (
     <div className="bg-gray-200 min-h-screen">
