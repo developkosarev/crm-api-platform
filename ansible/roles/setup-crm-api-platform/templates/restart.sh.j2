@@ -28,4 +28,4 @@ $DOCKER_COMPOSE -f compose.yaml up -d
 
 sleep 5
 
-docker exec -i $SCHEDULER_CONTAINER_NAME php bin/console doctrine:migrations:migrate --no-interaction
+docker exec -i $WORKER_CONTAINER_NAME php bin/console doctrine:migrations:migrate --no-interaction
