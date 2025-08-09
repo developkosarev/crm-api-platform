@@ -2,7 +2,7 @@ name: Publish Docker image PWA
 env:
   DEPLOY_PACKAGE_NAME : "crm-api-platform-${{ github.sha }}"
   DEPLOY_VERSION : "v0.0.1"
-  DEPLOY_FOLDER : "docker"  
+  DEPLOY_FOLDER : "crm-api-platform"  
 
 #on:
 #  release:
@@ -103,6 +103,12 @@ jobs:
           port: 22
           script: |
             cd /home/${{ secrets.SSH_USER }}/${{ env.DEPLOY_FOLDER }}
-            docker compose -f compose-crm-api-platform.yml pull
-            docker compose -f compose-crm-api-platform.yml down
-            docker compose -f compose-crm-api-platform.yml up -d 
+            export CR_PAT=${{ secrets.CR_PAT }}
+            ./restart.sh
+          
+          #  
+          #script: |
+          #  cd /home/${{ secrets.SSH_USER }}/${{ env.DEPLOY_FOLDER }}
+          #  docker compose -f compose-crm-api-platform.yml pull
+          #  docker compose -f compose-crm-api-platform.yml down
+          #  docker compose -f compose-crm-api-platform.yml up -d 
