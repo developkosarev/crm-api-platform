@@ -12,7 +12,10 @@ use App\State\UserResetPasswordRequestProcessor;
     uriTemplate: '/api/users/reset-password-request{._format}',
     shortName: 'User',
     operations: [
-        new Post(input: UserResetPasswordRequestDto::class, processor: UserResetPasswordRequestProcessor::class),
+        new Post(
+            input: UserResetPasswordRequestDto::class,
+            processor: UserResetPasswordRequestProcessor::class,
+        )
     ],
 )]
 class UserResetPasswordRequest

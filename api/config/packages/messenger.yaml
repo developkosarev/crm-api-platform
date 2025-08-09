@@ -1,0 +1,48 @@
+framework:
+    messenger:
+        # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
+        failure_transport: failed
+
+        transports:
+            # https://symfony.com/doc/current/messenger.html#transport-configuration
+            # async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            # failed: 'doctrine://default?queue_name=failed'
+            # sync: 'sync://'
+            
+            async_mailer:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                serializer: messenger.transport.symfony_serializer
+                
+                # default configuration
+                retry_strategy:
+                    max_retries: 10
+                    # 60 sec delay
+                    delay: 60000
+                    # causes the delay to be higher before each retry
+                    # e.g. 10 second delay, 20 seconds, 40 seconds, 80 seconds
+                    #multiplier: 2
+                    # e.g. 10 second delay, 10 seconds, 10 seconds, 10 seconds
+                    multiplier: 1
+                    max_delay: 0
+                    # override all of this with a service that
+                    # implements Symfony\Component\Messenger\Retry\RetryStrategyInterface
+                    # service: null
+                    
+            failed:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: failed                
+        
+        routing:
+            # Route your messages to the transports
+            # 'App\Message\YourMessage': async
+            App\Message\User\UserResetPasswordRequest: async_mailer
+    
+    
+    when@test:
+    framework:
+        messenger:
+            transports:
+                # replace with your transport name here (e.g., my_transport: 'in-memory://')
+                # For more Messenger testing tools, see https://github.com/zenstruck/messenger-test
+                async: 'in-memory://'
