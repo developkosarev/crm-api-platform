@@ -1,0 +1,4 @@
+---
+
+- include_tasks: crm-api-platform.yml
+  tags: crm-api-platform

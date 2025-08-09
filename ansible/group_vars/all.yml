@@ -1,0 +1,11 @@
+---
+
+# CRM API PLATFORM
+
+crm_api_platform_docker_compose_root    : "/home/dk/crm-api-platform"
+
+crm_api_platform_db_connection_host     : "database"
+crm_api_platform_db_connection_dbname   : "api_magento"
+crm_api_platform_db_connection_username : "symfony_api"
+
+

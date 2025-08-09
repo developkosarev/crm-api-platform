@@ -1,0 +1,25 @@
+---
+- name: Install crm-api-platform
+  block:
+    - name: 01.01 Create a directory if it does not exist
+      ansible.builtin.file:
+        path: "{{ crm_api_platform_docker_compose_root }}"
+        state: directory
+        
+    - name: 01.02 Copy docker compose
+      ansible.builtin.copy:
+        src: compose-crm-api-platform.yml.conf
+        dest: "{{ crm_api_platform_docker_compose_root }}/compose-crm-api-platform.yml"    
+    
+    - name: 01.03 Copy docker compose restart
+      template:
+        src: restart.sh.j2
+        dest: "{{ crm_api_platform_docker_compose_root }}/restart.sh"
+        mode: a+x    
+
+    - name: 01.04 Copy .env
+      template:
+        src: env.dist
+        dest: "{{ crm_api_platform_docker_compose_root }}/.env"
+        
+  tags: crm-api-platform

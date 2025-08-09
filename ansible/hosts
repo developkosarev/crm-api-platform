@@ -1,0 +1,2 @@
+[dev]
+dk-dev ansible_python_interpreter=python3
