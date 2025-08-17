@@ -8,28 +8,33 @@ PWA_CONTAINER_NAME="crm-api-platform-pwa-1"
 
 MAX_WAIT=60
 
-echo '#################### 00.01 Prune ####################'
-docker image prune --all --force
+#echo '#################### 00.01 Prune ####################'
+#docker image prune --all --force
 
 echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
 
 # Pull the latest images
 echo '#################### 01.01 Pull the latest images ####################'
-$DOCKER_COMPOSE -f compose.base.yml -f compose-crm.override.yml pull --quiet
+$DOCKER_COMPOSE -f compose.base.yml -f compose-crm.green.override.yml pull --quiet
 echo '01.02 Done'
 
 
 echo '#################### 04.01 Down ####################'
 # Bring down the current containers
-#$DOCKER_COMPOSE -f compose.base.yml -f compose-crm.override.yml down
+#$DOCKER_COMPOSE -f compose.base.yml -f compose-crm.green.override.yml down
 
 docker stop $PWA_CONTAINER_NAME $WORKER_CONTAINER_NAME
 docker rm $PWA_CONTAINER_NAME $WORKER_CONTAINER_NAME
 
 echo '#################### 05.01 Up ####################'
 # Bring the containers back up
-$DOCKER_COMPOSE -f compose.base.yml -f compose-crm.override.yml up -d
+$DOCKER_COMPOSE -f compose.base.yml -f compose-crm.green.override.yml up -d
 
 sleep 5
 
 docker exec -i $WORKER_CONTAINER_NAME php bin/console doctrine:migrations:migrate --no-interaction
+
+sleep 5
+
+echo '#################### 06.01 Prune ####################'
+docker image prune --all --force

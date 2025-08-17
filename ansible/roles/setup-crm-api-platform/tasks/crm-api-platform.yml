@@ -1,5 +1,10 @@
 ---
 - name: Install crm-api-platform
+  vars:
+    blue_green:
+      - { release: 'blue' }
+      - { release: 'green' }
+  
   block:
     - name: 01.01 Create a directory if it does not exist
       ansible.builtin.file:
@@ -11,18 +16,24 @@
         src: docker/compose.base.yml.conf
         dest: "{{ crm_api_platform_docker_compose_root }}/compose.base.yml"
         
-    - name: 01.02 Copy docker compose
-      ansible.builtin.copy:
+    #- name: 01.02 Copy docker compose
+    #  ansible.builtin.copy:
+    #    src: docker/compose-crm.override.yml.conf
+    #    dest: "{{ crm_api_platform_docker_compose_root }}/compose-crm.override.yml"    
+        
+    - name: 01.03 Copy docker compose
+      template:
         src: docker/compose-crm.override.yml.conf
-        dest: "{{ crm_api_platform_docker_compose_root }}/compose-crm.override.yml"    
+        dest: "{{ crm_api_platform_docker_compose_root }}/compose-crm.{{ item.release }}.override.yml"
+      loop: "{{ blue_green }}"  
     
-    - name: 01.03 Copy docker compose restart
+    - name: 01.04 Copy docker compose restart
       template:
         src: docker/restart.sh.j2
         dest: "{{ crm_api_platform_docker_compose_root }}/restart.sh"
         mode: a+x    
 
-    - name: 01.04 Copy .env
+    - name: 01.05 Copy .env
       template:
         src: docker/env.dist
         dest: "{{ crm_api_platform_docker_compose_root }}/.env"
