@@ -1,4 +1,3 @@
-import React from 'react';
 
 const AboutUsPage = () => { 
   return (
@@ -6,4 +5,4 @@ const AboutUsPage = () => {
   )
 };
 
-export { AboutUsPage};
+export default AboutUsPage;
