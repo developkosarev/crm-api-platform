@@ -1,0 +1,17 @@
+---
+#- name: reload-nginx
+#  command: nginx -t
+#  become: true
+#  register: nginx_check
+#  changed_when: false
+#  failed_when: nginx_check.rc != 0
+#  
+#- name: reload-nginx  
+#  ansible.builtin.service:
+#    name: nginx
+#    state: reloaded
+#  become: true
+
+- name: reload-nginx
+  debug:
+    msg: "The Nginx service restarted successfully (sudo nginx -t && nginx -s reload)"

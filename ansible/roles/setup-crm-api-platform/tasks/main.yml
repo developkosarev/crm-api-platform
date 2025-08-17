@@ -2,3 +2,6 @@
 
 - include_tasks: crm-api-platform.yml
   tags: crm-api-platform
+  
+- include_tasks: nginx.yml
+  tags: nginx  
