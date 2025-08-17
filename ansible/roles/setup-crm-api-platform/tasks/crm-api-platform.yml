@@ -8,23 +8,23 @@
 
     - name: 01.02 Copy docker compose
       ansible.builtin.copy:
-        src: compose.base.yml.conf
+        src: docker/compose.base.yml.conf
         dest: "{{ crm_api_platform_docker_compose_root }}/compose.base.yml"
         
     - name: 01.02 Copy docker compose
       ansible.builtin.copy:
-        src: compose-crm.override.yml.conf
+        src: docker/compose-crm.override.yml.conf
         dest: "{{ crm_api_platform_docker_compose_root }}/compose-crm.override.yml"    
     
     - name: 01.03 Copy docker compose restart
       template:
-        src: restart.sh.j2
+        src: docker/restart.sh.j2
         dest: "{{ crm_api_platform_docker_compose_root }}/restart.sh"
         mode: a+x    
 
     - name: 01.04 Copy .env
       template:
-        src: env.dist
+        src: docker/env.dist
         dest: "{{ crm_api_platform_docker_compose_root }}/.env"
         
   tags: crm-api-platform

@@ -1,0 +1,9 @@
+---
+- name: restart-nginx
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+
+- name: restart-nginx
+  debug:
+    msg: "The Nginx service restarted successfully (sudo nginx -t && nginx -s reload)"

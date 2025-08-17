@@ -1,0 +1,26 @@
+---
+- name: Install Nginx
+  block:    
+    # crm
+    - name: Add Nginx configuration File crm.smarteule.com.conf
+      template:
+        src: nginx/crm.smarteule.com.conf
+        dest: /etc/nginx/sites-available/crm.smarteule.com.conf
+        owner: root
+        group: root
+        mode: '0644'
+        backup: no
+      notify:
+      - restart-nginx
+
+    - name: Create Stage Symbolic Link crm.smarteule.com.conf
+      file:
+        src: /etc/nginx/sites-available/crm.smarteule.com.conf
+        dest: /etc/nginx/sites-enabled/crm.smarteule.com.conf
+        owner: root
+        group: root
+        state: link
+      notify:
+      - restart-nginx    
+        
+  tags: nginx

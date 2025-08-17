@@ -14,3 +14,4 @@
 ## Setup
 1. ansible-playbook setup-crm-api-platform.yml -i hosts.local --list-tags
 2. ansible-playbook setup-crm-api-platform.yml -i hosts.local --tags="crm-api-platform" --check
+3. ansible-playbook setup-crm-api-platform.yml -i hosts.local --tags="nginx" --check
