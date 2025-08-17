@@ -35,7 +35,7 @@ FROM base AS builder
 
 ENV CI=true
 
-COPY --link pnpm-lock.yaml package.json tsconfig.json next.config.js ./
+COPY --link pnpm-lock.yaml package.json tsconfig.json next.config.ts ./
 RUN pnpm fetch --prod
 
 COPY --link . .
