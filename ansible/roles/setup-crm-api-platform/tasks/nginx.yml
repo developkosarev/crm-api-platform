@@ -1,26 +1,59 @@
 ---
 - name: Install Nginx
-  block:    
+  block: 
+    # sudo chown youruser:youruser /etc/nginx/nginx.conf
+    # sudo chown -R youruser:youruser /etc/nginx
+          
     # crm
     - name: Add Nginx configuration File crm.smarteule.com.conf
       template:
         src: nginx/crm.smarteule.com.conf
         dest: /etc/nginx/sites-available/crm.smarteule.com.conf
-        owner: root
-        group: root
+        owner: dk
+        group: dk
         mode: '0644'
         backup: no
       notify:
-      - restart-nginx
+      - reload-nginx
 
     - name: Create Stage Symbolic Link crm.smarteule.com.conf
       file:
         src: /etc/nginx/sites-available/crm.smarteule.com.conf
         dest: /etc/nginx/sites-enabled/crm.smarteule.com.conf
-        owner: root
-        group: root
+        owner: dk
+        group: dk
         state: link
       notify:
-      - restart-nginx    
+      - reload-nginx
+    
+    
+    #reload nginx  
+    - name: Check nginx config
+      command: sudo nginx -t      
+      register: nginx_check
+      changed_when: false
+      failed_when: nginx_check.rc != 0
+    - debug:
+        var: nginx_check.rc
+    - debug:
+        var: nginx_check.stderr_lines    
+        
+    - name: Reload nginx config
+      command: sudo nginx -s reload
+      register: nginx_reload
+      changed_when: false
+      failed_when: nginx_reload.rc != 0
+    - debug:
+        var: nginx_reload        
+    
+    
+    #- name: Reload nginx
+    #  #shell: sudo nginx -t && sudo nginx -s reload
+    #  command: sudo nginx -t      
+    #  register: shell_output
+    #- debug:
+    #    var: shell_output.stdout_lines          
+    #- debug:
+    #    var: shell_output.stderr_lines    
         
   tags: nginx
