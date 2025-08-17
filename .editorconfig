@@ -6,8 +6,11 @@ root = true
 
 [*]
 # Change these settings to your own preference
+charset = utf-8
 indent_style = space
-indent_size = 4
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
 
 # We recommend you to keep these unchanged
 end_of_line = lf
@@ -23,6 +26,7 @@ indent_size = 2
 
 [*.md]
 trim_trailing_whitespace = false
+max_line_length = off
 
 [*.sh]
 indent_style = tab

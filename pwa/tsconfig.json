@@ -17,9 +17,8 @@
     "noEmit": true,
     "isolatedModules": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+       "~/*": ["./*"],
+      "@/*": ["./src/*"],
     },
     "allowJs": true,
     "incremental": true,

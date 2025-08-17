@@ -1,0 +1,34 @@
+{
+  "Index": {
+    "title": "Home",
+    "loggedIn": "Logged in as {username}",
+    "loggedOut": "You are logged out.",
+    "login": "Login",
+    "logout": "Logout",
+    "secret": "Secret page for logged in users"
+  },
+  "LocaleLayout": {
+    "title": "next-intl with Auth.js example"
+  },
+  "login": {
+    "title": "Sign in to your account",
+    "redirectToSignUp": "Don't have an account?",
+    "redirectLabel": "Sign up",
+    "email": "Email address",
+    "username": "Username",
+    "password": "Password",
+    "btnLabel": "Sign in",
+    "error": "{error, select, CredentialsSignin {Invalid username or password} other {Unknown error}}"
+  },
+  "LocaleSwitcher": {
+    "switchLocale": "Switch to {locale, select, de {German} en {English} other {Unknown}}"
+  },
+  "Secret": {
+    "title": "Secret page",
+    "description": "This page is only visible for logged in users."
+  },
+    "aboutUs": {
+      "title": "About Us",
+      "description": "This page is visible for all users."
+  }
+}

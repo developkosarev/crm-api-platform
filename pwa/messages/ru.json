@@ -1,0 +1,34 @@
+{
+  "Index": {
+    "title": "Стартовая страница",
+    "loggedIn": "Angemeldet als {username}",
+    "loggedOut": "Du bist abgemeldet.",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "secret": "Geheime Seite für angemeldete Benutzer"
+  },
+  "LocaleLayout": {
+    "title": "next-intl mit Auth.js Beispiel"
+  },
+  "login": {
+    "title": "Войти в учетную запись",
+    "redirectToSignUp": "Eще нет учетной записи?",
+    "redirectLabel": "Зарегистрироваться",
+    "email": "Адрес электронной почты",
+    "username": "Имя",
+    "password": "Пароль",
+    "btnLabel": "Войти",
+    "error": "{error, select, CredentialsSignin {Ungültiger Benutzername oder Passwort} other {Unbekannter Fehler}}"
+  },
+  "LocaleSwitcher": {
+    "switchLocale": "К {locale, select, de {Deutsch} en {Englisch} other {Unbekannt}} wechseln"
+  },
+  "Secret": {
+    "title": "Geheime Seite",
+    "description": "Diese Seite ist nur für angemeldete Benutzer sichtbar."
+  },
+  "AboutUs": {
+    "title": "О нас",
+    "description": "Эта страница видна всем пользователям."
+  }
+}
