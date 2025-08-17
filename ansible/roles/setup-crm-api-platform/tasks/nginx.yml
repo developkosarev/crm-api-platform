@@ -1,30 +1,61 @@
 ---
 - name: Install Nginx
-  block: 
+  vars:
+    blue_green_steps:
+      - { step: 'step1' }
+      - { step: 'step2' }
+      - { step: 'step3' }
+      - { step: 'step4' }
+          
+    domains:
+      - { simlink: 'blue',  port_nginx: 80, port: 3002 } #3002 8080
+      - { simlink: 'green', port_nginx: 81, port: 3003 } #3003 8081
+  
+  block:
     # sudo chown youruser:youruser /etc/nginx/nginx.conf
     # sudo chown -R youruser:youruser /etc/nginx
-          
+
+    - name: Add Nginx blue-green-crm.conf
+      template:
+        src: nginx/blue-green-crm.conf
+        dest: /etc/nginx/maps-available/blue-green-crm.{{ item.step }}.conf
+        owner: dk
+        group: dk
+        mode: '0644'
+        backup: no
+      loop: "{{ blue_green_steps }}"
+      
+    - name: Create Symbolic Link blue-green-crm.conf
+      file:
+        src: /etc/nginx/maps-available/blue-green-crm.step1.conf
+        dest: /etc/nginx/conf.d/blue-green-crm.conf
+        owner: dk
+        group: dk
+        state: link        
+        
     # crm
     - name: Add Nginx configuration File crm.smarteule.com.conf
       template:
         src: nginx/crm.smarteule.com.conf
-        dest: /etc/nginx/sites-available/crm.smarteule.com.conf
+        dest: /etc/nginx/sites-available/crm.smarteule.com.{{ item.port_nginx }}.conf
         owner: dk
         group: dk
         mode: '0644'
         backup: no
       notify:
       - reload-nginx
-
+      loop: "{{ domains }}"
+    
     - name: Create Stage Symbolic Link crm.smarteule.com.conf
       file:
-        src: /etc/nginx/sites-available/crm.smarteule.com.conf
-        dest: /etc/nginx/sites-enabled/crm.smarteule.com.conf
+        src: /etc/nginx/sites-available/crm.smarteule.com.{{ item.port_nginx }}.conf
+        dest: /etc/nginx/sites-enabled/crm.smarteule.com.{{ item.port_nginx }}.conf
         owner: dk
         group: dk
         state: link
       notify:
       - reload-nginx
+      loop: "{{ domains }}" 
     
     
     #reload nginx  
