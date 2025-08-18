@@ -1,12 +1,13 @@
+import { routing } from '@/i18n/routing';
+import { getToken } from "next-auth/jwt";
 import { withAuth } from "next-auth/middleware";
 import createMiddleware from 'next-intl/middleware';
-import { getToken } from "next-auth/jwt";
-import { NextResponse, NextRequest } from "next/server";
-import { routing } from '@/i18n/routing';
+import { NextRequest } from "next/server";
 
 const publicPages = [
   '/',
   '/login',
+  '/about-us',
   '/dashboard/auth/signup',
   '/docs',
   '/dev'
