@@ -1,7 +1,7 @@
 import { Link } from '@/i18n/navigation';
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   session: Session | null;
@@ -9,7 +9,6 @@ type Props = {
 
 export const HomePage = ({session}: Props) => {
   const t = useTranslations('Index');
-  const locale = useLocale();
   function onLogoutClick() {
     signOut();
   }
