@@ -27,7 +27,7 @@ help:
 	@echo "$(call format,stop crm=1,'Stop crm1 containers')"
 	@echo "$(call format,restart crm=1,'Restart crm1 containers')"
 	@echo "$(call red,===============================)"
-	@echo "$(call format,logs,'Logs scheduler')"
+	@echo "$(call format,logs,'Logs web')"
 	@echo "$(call red,===============================)"
 	@echo "$(call format,start-db,'Start db')"
 	@echo "$(call format,stop-db,'Stop db')"
