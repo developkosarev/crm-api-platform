@@ -11,45 +11,55 @@
         path: "{{ crm_api_platform_docker_compose_root }}"
         state: directory
         
-    #1-2    
+    #1-2
+    - name: 01.02 Copy Makefile
+      ansible.builtin.copy:
+        src: docker/Makefile
+        dest: "{{ crm_api_platform_docker_compose_root }}/Makefile"
+    
     - name: 01.02 Copy docker compose db
       ansible.builtin.copy:
-        src: docker/compose-db.yml.conf
-        dest: "{{ crm_api_platform_docker_compose_root }}/compose-db.yml.conf"
+        src: docker/compose-db.yml
+        dest: "{{ crm_api_platform_docker_compose_root }}/compose-db.yml"
         
     - name: 01.02 Copy docker compose base
       ansible.builtin.copy:
-        src: docker/compose-base.yml.conf
-        dest: "{{ crm_api_platform_docker_compose_root }}/compose-base.yml.conf"    
+        src: docker/compose-base.yml
+        dest: "{{ crm_api_platform_docker_compose_root }}/compose-base.yml"    
         
     - name: 01.02 Copy docker compose 1
       ansible.builtin.copy:
-        src: docker/compose-crm-1.override.yml.conf
-        dest: "{{ crm_api_platform_docker_compose_root }}/compose-crm-1.override.yml.conf"    
-        
+        src: docker/compose-crm-1.override.yml
+        dest: "{{ crm_api_platform_docker_compose_root }}/compose-crm-1.override.yml"    
 
-
-    - name: 01.02 Copy docker compose
+    - name: 01.02 Copy docker compose 2
       ansible.builtin.copy:
-        src: docker/compose.base.yml.conf
-        dest: "{{ crm_api_platform_docker_compose_root }}/compose.base.yml"
+        src: docker/compose-crm-2.override.yml
+        dest: "{{ crm_api_platform_docker_compose_root }}/compose-crm-2.override.yml"    
         
+
+
     #- name: 01.02 Copy docker compose
     #  ansible.builtin.copy:
+    #    src: docker/compose.base.yml.conf
+    #    dest: "{{ crm_api_platform_docker_compose_root }}/compose.base.yml"
+    #    
+    ##- name: 01.02 Copy docker compose
+    ##  ansible.builtin.copy:
+    ##    src: docker/compose-crm.override.yml.conf
+    ##    dest: "{{ crm_api_platform_docker_compose_root }}/compose-crm.override.yml"    
+    #    
+    #- name: 01.03 Copy docker compose
+    #  template:
     #    src: docker/compose-crm.override.yml.conf
-    #    dest: "{{ crm_api_platform_docker_compose_root }}/compose-crm.override.yml"    
-        
-    - name: 01.03 Copy docker compose
-      template:
-        src: docker/compose-crm.override.yml.conf
-        dest: "{{ crm_api_platform_docker_compose_root }}/compose-crm.{{ item.release }}.override.yml"
-      loop: "{{ blue_green }}"  
-    
-    - name: 01.04 Copy docker compose restart
-      template:
-        src: docker/restart.sh.j2
-        dest: "{{ crm_api_platform_docker_compose_root }}/restart.sh"
-        mode: a+x    
+    #    dest: "{{ crm_api_platform_docker_compose_root }}/compose-crm.{{ item.release }}.override.yml"
+    #  loop: "{{ blue_green }}"  
+    #
+    #- name: 01.04 Copy docker compose restart
+    #  template:
+    #    src: docker/restart.sh.j2
+    #    dest: "{{ crm_api_platform_docker_compose_root }}/restart.sh"
+    #    mode: a+x    
 
     - name: 01.05 Copy .env
       template:

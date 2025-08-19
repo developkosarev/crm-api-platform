@@ -4,8 +4,8 @@ services:
     #image: ghcr.io/developkosarev/crm-api-platform-api:master
     image: ghcr.io/belvexa/crm-api-platform-api:master
     container_name: crm-api-platform-php-1
-    depends_on:
-      - database
+    #depends_on:
+    #  - database
     restart: unless-stopped
     healthcheck:
       disable: true
