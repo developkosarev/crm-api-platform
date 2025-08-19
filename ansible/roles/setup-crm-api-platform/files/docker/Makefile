@@ -62,6 +62,9 @@ stop-db: ## Stop db
 	$(DOCKER_COMPOSE_DB) stop
 .PHONY: stop-db
 
+down-db: ## Down db
+	$(DOCKER_COMPOSE_DB) down
+.PHONY: down-db
 
 
 

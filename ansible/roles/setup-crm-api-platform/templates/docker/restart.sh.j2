@@ -23,14 +23,14 @@ echo '#################### 04.01 Down ####################'
 # Bring down the current containers
 #$DOCKER_COMPOSE -p crm1 -f compose-base.yml -f compose-crm-1.override.yml down
 
-if [ "$(docker ps -q -f name=$PWA_CONTAINER_NAME)" ]; then
-    docker stop $PWA_CONTAINER_NAME
-    docker rm $PWA_CONTAINER_NAME
-fi
-if [ "$(docker ps -q -f name=$WORKER_CONTAINER_NAME)" ]; then
-    docker stop $WORKER_CONTAINER_NAME
-    docker rm $WORKER_CONTAINER_NAME
-fi
+#if [ "$(docker ps -q -f name=$PWA_CONTAINER_NAME)" ]; then
+#    docker stop $PWA_CONTAINER_NAME
+#    docker rm $PWA_CONTAINER_NAME
+#fi
+#if [ "$(docker ps -q -f name=$WORKER_CONTAINER_NAME)" ]; then
+#    docker stop $WORKER_CONTAINER_NAME
+#    docker rm $WORKER_CONTAINER_NAME
+#fi
 
 echo '#################### 05.01 Up ####################'
 # Bring the containers back up

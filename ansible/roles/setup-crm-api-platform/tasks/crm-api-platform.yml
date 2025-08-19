@@ -54,12 +54,12 @@
     #    src: docker/compose-crm.override.yml.conf
     #    dest: "{{ crm_api_platform_docker_compose_root }}/compose-crm.{{ item.release }}.override.yml"
     #  loop: "{{ blue_green }}"  
-    #
-    #- name: 01.04 Copy docker compose restart
-    #  template:
-    #    src: docker/restart.sh.j2
-    #    dest: "{{ crm_api_platform_docker_compose_root }}/restart.sh"
-    #    mode: a+x    
+    
+    - name: 01.04 Copy docker compose restart
+      template:
+        src: docker/restart.sh.j2
+        dest: "{{ crm_api_platform_docker_compose_root }}/restart.sh"
+        mode: a+x    
 
     - name: 01.05 Copy .env
       template:
