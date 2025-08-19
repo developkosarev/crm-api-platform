@@ -1,0 +1,16 @@
+services:
+  php:
+    container_name: crm-api-platform-php-2
+    ports:
+      # HTTP
+      - target: 80
+        published: ${HTTP_PORT_2:-80}
+        protocol: tcp
+
+  pwa:
+    container_name: crm-api-platform-pwa-2
+
+networks:
+  default:
+    external: true
+    name: crm2

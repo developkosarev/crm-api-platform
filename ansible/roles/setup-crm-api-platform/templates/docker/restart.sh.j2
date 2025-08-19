@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+#./restart.sh 1
+#./restart.sh 2
+
+CRM_PROJECT="${1:-1}"
+
 DOCKER_COMPOSE="{{ docker_compose }}"
 
-WORKER_CONTAINER_NAME=" crm-api-platform-php-1"
-PWA_CONTAINER_NAME="crm-api-platform-pwa-1"
+WORKER_CONTAINER_NAME="crm-api-platform-php-$CRM_PROJECT"
+PWA_CONTAINER_NAME="crm-api-platform-pwa-$CRM_PROJECT"
 
 MAX_WAIT=60
 
@@ -15,20 +20,26 @@ echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
 
 # Pull the latest images
 echo '#################### 01.01 Pull the latest images ####################'
-$DOCKER_COMPOSE -f compose.base.yml -f compose-crm.green.override.yml pull --quiet
+$DOCKER_COMPOSE -p crm1 -f compose-base.yml -f compose-crm-$CRM_PROJECT.override.yml pull --quiet
 echo '01.02 Done'
 
 
 echo '#################### 04.01 Down ####################'
 # Bring down the current containers
-#$DOCKER_COMPOSE -f compose.base.yml -f compose-crm.green.override.yml down
+$DOCKER_COMPOSE -p crm$CRM_PROJECT -f compose-base.yml -f compose-crm-$CRM_PROJECT.override.yml down
 
-docker stop $PWA_CONTAINER_NAME $WORKER_CONTAINER_NAME
-docker rm $PWA_CONTAINER_NAME $WORKER_CONTAINER_NAME
+#if [ "$(docker ps -q -f name=$PWA_CONTAINER_NAME)" ]; then
+#    docker stop $PWA_CONTAINER_NAME
+#    docker rm $PWA_CONTAINER_NAME
+#fi
+#if [ "$(docker ps -q -f name=$WORKER_CONTAINER_NAME)" ]; then
+#    docker stop $WORKER_CONTAINER_NAME
+#    docker rm $WORKER_CONTAINER_NAME
+#fi
 
 echo '#################### 05.01 Up ####################'
 # Bring the containers back up
-$DOCKER_COMPOSE -f compose.base.yml -f compose-crm.green.override.yml up -d
+$DOCKER_COMPOSE -p crm$CRM_PROJECT -f compose-base.yml -f compose-crm-$CRM_PROJECT.override.yml up -d
 
 sleep 5
 
