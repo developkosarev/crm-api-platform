@@ -20,7 +20,7 @@ echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
 
 # Pull the latest images
 echo '#################### 01.01 Pull the latest images ####################'
-$DOCKER_COMPOSE -p crm1 -f compose-base.yml -f compose-crm-$CRM_PROJECT.override.yml pull --quiet
+$DOCKER_COMPOSE -p crm$CRM_PROJECT -f compose-base.yml -f compose-crm-$CRM_PROJECT.override.yml pull --quiet
 echo '01.02 Done'
 
 
