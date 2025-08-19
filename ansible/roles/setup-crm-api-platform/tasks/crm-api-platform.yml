@@ -10,6 +10,24 @@
       ansible.builtin.file:
         path: "{{ crm_api_platform_docker_compose_root }}"
         state: directory
+        
+    #1-2    
+    - name: 01.02 Copy docker compose db
+      ansible.builtin.copy:
+        src: docker/compose-db.yml.conf
+        dest: "{{ crm_api_platform_docker_compose_root }}/compose-db.yml.conf"
+        
+    - name: 01.02 Copy docker compose base
+      ansible.builtin.copy:
+        src: docker/compose-base.yml.conf
+        dest: "{{ crm_api_platform_docker_compose_root }}/compose-base.yml.conf"    
+        
+    - name: 01.02 Copy docker compose 1
+      ansible.builtin.copy:
+        src: docker/compose-crm-1.override.yml.conf
+        dest: "{{ crm_api_platform_docker_compose_root }}/compose-crm-1.override.yml.conf"    
+        
+
 
     - name: 01.02 Copy docker compose
       ansible.builtin.copy:
