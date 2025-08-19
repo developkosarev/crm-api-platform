@@ -1,6 +1,11 @@
 services:
   php:
     container_name: crm-api-platform-php-1
+    ports:
+      # HTTP
+      - target: 80
+        published: ${HTTP_PORT_1:-80}
+        protocol: tcp
 
   pwa:
     container_name: crm-api-platform-pwa-1
