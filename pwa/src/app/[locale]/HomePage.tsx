@@ -14,7 +14,7 @@ export const HomePage = ({session}: Props) => {
   }
 
   return (
-    <div>
+    <div className='min-h-[70vh]'>
       <h1>{t('title')}</h1>
             {session?.user?.name ? (
         <>
