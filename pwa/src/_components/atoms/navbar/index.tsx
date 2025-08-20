@@ -2,10 +2,10 @@
 
 import * as Headless from '@headlessui/react';
 import clsx from 'clsx';
-import { LayoutGroup, motion } from 'motion/react';
+//import { LayoutGroup, motion } from 'motion/react';
 import React, { forwardRef, useId } from 'react';
-import { TouchTarget } from './button';
-import { Link } from './link/link';
+import { TouchTarget } from '../button';
+import { Link } from '../link';
 
 export function Navbar({ className, ...props }: React.ComponentPropsWithoutRef<'nav'>) {
   return <nav {...props} className={clsx(className, 'flex flex-1 items-center gap-4 py-2.5')} />
@@ -19,9 +19,9 @@ export function NavbarSection({ className, ...props }: React.ComponentPropsWitho
   let id = useId()
 
   return (
-    <LayoutGroup id={id}>
+    //<LayoutGroup id={id}>
       <div {...props} className={clsx(className, 'flex items-center gap-3')} />
-    </LayoutGroup>
+  //  </LayoutGroup>
   )
 }
 
@@ -62,12 +62,12 @@ export const NavbarItem = forwardRef(function NavbarItem(
 
   return (
     <span className={clsx(className, 'relative')}>
-      {current && (
+      {/*current && (
         <motion.span
           layoutId="current-indicator"
           className="absolute inset-x-2 -bottom-2.5 h-0.5 rounded-full bg-zinc-950 dark:bg-white"
         />
-      )}
+      )*/}
       {'href' in props ? (
         <Link
           {...props}
