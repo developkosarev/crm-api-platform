@@ -17,6 +17,15 @@
 
     - name: Add Nginx blue-green-crm.conf
       template:
+        src: nginx/upstream.conf
+        dest: /etc/nginx/conf.d/upstream.conf
+        owner: dk
+        group: dk
+        mode: '0644'
+        backup: no
+    
+    - name: Add Nginx blue-green-crm.conf
+      template:
         src: nginx/blue-green-crm.conf
         dest: /etc/nginx/maps-available/blue-green-crm.{{ item.step }}.conf
         owner: dk
@@ -25,37 +34,37 @@
         backup: no
       loop: "{{ blue_green_steps }}"
       
-    - name: Create Symbolic Link blue-green-crm.conf
-      file:
-        src: /etc/nginx/maps-available/blue-green-crm.step1.conf
-        dest: /etc/nginx/conf.d/blue-green-crm.conf
-        owner: dk
-        group: dk
-        state: link        
+    #- name: Create Symbolic Link blue-green-crm.conf
+    #  file:
+    #    src: /etc/nginx/maps-available/blue-green-crm.step2.conf
+    #    dest: /etc/nginx/conf.d/blue-green-crm.conf
+    #    owner: dk
+    #    group: dk
+    #    state: link        
         
     # crm
     - name: Add Nginx configuration File crm.smarteule.com.conf
       template:
         src: nginx/crm.smarteule.com.conf
-        dest: /etc/nginx/sites-available/crm.smarteule.com.{{ item.port_nginx }}.conf
+        dest: /etc/nginx/sites-available/crm.smarteule.com.conf
         owner: dk
         group: dk
         mode: '0644'
         backup: no
       notify:
       - reload-nginx
-      loop: "{{ domains }}"
+      #loop: "{{ domains }}"
     
     - name: Create Stage Symbolic Link crm.smarteule.com.conf
       file:
-        src: /etc/nginx/sites-available/crm.smarteule.com.{{ item.port_nginx }}.conf
-        dest: /etc/nginx/sites-enabled/crm.smarteule.com.{{ item.port_nginx }}.conf
+        src: /etc/nginx/sites-available/crm.smarteule.com.conf
+        dest: /etc/nginx/sites-enabled/crm.smarteule.com.conf
         owner: dk
         group: dk
         state: link
       notify:
       - reload-nginx
-      loop: "{{ domains }}" 
+      #loop: "{{ domains }}" 
     
     
     #reload nginx  
