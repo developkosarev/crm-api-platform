@@ -34,13 +34,13 @@
         backup: no
       loop: "{{ blue_green_steps }}"
       
-    - name: Create Symbolic Link blue-green-crm.conf
-      file:
-        src: /etc/nginx/maps-available/blue-green-crm.step2.conf
-        dest: /etc/nginx/conf.d/blue-green-crm.conf
-        owner: dk
-        group: dk
-        state: link        
+    #- name: Create Symbolic Link blue-green-crm.conf
+    #  file:
+    #    src: /etc/nginx/maps-available/blue-green-crm.step2.conf
+    #    dest: /etc/nginx/conf.d/blue-green-crm.conf
+    #    owner: dk
+    #    group: dk
+    #    state: link        
         
     # crm
     - name: Add Nginx configuration File crm.smarteule.com.conf

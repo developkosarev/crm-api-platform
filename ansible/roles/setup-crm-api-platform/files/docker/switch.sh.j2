@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+NGINX_PATCH_MAPS="/etc/nginx/maps-available"
+
+LINK="/etc/nginx/conf.d/blue-green-crm.conf"
+STEPS=("$NGINX_PATCH_MAPS/blue-green-crm.step1.conf" "$NGINX_PATCH_MAPS/blue-green-crm.step2.conf" "$NGINX_PATCH_MAPS/blue-green-crm.step3.conf" "$NGINX_PATCH_MAPS/blue-green-crm.step4.conf")
+
+#echo '#################### 01.01 Current ####################'
+# get current target
+current_target=$(readlink "$LINK")
+#echo "Current target: $current_target"
+
+# find current step
+index=-1
+for i in "${!STEPS[@]}"; do
+    if [[ "${STEPS[$i]}" == "$current_target" ]]; then
+        index=$i
+        break
+    fi
+done
+if [[ $index -eq -1 ]]; then
+    echo "Error link can not recognise: $current_target"
+    exit 1
+fi
+
+# calculate next spep
+next_index=$(( (index + 1) % ${#STEPS[@]} ))
+next_target=${STEPS[$next_index]}
+
+#echo '#################### 02.01 Next step ####################'
+#echo "Next target: $next_target"
+
+# switch
+ln -sfn "$next_target" "$LINK"
+echo "Done: $LINK -> $next_target"
+
+sudo nginx -t && sudo nginx -s reload
+
