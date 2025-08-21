@@ -10,7 +10,9 @@ const publicPages = [
   '/about-us',
   '/dashboard/auth/signup',
   '/docs',
-  '/dev'
+  '/dev',
+  '/services',
+  '/contact'
   // (/secret requires auth)
 ];
 
