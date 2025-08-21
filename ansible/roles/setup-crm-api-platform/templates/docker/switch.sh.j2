@@ -26,18 +26,27 @@ if [[ $index -eq -1 ]]; then
     exit 1
 fi
 
-# calculate next spep
+# calculate next step
 next_index=$(( (index + 1) % ${#STEPS[@]} ))
 next_target=${STEPS[$next_index]}
 
 {% endraw %}
 
-#echo '#################### 02.01 Next step ####################'
+
+#echo '#################### 02 Next step ####################'
 #echo "Next target: $next_target"
+if [[ $index -eq 0 ]]; then
+    echo -e "\033[32m#################### 02.01 Deploy GREEN ####################\033[0m"
+    bash restart.sh 2
+fi
+if [[ $index -eq 2 ]]; then
+    echo -e "\033[34m#################### 02.02 Deploy BLUE ####################\033[0m"
+    bash restart.sh 1
+fi
 
 # switch
 ln -sfn "$next_target" "$LINK"
-echo "Done: $LINK -> $next_target"
+echo -e "\033[32mDone: index: $next_index link: $LINK -> $next_target\033[0m"
 
 sudo nginx -t && sudo nginx -s reload
 
