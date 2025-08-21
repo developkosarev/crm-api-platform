@@ -62,7 +62,7 @@
         mode: a+x
 
     - name: 01.04.2 Copy docker compose switch
-      ansible.builtin.copy:
+      template:
         src: docker/switch.sh.j2
         dest: "{{ crm_api_platform_docker_compose_root }}/switch.sh"
         mode: a+x
