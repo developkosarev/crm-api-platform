@@ -1,3 +1,5 @@
+'use client'
+
 import { Link } from '@/i18n/navigation';
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
