@@ -49,7 +49,7 @@
 	@pwa expression `(
 			header({'Accept': '*text/html*'})
 			&& !path(
-				'/docs*', '/graphql*', '/bundles*', '/contexts*', '/_profiler*', '/_wdt*',
+				'/docs*', '/graphql*', '/bundles*', '/contexts*', '/_profiler*', '/_wdt*', '/health-check'
 				'*.json*', '*.html', '*.csv', '*.yml', '*.yaml', '*.xml'
 			)
 		)
