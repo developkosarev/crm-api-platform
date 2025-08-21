@@ -15,7 +15,7 @@ class HealthCheckController
     {
         try {
             $connection->executeQuery('SELECT 1');
-            return new JsonResponse(['status' => 'ok v-1']);
+            return new JsonResponse(['status' => 'ok v-2']);
         } catch (\Throwable $e) {
             return new JsonResponse(['status' => 'error', 'message' => $e->getMessage()], 500);
         }
