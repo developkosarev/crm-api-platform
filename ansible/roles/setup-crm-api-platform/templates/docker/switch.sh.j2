@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+RED='\033[31m'
+GREEN='\033[32m'
+BLUE='\033[34m'
+YELLOW='\033[33m'
+NC='\033[0m' # No Color
+
+URL="http://crm.smarteule.com"
+USER_AGENT_WARMUP="crm-green-F45fs95Dfvetc"
 NGINX_PATCH_MAPS="/etc/nginx/maps-available"
 
 LINK="/etc/nginx/conf.d/blue-green-crm.conf"
@@ -36,17 +44,37 @@ next_target=${STEPS[$next_index]}
 #echo '#################### 02 Next step ####################'
 #echo "Next target: $next_target"
 if [[ $index -eq 0 ]]; then
-    echo -e "\033[32m#################### 02.01 Deploy GREEN ####################\033[0m"
+    echo -e "${GREEN}#################### 02.01 Deploy GREEN ####################${NC}"
     bash restart.sh 2
 fi
 if [[ $index -eq 2 ]]; then
-    echo -e "\033[34m#################### 02.02 Deploy BLUE ####################\033[0m"
+    echo -e "${BLUE}#################### 02.02 Deploy BLUE ####################${NC}"
     bash restart.sh 1
 fi
 
 # switch
 ln -sfn "$next_target" "$LINK"
-echo -e "\033[32mDone: index: $next_index link: $LINK -> $next_target\033[0m"
+echo -e "\033[32mDone: index: $next_index link: $LINK -> $next_target${NC}"
 
 sudo nginx -t && sudo nginx -s reload
 
+echo -e "${RED}#################### 03 Warm-Up ####################${NC}"
+for url_to_warm in \
+  /health-check \
+  "" \
+  /services \
+  /health-check \
+  /health-check \
+  /health-check; do
+    curl -sS \
+      -H "User-Agent: $USER_AGENT_WARMUP" \
+      -w "Status: %{http_code} Time: %{time_total} URL: %{url_effective}\n" \
+      "$URL$url_to_warm" \
+      -o /dev/null | tee cache_warmer_results.log
+done
+if grep -q "^Status: [50]" cache_warmer_results.log; then
+  echo "One or more requests returned 5xx status code — failing pipeline"
+  grep "^Status: [50]" cache_warmer_results.log
+  exit 1
+fi
+curl -sS -I -H "User-Agent: $USER_AGENT_WARMUP" "$URL"
