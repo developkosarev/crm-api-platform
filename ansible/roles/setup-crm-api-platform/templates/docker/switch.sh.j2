@@ -68,6 +68,7 @@ for url_to_warm in \
   /health-check; do
     curl -sS \
       -H "User-Agent: $USER_AGENT_WARMUP" \
+      -H "Accept: text/html" \
       -w "Status: %{http_code} Time: %{time_total} URL: %{url_effective}\n" \
       "$URL$url_to_warm" \
       -o /dev/null | tee cache_warmer_results.log
