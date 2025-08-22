@@ -33,6 +33,7 @@ help:
 	@echo "$(call format,bash-pwa,   'Bash pwa dev')"
 	@echo "$(call red,===============================)"
 	@echo "$(call format,crm-fixture,'Crm fixture load')"
+	@echo "$(call format,e2e,'Run e2e test')"
 	@echo "$(call yellow,===========GIT=================)"
 	@echo "$(call format,git-remote-v,'git remote -v')"
 	@echo "$(call format,git-push-origin-belvexa-master,'git push origin-belvexa master')"
@@ -66,14 +67,18 @@ bash: ## Bash dev
 ## PWA
 restart-pwa:
 	$(DOCKER_COMPOSE_DEV) restart pwa
-.PHONY:
+.PHONY: restart-pwa
 
 bash-pwa:
 	docker exec -it $(CONTAINER_NAME_PWA) bash
-.PHONY:
+.PHONY: bash-pwa
 
 
 ## Tests
 crm-fixture:
 	docker exec -it $(CONTAINER_NAME_CRM) php bin/console doctrine:fixtures:load
-.PHONY:
+.PHONY: crm-fixture
+
+e2e:
+	cd e2e && npm run test
+.PHONY: e2e
