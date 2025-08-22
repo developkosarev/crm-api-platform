@@ -9,6 +9,7 @@ type Props = {
   session: Session | null;
 };
 
+
 export const HomePage = ({session}: Props) => {
   const t = useTranslations('Index');
   function onLogoutClick() {

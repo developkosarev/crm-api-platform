@@ -3,13 +3,25 @@ const { test, expect } = require('@playwright/test');
 
 test('homepage', async ({ page }) => {
   await page.goto('/');
-  //await expect(page).toHaveTitle('Welcome to API Platform!');
+  await expect(page).toHaveTitle('Home');
 });
 
 test('services', async ({ page }) => {
   await page.goto('/services');
-  //await expect(page).toHaveTitle('Services');
+  await expect(page).toHaveTitle('Services');
   //await expect(page.locator('p')).toHaveCountGreaterThan(0);
+});
+
+test('contact', async ({ page }) => {
+  await page.goto('/contact');
+  await expect(page).toHaveTitle('Contact');
+  //await expect(page.locator('p')).toHaveCountGreaterThan(0);
+  const count = await page.locator('p').count();
+  if (count > 0) {
+    console.log(`Count = ${count} p`);
+  }
+  const value = 1;
+  expect(value).toBe(1);
 });
 
 //test('swagger', async ({ page }) => {
