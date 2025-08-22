@@ -58,7 +58,7 @@ jobs:
           script: |
             cd /home/${{ secrets.SSH_USER }}/${{ env.DEPLOY_FOLDER }}
             export CR_PAT=${{ secrets.CR_PAT }}
-            ./swith.sh && ./swith.sh 
+            ./switch.sh && ./switch.sh 
           
           #script: |
           #  cd /home/${{ secrets.SSH_USER }}/${{ env.DEPLOY_FOLDER }}
