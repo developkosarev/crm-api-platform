@@ -1,4 +1,5 @@
 DOCKER_COMPOSE_DEV = docker compose
+DOCKER_COMPOSE_PROXY = docker compose -f compose.proxy.yml
 
 CONTAINER_NAME_CRM = crm-api-platform-php-1
 CONTAINER_NAME_PWA = crm-api-platform-pwa-1
@@ -39,11 +40,12 @@ help:
 	@echo "$(call format,git-push-origin-belvexa-master,'git push origin-belvexa master')"
 	@echo "$(call format,git-pull-origin-belvexa-master,'git pull origin-belvexa master')"
 
-build: ## Start dev
+build: ## Build dev
 	$(DOCKER_COMPOSE_DEV) build --no-cache
 .PHONY: build
 
 start: ## Start dev
+	$(DOCKER_COMPOSE_PROXY) up -d
 	$(DOCKER_COMPOSE_DEV) up --wait
 .PHONY: start
 
@@ -53,6 +55,7 @@ start-xdebug: ## Start dev
 
 stop: ## Stop dev
 	$(DOCKER_COMPOSE_DEV) stop
+	$(DOCKER_COMPOSE_PROXY) stop
 .PHONY: stop
 
 down: ## Down dev
