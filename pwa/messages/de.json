@@ -1,6 +1,6 @@
 {
   "Index": {
-    "title": "App-Einstiegstest Seite",
+    "title": "Startseite",
     "loggedIn": "Angemeldet als {username}",
     "loggedOut": "Du bist abgemeldet.",
     "login": "Anmelden",
@@ -27,7 +27,7 @@
     "title": "Geheime Seite",
     "description": "Diese Seite ist nur für angemeldete Benutzer sichtbar."
   },
-      "AboutUs": {
+  "AboutUs": {
     "title": "Über uns",
     "description": "Diese Seite ist für alle Benutzer sichtbar."
   }

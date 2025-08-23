@@ -17,24 +17,8 @@ export const HomePage = ({session}: Props) => {
   }
 
   return (
-    <div className='min-h-[70vh]'>
+    <div className='flex-grow p-6 md:overflow-y-auto md:p-12 min-h-[70vh]'>
       <h1>{t('title')}</h1>
-            {session?.user?.name ? (
-        <>
-          <p>{t('loggedIn', {username: session.user.name})}</p>
-          <p>
-            <Link href='/secret'>{t('secret')}</Link>
-          </p>
-          <button onClick={onLogoutClick} type="button">
-            {t('logout')}
-          </button>
-        </>
-      ) : (
-        <>
-          <p>{t('loggedOut')}</p>
-          <Link className='text-green-600' href='/login'>{t('login')}</Link>
-        </>
-      )}
     </div>
   );
 }
