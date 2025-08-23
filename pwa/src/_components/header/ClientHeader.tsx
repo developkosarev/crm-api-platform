@@ -15,12 +15,14 @@ import Logout from "./Logout";
 import LogoutLi from "./LogoutLi";
 import LoginLi from './LoginLi';
 import { Session } from 'next-auth';
+import { useTranslations } from 'next-intl';
 
 interface ClientHeaderProps {
   session: Session | null;
 }
 
 const ClientHeader = ({ session }: ClientHeaderProps) => {
+  const t = useTranslations('Navigation');
   const { links, actions, isSticky, showToggleTheme, showRssFeed, position } = headerData;
 
   const ref = useRef(null);
@@ -119,7 +121,7 @@ const ClientHeader = ({ session }: ClientHeaderProps) => {
                         className="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
                         onClick={() => handleDropdownOnClick(index)}
                       >
-                        {label}{' '}
+                        {t(label)}{' '}
                       </button>
 
                       {/* <!-- Links --> */}
@@ -143,7 +145,7 @@ const ClientHeader = ({ session }: ClientHeaderProps) => {
                       href={href as string}
                       onClick={() => handleLinkOnClick(index)}
                     >
-                      {label}
+                      {t(label)}
                     </Link>
                   )}
                 </li>

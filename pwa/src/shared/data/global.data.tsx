@@ -14,11 +14,11 @@ import { FooterProps, HeaderProps } from '../types';
 export const headerData: HeaderProps = {
   links: [
     {
-      label: 'Pages',
+      label: 'pages',
       //icon: IconChevronDown,
       links: [
         {
-          label: 'Services',
+          label: 'services',
           href: '/services',
         },
         // {
@@ -52,7 +52,7 @@ export const headerData: HeaderProps = {
     //  href: '/blog',
     //},
     {
-      label: 'Contact',
+      label: 'contact',
       href: '/contact',
     }
   ],

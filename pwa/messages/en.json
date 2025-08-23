@@ -27,8 +27,12 @@
     "title": "Secret page",
     "description": "This page is only visible for logged in users."
   },
-    "aboutUs": {
+  "aboutUs": {
       "title": "About Us",
       "description": "This page is visible for all users."
+  },
+  "Navigation": {
+    "pages": "Pages",
+    "contact": "Contact"
   }
 }
