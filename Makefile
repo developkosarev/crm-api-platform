@@ -73,6 +73,10 @@ bash-pwa:
 	docker exec -it $(CONTAINER_NAME_PWA) bash
 .PHONY: bash-pwa
 
+typescheck-pwa:
+	docker exec -it $(CONTAINER_NAME_PWA) pnpm typescheck
+.PHONY: typescheck-pwa
+
 
 ## Tests
 crm-fixture:

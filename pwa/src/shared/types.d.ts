@@ -17,7 +17,7 @@ type LinkOrButton = {
 };
 
 type Link = {
-  label?: string;
+  label: string;
   href?: string;
   ariaLabel?: string;
   /*icon?: Icon;*/
