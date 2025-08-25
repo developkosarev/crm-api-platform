@@ -19,3 +19,4 @@
 ## Setup shop
 1. ansible-playbook setup-crm-shopware.yml -i hosts.local --list-tags
 2. ansible-playbook setup-crm-shopware.yml -i hosts.local --tags="crm-shopware" --check
+3. ansible-playbook setup-crm-shopware.yml -i hosts.local --tags="nginx" --check
