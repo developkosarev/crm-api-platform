@@ -1,0 +1,45 @@
+---
+- name: Install Nginx      
+  block:
+    # sudo chown youruser:youruser /etc/nginx/nginx.conf
+    # sudo chown -R youruser:youruser /etc/nginx
+        
+    # shopware
+    - name: Add Nginx configuration File shop.smarteule.com.conf
+      template:
+        src: nginx/shop.smarteule.com.conf
+        dest: /etc/nginx/sites-available/shop.smarteule.com.conf
+        owner: dk
+        group: dk
+        mode: '0644'
+        backup: no
+    
+    - name: Create Stage Symbolic Link shop.smarteule.com.conf
+      file:
+        src: /etc/nginx/sites-available/shop.smarteule.com.conf
+        dest: /etc/nginx/sites-enabled/shop.smarteule.com.conf
+        owner: dk
+        group: dk
+        state: link
+    
+    
+    #reload nginx  
+    - name: Check nginx config
+      command: sudo nginx -t      
+      register: nginx_check
+      changed_when: false
+      failed_when: nginx_check.rc != 0
+    - debug:
+        var: nginx_check.rc
+    - debug:
+        var: nginx_check.stderr_lines    
+        
+    - name: Reload nginx config
+      command: sudo nginx -s reload
+      register: nginx_reload
+      changed_when: false
+      failed_when: nginx_reload.rc != 0
+    - debug:
+        var: nginx_reload
+        
+  tags: nginx

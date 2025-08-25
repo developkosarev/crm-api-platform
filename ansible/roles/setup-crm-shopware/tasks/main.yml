@@ -1,0 +1,8 @@
+---
+  
+  #https://github.com/shopwareLabs/example-docker-repository/blob/main/compose.yml
+- include_tasks: crm-shopware.yml
+  tags: crm-shopware
+  
+- include_tasks: nginx.yml
+  tags: nginx  

@@ -1,0 +1,35 @@
+---
+- name: Install crm-shopware    
+  block:
+    - name: 01.01 Create a directory if it does not exist
+      ansible.builtin.file:
+        path: "{{ crm_shopware_docker_compose_root }}"
+        state: directory
+        
+    #1-2
+    - name: 01.02 Copy Makefile
+      ansible.builtin.copy:
+        src: docker/Makefile
+        dest: "{{ crm_shopware_docker_compose_root }}/Makefile"
+    
+    #- name: 01.02 Copy docker compose db
+    #  ansible.builtin.copy:
+    #    src: docker/compose-db.yml
+    #    dest: "{{ crm_api_platform_docker_compose_root }}/compose-db.yml"
+    #    
+    #- name: 01.02 Copy docker compose base
+    #  ansible.builtin.copy:
+    #    src: docker/compose-base.yml
+    #    dest: "{{ crm_api_platform_docker_compose_root }}/compose-base.yml"    
+        
+    - name: 01.02 Copy docker compose
+      ansible.builtin.copy:
+        src: docker/compose.yml
+        dest: "{{ crm_shopware_docker_compose_root }}/compose.yml"
+        
+    - name: 01.05 Copy .env
+      template:
+        src: docker/env.dist
+        dest: "{{ crm_shopware_docker_compose_root }}/.env"    
+        
+  tags: crm-shopware

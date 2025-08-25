@@ -1,0 +1,13 @@
+---
+- name: Setup server
+  hosts: dev
+  gather_facts: false
+  #become: true
+
+  vars:
+    users:
+      - dk
+    
+  roles:
+    - role: setup-crm-shopware
+      tags: setup-crm-shopware
