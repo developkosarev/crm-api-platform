@@ -14,8 +14,6 @@ class HealthCheckController
     #[Route('/health-check', name: 'app_health_check', methods: ['GET'])]
     public function __invoke(Request $request, Connection $connection): JsonResponse
     {
-      $request->headers->all();
-
         try {
             $connection->executeQuery('SELECT 1');
             return new JsonResponse([
