@@ -9,6 +9,10 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+        app_customer_provider:
+          entity:
+            class: App\Entity\Customer
+            property: email        
         #users_in_memory: { memory: null }
     firewalls:
         dev:
@@ -37,7 +41,19 @@ security:
             # https://symfony.com/doc/current/security.html#the-firewall
 
             # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true        
+            # switch_user: true
+
+        login_customers:
+          stateless: true
+          provider: app_customer_provider
+          entry_point: jwt
+          json_login:
+            check_path: /api/customers/login
+            username_path: email
+            password_path: password
+            success_handler: lexik_jwt_authentication.handler.authentication_success
+            failure_handler: lexik_jwt_authentication.handler.authentication_failure
+          jwt: ~  
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
@@ -46,6 +62,7 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
         # - { path: ^/auth, roles: PUBLIC_ACCESS }
         - { path: ^/api/(login|token/refresh), roles: PUBLIC_ACCESS }
+        - { path: ^/api/customers/(login|token/refresh), roles: PUBLIC_ACCESS }
 
 when@test:
     security:
