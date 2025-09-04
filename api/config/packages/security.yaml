@@ -18,6 +18,20 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        customer_api:
+            pattern: ^/api/customers
+            stateless: true
+            provider: app_customer_provider
+            entry_point: jwt
+            json_login:
+                check_path: /api/customers/login
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            jwt: ~
+
         main:
             stateless: true
             provider: app_user_provider
@@ -31,8 +45,8 @@ security:
             jwt: ~
             refresh_jwt:
                 check_path: /api/token/refresh # or, you may use the `api_refresh_token` route name
-            #    # or if you have more than one user provider
-            #    # provider: user_provider_name
+                # or if you have more than one user provider
+                # provider: user_provider_name
 
             #lazy: true
             #provider: users_in_memory
@@ -42,18 +56,6 @@ security:
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
-
-        login_customers:
-          stateless: true
-          provider: app_customer_provider
-          entry_point: jwt
-          json_login:
-            check_path: /api/customers/login
-            username_path: email
-            password_path: password
-            success_handler: lexik_jwt_authentication.handler.authentication_success
-            failure_handler: lexik_jwt_authentication.handler.authentication_failure
-          jwt: ~  
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
