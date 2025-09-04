@@ -49,7 +49,7 @@ start: ## Start dev
 	$(DOCKER_COMPOSE_DEV) up --wait
 .PHONY: start
 
-start-xdebug: ## Start dev
+start-xdebug: ## Start dev http://localhost:82/_profiler/xdebug
 	XDEBUG_MODE=debug XDEBUG_SESSION=1 $(DOCKER_COMPOSE_DEV) up --wait
 .PHONY: start-xdebug
 
