@@ -28,8 +28,7 @@ const LoginForm = ({error, isLoading, callback}: FormProps) => {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault()
         const formData = new FormData(event.currentTarget);
-    console.log('event', event.currentTarget)
-        console.log('event', event.currentTarget.elements)
+
     if (callback !== undefined) { 
       callback({
         email: String(formData.get("email")),

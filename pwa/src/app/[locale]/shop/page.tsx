@@ -1,26 +1,24 @@
 import { LocalePageProps } from '@/types';
 import { getTranslations } from 'next-intl/server';
-import { PartnersLoginPage } from './components/PartnersLoginPage';
 
 type MetaDataProps = {
   params: LocalePageProps;
-};
+}
 
 export async function generateMetadata({ params }: MetaDataProps) {
   const { locale } = await params;
-  console.log('locale', locale);
-  const t = await getTranslations({
-    locale,
-    namespace: 'metadata.partnerLogin',
-  });
-
+  console.log('locale', locale)
+  const t = await getTranslations({locale, namespace: 'metadata.shop'});
+ 
   return {
     title: t('title'),
     descritpion: t('descritpion'),
-    keywords: t('keywords'),
+    keywords: t('keywords')
   };
 }
 
-export default function Page() {
-  return <PartnersLoginPage />;
+export default function Secret() {
+  return (
+      <p>Shop Page</p>
+  );
 }

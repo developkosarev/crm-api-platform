@@ -1,6 +1,6 @@
 import { LocalePageProps } from '@/types';
 import { getTranslations } from 'next-intl/server';
-import { PartnersLoginPage } from './components/PartnersLoginPage';
+import { ClientLoginPage } from './components/ClientLoginPage';
 
 type MetaDataProps = {
   params: LocalePageProps;
@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: MetaDataProps) {
   console.log('locale', locale);
   const t = await getTranslations({
     locale,
-    namespace: 'metadata.partnerLogin',
+    namespace: 'metadata.clientLogin',
   });
 
   return {
@@ -22,5 +22,5 @@ export async function generateMetadata({ params }: MetaDataProps) {
 }
 
 export default function Page() {
-  return <PartnersLoginPage />;
+  return <ClientLoginPage />;
 }
