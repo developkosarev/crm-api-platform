@@ -45,7 +45,7 @@ build: ## Build dev
 .PHONY: build
 
 start: ## Start dev
-	$(DOCKER_COMPOSE_PROXY) up -d
+#	$(DOCKER_COMPOSE_PROXY) up -d
 	$(DOCKER_COMPOSE_DEV) up --wait
 .PHONY: start
 
@@ -55,7 +55,7 @@ start-xdebug: ## Start dev http://localhost:82/_profiler/xdebug
 
 stop: ## Stop dev
 	$(DOCKER_COMPOSE_DEV) stop
-	$(DOCKER_COMPOSE_PROXY) stop
+#	$(DOCKER_COMPOSE_PROXY) stop
 .PHONY: stop
 
 down: ## Down dev
