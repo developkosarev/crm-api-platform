@@ -1,5 +1,6 @@
 'use client'
 
+import { Link } from '@/i18n/navigation';
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
@@ -7,6 +8,7 @@ import { useTranslations } from 'next-intl';
 type Props = {
   session: Session | null;
 };
+
 
 export const HomePage = ({session}: Props) => {
   const t = useTranslations('Index');

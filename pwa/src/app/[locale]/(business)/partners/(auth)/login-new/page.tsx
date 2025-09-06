@@ -2,10 +2,10 @@ import { authConfig } from "@/config/auth";
 import { getServerSession } from "next-auth/next";
 import { redirect, RedirectType } from 'next/navigation'
 
-import LoginForm from '~/src/_components/dashboard/auth/login-view';
+import { LoginForm } from '~/src/_components/auth-forms';
 import { Suspense } from 'react';
 
-export default async function LoginPage() {
+export default async function LoginNewPage() {
  /* const session = await getServerSession(authConfig)
 
   if (!session?.user?.email) {

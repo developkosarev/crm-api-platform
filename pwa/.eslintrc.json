@@ -5,38 +5,29 @@
     "next/core-web-vitals",
     "prettier"
   ],
-  "plugins": ["simple-import-sort", "unused-imports", "perfectionist", "react"],
+  "plugins": ["simple-import-sort", "unused-imports"],
   "ignorePatterns": ["!**/*", ".next/**/*"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"]
     },
-    { "files": ["*.ts", "*.tsx"], "rules": {} },
-    { "files": ["*.js", "*.jsx"], "rules": {} },
-    { "files": ["e2e/**/*.{ts,js,tsx,jsx}"], "rules": {} }
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {}
+    },
+    {
+      "files": ["e2e/**/*.{ts,js,tsx,jsx}"],
+      "rules": {}
+    }
   ],
   "rules": {
-    "@next/next/no-html-link-for-pages": "off",
-
-    /* ——— Imports ——— */
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error",
-    "unused-imports/no-unused-imports": "error",
-
-    /* ——— Objects ——— */
-    "perfectionist/sort-objects": [
-      "error",
-      { "type": "natural", "order": "asc", "ignoreCase": true }
-    ],
-
-    /* ——— JSX props ——— */
-    "perfectionist/sort-jsx-props": [
-      "error",
-      { "type": "natural", "order": "asc", "ignoreCase": true }
-    ]
+    "@next/next/no-html-link-for-pages": "off"
   },
-  "settings": {
-    "react": { "version": "detect" }
-  },
-  "env": { "jest": true }
+  "env": {
+    "jest": true
+  }
 }

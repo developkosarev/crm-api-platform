@@ -3,26 +3,29 @@
 @theme {
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-playfair: var(--font-playfair), ui-serif, Georgia, serif;
-  --color-dark-blue: oklch(0.21 0.034 264.665);
-  --color-primary-1: oklch(67.8% 0.179919 287.1);
-  --color-primary-2: oklch(80.8% 0.099741 283.9);
-  --color-primary-3: oklch(76.7% 0.077564 3.1);
 }
-body {
-  @apply font-body text-lg;
+body { 
+    @apply font-body text-lg; 
+}
+h1 { 
+    @apply font-playfair font-bold text-4xl ;
+}
+
+h2 {
+     @apply font-playfair;
 }
 
 input[type='number'] {
-  -moz-appearance: textfield;
-  appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 input[type='number']::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 input[type='number']::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
