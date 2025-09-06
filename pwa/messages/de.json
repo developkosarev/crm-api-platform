@@ -7,6 +7,11 @@
     "logout": "Abmelden",
     "secret": "Geheime Seite für angemeldete Benutzer"
   },
+  "navigation": {
+    "openMainMenu": "Hauptmenü öffnen",
+    "pages": "Seiten",
+    "contact": "Kontakt"
+  },
   "LocaleLayout": {
     "title": "next-intl mit Auth.js Beispiel"
   },
@@ -20,6 +25,32 @@
     "btnLabel": "Anmelden",
     "error": "{error, select, CredentialsSignin {Ungültiger Benutzername oder Passwort} other {Unbekannter Fehler}}"
   },
+  "client": {
+    "loginForm": {
+      "title": "Anmelden",
+      "redirectToSignUp": "Sie haben noch kein Konto?",
+      "redirectLabel": "Registrieren",
+      "email": "E-Mail-Adresse",
+      "username": "Benutzername",
+      "password": "Passwort",
+      "forgotPassword": "Passwort vergessen?",
+      "btnLabel": "Anmelden",
+      "error": "{error, select, CredentialsSignin {Ungültiger Benutzername oder Passwort} other {Unbekannter Fehler}}"
+    }
+  },
+  "partner": {
+    "loginForm": {
+      "title": "Sign in to your business account",
+      "redirectToSignUp": "Don't have an account?",
+      "redirectLabel": "Sign up",
+      "email": "Email address",
+      "username": "Username",
+      "password": "Password",
+      "forgotPassword": "Forgot password?",
+      "btnLabel": "Sign in",
+      "error": "{error, select, CredentialsSignin {Invalid username or password} other {Unknown error}}"
+    }
+  },
   "LocaleSwitcher": {
     "switchLocale": "Zu {locale, select, de {Deutsch} en {Englisch} other {Unbekannt}} wechseln"
   },
@@ -31,8 +62,26 @@
     "title": "Über uns",
     "description": "Diese Seite ist für alle Benutzer sichtbar."
   },
-  "Navigation": {
-    "pages": "Seiten",
-    "contact": "Kontakt"
+  "metadata": {
+    "homepage": {
+      "title": "Startseite",
+      "description": "Belvexa Startseite",
+      "keywords": "Startseite"
+    },
+    "shop": {
+      "title": "Shop",
+      "description": "Belvexa Shop",
+      "keywords": "Shop"
+    },
+    "clientLogin": {
+      "title": "Customers login page",
+      "description": "Belvexa customers login page",
+      "keywords": "Customers login page"
+    },
+    "partnerLogin": {
+      "title": "Partners login page",
+      "description": "Belvexa partners login page",
+      "keywords": "Partners login page"
+    }
   }
 }

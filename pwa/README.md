@@ -1,8 +1,16 @@
 # Auth
+
 http://localhost:3000/api/auth/signin
 http://localhost:3000/api/auth/signout
 
+http://localhost:3000/login
+http://localhost:3000/logout
+
+http://localhost:3000/partners/login
+http://localhost:3000/partners/logout
+
 ## Build
+
 ```
 docker build --tag crm-app-pwa:v0.0.1 --file Dockerfile .
 docker build --tag crm-app-pwa:v0.0.1 --progress=plain --target builder --file Dockerfile .
@@ -17,14 +25,14 @@ The `admin` page contains an API Platform Admin project (refer to its [documenta
 You can also generate your web app here by using the API Platform Client Generator (refer to its [documentation](https://api-platform.com/docs/client-generator/nextjs/)).
 
 # Documentation
+
 https://nextjs.org/learn/dashboard-app/getting-started
 npx create-next-app@latest nextjs-dashboard --example "https://github.com/vercel/next-learn/tree/main/dashboard/starter-example" --use-pnpm
-
 
 # Examples
 
 1. TailAdmin Next.js
-Описание: Бесплатный шаблон админ-панели, построенный на Next.js и Tailwind CSS. Включает готовые компоненты, такие как навигационные меню, таблицы, формы и графики.
+   Описание: Бесплатный шаблон админ-панели, построенный на Next.js и Tailwind CSS. Включает готовые компоненты, такие как навигационные меню, таблицы, формы и графики.
 
 Особенности: Готовые навигационные меню
 Компоненты для таблиц, форм и графиков
@@ -60,7 +68,7 @@ Tailwind CSS с поддержкой сортировки и слияния кл
 Shadcn/UI — настраиваемые UI-компоненты
 Интеграция с Stripe и NextAuth для платежей и аутентификации
 
-Ссылка: https://github.com/Skolaczk/next-starter 
+Ссылка: https://github.com/Skolaczk/next-starter
 
 5. Tailnext — Бесплатный шаблон на Next.js 14 и Tailwind CSS
    Описание: Открытый шаблон для создания сайтов с использованием Next.js и Tailwind CSS, учитывающий лучшие практики.

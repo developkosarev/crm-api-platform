@@ -7,6 +7,11 @@
     "logout": "Logout",
     "secret": "Secret page for logged in users"
   },
+  "navigation": {
+    "openMainMenu": "Open main menu",
+    "pages": "Pages",
+    "contact": "Contact"
+  },
   "LocaleLayout": {
     "title": "next-intl with Auth.js example"
   },
@@ -20,6 +25,32 @@
     "btnLabel": "Sign in",
     "error": "{error, select, CredentialsSignin {Invalid username or password} other {Unknown error}}"
   },
+  "client": {
+    "loginForm": {
+      "title": "Sign in to your account",
+      "redirectToSignUp": "Don't have an account?",
+      "redirectLabel": "Sign up",
+      "email": "Email address",
+      "username": "Username",
+      "password": "Password",
+      "forgotPassword": "Forgot password?",
+      "btnLabel": "Sign in",
+      "error": "{error, select, CredentialsSignin {Invalid username or password} other {Unknown error}}"
+    }
+  },
+  "partner": {
+    "loginForm": {
+      "title": "Sign in to your business account",
+      "redirectToSignUp": "Don't have an account?",
+      "redirectLabel": "Sign up",
+      "email": "Email address",
+      "username": "Username",
+      "password": "Password",
+      "forgotPassword": "Forgot password?",
+      "btnLabel": "Sign in",
+      "error": "{error, select, CredentialsSignin {Invalid username or password} other {Unknown error}}"
+    }
+  },
   "LocaleSwitcher": {
     "switchLocale": "Switch to {locale, select, de {German} en {English} other {Unknown}}"
   },
@@ -28,11 +59,30 @@
     "description": "This page is only visible for logged in users."
   },
   "aboutUs": {
-      "title": "About Us",
-      "description": "This page is visible for all users."
+    "title": "About Us",
+    "description": "This page is visible for all users."
   },
-  "Navigation": {
-    "pages": "Pages",
-    "contact": "Contact"
+
+  "metadata": {
+    "homepage": {
+      "title": "Belvexa | Beauty & Wellness, Tailored by Your Trusted Salon",
+      "description": "Because the best advice comes from those who know you. Book beauty & wellness appointments with Belvexa, and enjoy expert-chosen treatments & products.",
+      "keywords": "book visit, book appointment, book haircut, book manicure, book in salon, salon system, spa software, beauty software, salon app, scheduling app, hair salon software, best salon software, Salon system, top salon software, Spa system, Appointment Scheduling, salon program, booking software, system, appointment system, scheduling software, online booking, salon program, salon management software, salon programs, scheduling applications, appointment schedule, appointment manager, booking app, nail software, spa, hair, nail salon, beauty, yoga, Shedul, Fresha, Fresha partners, mindbody, booksy, salon iris, best, free, pos, crm, point of sale, calendar system, calendar, reminders, salon supplies, salon management, bookings app, appointment app, salon software, best salons, free booking system, salon, appointment, uk, germany, united kingdom, ireland"
+    },
+    "shop": {
+      "title": "Shop",
+      "description": "Belvexa Shop",
+      "keywords": "Shop"
+    },
+    "clientLogin": {
+      "title": "Customers login page",
+      "description": "Belvexa customers login page",
+      "keywords": "Customers login page"
+    },
+    "partnerLogin": {
+      "title": "Partners login page",
+      "description": "Belvexa partners login page",
+      "keywords": "Partners login page"
+    }
   }
 }
