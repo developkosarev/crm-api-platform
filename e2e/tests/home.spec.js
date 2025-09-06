@@ -3,7 +3,17 @@ const { test, expect } = require('@playwright/test');
 
 test('homepage', async ({ page }) => {
   await page.goto('/');
-  await expect(page).toHaveTitle('Home');
+  await expect(page).toHaveTitle('Startseite');
+});
+
+test('homepage-ru', async ({ page }) => {
+  await page.goto('/ru/');
+  await expect(page).toHaveTitle('Домашняя страница');
+});
+
+test('homepage-en', async ({ page }) => {
+  await page.goto('/en/');
+  await expect(page).toHaveTitle('Belvexa | Beauty & Wellness, Tailored by Your Trusted Salon');
 });
 
 test('services', async ({ page }) => {
