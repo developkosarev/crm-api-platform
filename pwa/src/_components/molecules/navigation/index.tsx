@@ -1,5 +1,6 @@
 'use client';
 
+import { Link } from '@/i18n/navigation';
 import {
   Dialog,
   DialogPanel,
@@ -66,7 +67,7 @@ const callsToAction = [
 ];
 
 const MenuNavigation = () => {
-  const t = useTranslations('navigation');
+  const t = useTranslations('Navigation');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -76,7 +77,7 @@ const MenuNavigation = () => {
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       >
         <div className="flex lg:flex-1">
-          <a href="/" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Belvexa</span>
             <Image
               alt="Belvexa Logo"
@@ -85,7 +86,7 @@ const MenuNavigation = () => {
               width={160}
               height={64}
             />
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -128,13 +129,13 @@ const MenuNavigation = () => {
                           className="size-6 text-gray-600 group-hover:text-indigo-600 dark:text-gray-400 dark:group-hover:text-white"
                         />
                       </div>
-                      <a
+                      <Link
                         href={item.href}
                         className="mt-6 block font-semibold text-gray-900 dark:text-white"
                       >
                         {item.name}
                         <span className="absolute inset-0" />
-                      </a>
+                      </Link>
                       <p className="mt-1 text-gray-600 dark:text-gray-400">
                         {item.description}
                       </p>
@@ -145,7 +146,7 @@ const MenuNavigation = () => {
                   <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="grid grid-cols-3 divide-x divide-gray-900/5 border-x border-gray-900/5 dark:divide-white/5 dark:border-white/10">
                       {callsToAction.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
                           href={item.href}
                           className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-800"
@@ -155,7 +156,7 @@ const MenuNavigation = () => {
                             className="size-5 flex-none text-gray-400 dark:text-gray-500"
                           />
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -164,32 +165,32 @@ const MenuNavigation = () => {
             </PopoverPanel>
           </Popover>
 
-          <a
+          <Link
             href="#"
             className="text-sm/6 font-semibold text-gray-900 dark:text-white"
           >
             Features
-          </a>
-          <a
+          </Link>
+          <Link
             href="/shop"
             className="text-sm/6 font-semibold text-gray-900 dark:text-white"
           >
             Shop
-          </a>
-          <a
+          </Link>
+          <Link
             href="/blog"
             className="text-sm/6 font-semibold text-gray-900 dark:text-white"
           >
             Blog
-          </a>
+          </Link>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a
+          <Link
             href="/user-flow"
             className="text-sm/6 font-semibold text-gray-900 dark:text-white"
           >
             Sign in <span aria-hidden="true">&rarr;</span>
-          </a>
+          </Link>
           <p>Test</p>
         </div>
       </nav>
@@ -201,7 +202,7 @@ const MenuNavigation = () => {
         <div className="fixed inset-0 z-50" />
         <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:bg-gray-900 dark:sm:ring-gray-100/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
+            <Link href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Belvexa</span>
               <Image
                 alt="Belvexa Logo"
@@ -210,7 +211,7 @@ const MenuNavigation = () => {
                 width={160}
                 height={64}
               />
-            </a>
+            </Link>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
@@ -244,32 +245,32 @@ const MenuNavigation = () => {
                     ))}
                   </DisclosurePanel>
                 </Disclosure>
-                <a
+                <Link
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
                 >
                   Features
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/shop"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
                 >
                   Shop
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/blog"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
                 >
                   Blog
-                </a>
+                </Link>
               </div>
               <div className="py-6">
-                <a
+                <Link
                   href="/user-flow"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
                 >
                   Sign in | Sign up
-                </a>
+                </Link>
               </div>
             </div>
           </div>

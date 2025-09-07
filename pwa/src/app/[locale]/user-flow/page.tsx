@@ -1,5 +1,6 @@
-import { ChevronRightIcon } from '@heroicons/react/20/solid'
-import Image from 'next/image'
+import { Link } from '@/i18n/navigation';
+import { ChevronRightIcon } from '@heroicons/react/20/solid';
+import Image from 'next/image';
 
 const links = [
   {
@@ -31,10 +32,10 @@ export default function Page() {
                 >
                   <div className="flex-auto">
                     <h3 className="text-xl font-semibold text-white">
-                      <a href={link.href}>
+                      <Link href={link.href}>
                         <span aria-hidden="true" className="absolute inset-0" />
                         {link.name}
-                      </a>
+                      </Link>
                     </h3>
                     <p className="mt-2 text-sm/6 text-gray-300">
                       {link.description}
@@ -55,7 +56,9 @@ export default function Page() {
               {/* src="https://images.unsplash.com/photo-1670272502246-768d249768ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1152&q=80" */}
               <Image
                 alt=""
-                src="/user-flow/photo-1670272502246-768d249768ca.png" width={1152} height={768}
+                src="/user-flow/photo-1670272502246-768d249768ca.png"
+                width={1152}
+                height={768}
                 className="aspect-7/5 w-148 max-w-none rounded-2xl bg-gray-50 object-cover max-sm:w-120"
               />
             </div>
@@ -64,7 +67,9 @@ export default function Page() {
                 {/* src="https://images.unsplash.com/photo-1605656816944-971cd5c1407f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768&h=604&q=80" */}
                 <Image
                   alt=""
-                  src="/user-flow/photo-1605656816944-971cd5c1407f.png" width={768} height={604}
+                  src="/user-flow/photo-1605656816944-971cd5c1407f.png"
+                  width={768}
+                  height={604}
                   className="aspect-4/3 w-[24rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
                 />
               </div>
@@ -72,7 +77,9 @@ export default function Page() {
                 {/* src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1152&h=842&q=80" */}
                 <Image
                   alt=""
-                  src="/user-flow/photo-1568992687947-868a62a9f521.png" width={1152} height={768}
+                  src="/user-flow/photo-1568992687947-868a62a9f521.png"
+                  width={1152}
+                  height={768}
                   className="aspect-7/5 w-148 max-w-none flex-none rounded-2xl bg-gray-50 object-cover max-sm:w-120"
                 />
               </div>
@@ -80,7 +87,9 @@ export default function Page() {
                 {/* src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768&h=604&q=80" */}
                 <Image
                   alt=""
-                  src="/user-flow/photo-1612872087720-bb876e2e67d1.png" width={768} height={604}
+                  src="/user-flow/photo-1612872087720-bb876e2e67d1.png"
+                  width={768}
+                  height={604}
                   className="aspect-4/3 w-[24rem] max-w-none rounded-2xl bg-gray-50 object-cover"
                 />
               </div>

@@ -1,3 +1,4 @@
+import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import type { FormEventHandler } from 'react';
 
@@ -74,12 +75,12 @@ const CustomerLoginForm = ({
                   {labels.password}
                 </label>
                 <div className="text-sm">
-                  <a
-                    href="#"
+                  <Link
+                    href="/forgot-password"
                     className="font-semibold text-indigo-600 hover:text-indigo-500"
                   >
                     {labels.forgotPassword}
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="mt-2">
