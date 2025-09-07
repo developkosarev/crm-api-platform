@@ -35,6 +35,7 @@ help:
 	@echo "$(call red,===============================)"
 	@echo "$(call format,crm-fixture,'Crm fixture load')"
 	@echo "$(call format,e2e,'Run e2e test')"
+	@echo "$(call format,vitest,'Run vitest test')"
 	@echo "$(call yellow,===========GIT=================)"
 	@echo "$(call format,git-remote-v,'git remote -v')"
 	@echo "$(call format,git-push-origin-belvexa-master,'git push origin-belvexa master')"
@@ -89,3 +90,7 @@ crm-fixture:
 e2e:
 	cd e2e && npm run test
 .PHONY: e2e
+
+vitest:
+	docker exec -it $(CONTAINER_NAME_PWA) pnpm run test
+.PHONY: vitest

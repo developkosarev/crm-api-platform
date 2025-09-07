@@ -10,6 +10,7 @@ const CONTENT_TYPE = 'application/ld+json';
 enum Roles {
   Admin = 'ROLE_ADMIN',
   User = 'ROLE_USER',
+  Customer = 'ROLE_CUSTOMER'
 }
 
 interface CrmUser extends User {
