@@ -23,6 +23,13 @@ jobs:
       packages: write
       contents: read
     steps:
+      - name: 00ю Delete old package versions
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'crm-api-platform-pwa'
+          package-type: 'container'
+          min-versions-to-keep: 10
+
       - name: 01. Check out the repo
         uses: actions/checkout@v4
 
