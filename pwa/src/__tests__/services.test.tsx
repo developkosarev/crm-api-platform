@@ -4,7 +4,7 @@ import Page, { metadata } from '../app/[locale]/(public)/services/page'
 
 
 describe('Page metadata', () => {
-  it('metadata should be correct', () => {
+  test('metadata should be correct', () => {
     expect(metadata.title).toBe('Services')
     expect(metadata.description).toBe('Services')
     expect(metadata.keywords).toBe('Services')
@@ -12,7 +12,7 @@ describe('Page metadata', () => {
 })
 
 describe('Page component', () => {
-  it('render test "Services"', async () => {    
+  test('render test "Services"', async () => {    
     const Component = await Page()
     render(Component)
 

@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 const posts = [
   {
     id: 1,
@@ -77,7 +79,7 @@ export default function Page() {
               className="flex flex-col items-start justify-between"
             >
               <div className="relative w-full">
-                <img
+                <Image
                   alt=""
                   src={post.imageUrl}
                   className="aspect-video w-full rounded-2xl bg-gray-100 object-cover sm:aspect-2/1 lg:aspect-3/2"
@@ -108,7 +110,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div className="relative mt-8 flex items-center gap-x-4 justify-self-end">
-                  <img
+                  <Image
                     alt=""
                     src={post.author.imageUrl}
                     className="size-10 rounded-full bg-gray-100"
