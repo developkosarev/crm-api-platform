@@ -7,7 +7,7 @@
     "logout": "Logout",
     "secret": "Secret page for logged in users"
   },
-  "navigation": {
+  "Navigation": {
     "openMainMenu": "Open main menu",
     "pages": "Pages",
     "contact": "Contact"

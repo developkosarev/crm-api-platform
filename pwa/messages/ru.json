@@ -7,7 +7,7 @@
     "logout": "Abmelden",
     "secret": "Geheime Seite für angemeldete Benutzer"
   },
-  "navigation": {
+  "Navigation": {
     "openMainMenu": "Открыть главное меню",
     "pages": "Страницы",
     "contact": "Контакты"
