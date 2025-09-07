@@ -8,7 +8,7 @@ const posts = [
     description:
       'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
     imageUrl:
-      'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80',
+        'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80',
     date: 'Mar 16, 2020',
     datetime: '2020-03-16',
     category: { title: 'Marketing', href: '#' },
@@ -79,11 +79,13 @@ export default function Page() {
               className="flex flex-col items-start justify-between"
             >
               <div className="relative w-full">
-                <Image
-                  alt=""
-                  src={post.imageUrl}
-                  className="aspect-video w-full rounded-2xl bg-gray-100 object-cover sm:aspect-2/1 lg:aspect-3/2"
-                />
+                {/*<Image*/}
+                {/*  alt=""*/}
+                {/*  src={post.imageUrl}*/}
+                {/*  width={100}*/}
+                {/*  height={100}*/}
+                {/*  className="aspect-video w-full rounded-2xl bg-gray-100 object-cover sm:aspect-2/1 lg:aspect-3/2"*/}
+                {/*/>*/}
                 <div className="absolute inset-0 rounded-2xl inset-ring inset-ring-gray-900/10" />
               </div>
               <div className="flex max-w-xl grow flex-col justify-between">
@@ -110,11 +112,11 @@ export default function Page() {
                   </p>
                 </div>
                 <div className="relative mt-8 flex items-center gap-x-4 justify-self-end">
-                  <Image
-                    alt=""
-                    src={post.author.imageUrl}
-                    className="size-10 rounded-full bg-gray-100"
-                  />
+                  {/*<Image*/}
+                  {/*  alt=""*/}
+                  {/*  src={post.author.imageUrl}*/}
+                  {/*  className="size-10 rounded-full bg-gray-100"*/}
+                  {/*/>*/}
                   <div className="text-sm/6">
                     <p className="font-semibold text-gray-900">
                       <a href={post.author.href}>
