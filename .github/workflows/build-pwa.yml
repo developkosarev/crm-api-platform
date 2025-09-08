@@ -1,6 +1,7 @@
 name: Publish Docker image PWA
 env:
   DEPLOY_PACKAGE_NAME : "crm-api-platform-${{ github.sha }}"
+  DEPLOY_PACKAGE_PWA : "crm-api-platform-pwa"
   DEPLOY_VERSION : "v0.0.1"
   DEPLOY_FOLDER : "crm-api-platform"  
 
@@ -23,6 +24,13 @@ jobs:
       packages: write
       contents: read
     steps:
+      - name: 00. Delete old package versions
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: ${{ env.DEPLOY_PACKAGE_PWA }}
+          package-type: 'container'
+          min-versions-to-keep: 10
+
       - name: 01. Check out the repo
         uses: actions/checkout@v4
 
