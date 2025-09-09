@@ -25,4 +25,8 @@ services:
     
     App\State\UserPasswordHasher:
         bind:
-            $processor: '@api_platform.doctrine.orm.state.persist_processor' 
+            $processor: '@api_platform.doctrine.orm.state.persist_processor'
+
+    App\State\CustomerPasswordHasher:
+        bind:
+            $processor: '@api_platform.doctrine.orm.state.persist_processor'

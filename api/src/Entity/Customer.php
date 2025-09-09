@@ -5,7 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
 use App\Repository\CustomerRepository;
-use App\State\UserPasswordHasher;
+use App\State\CustomerPasswordHasher;
 use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -23,7 +23,7 @@ use Symfony\Component\Uid\Uuid;
     operations: [
         //new GetCollection(security: "is_granted('ROLE_ADMIN')"),
         //new Get(uriTemplate: '/api/users/{id}', security: "is_granted('ROLE_ADMIN')"),
-        new Post(validationContext: ['groups' => ['Default', 'user:create']], processor: UserPasswordHasher::class),
+        new Post(validationContext: ['groups' => ['Default', 'user:create']], processor: CustomerPasswordHasher::class),
     ],
     normalizationContext: ['groups' => ['customer:read']],
     denormalizationContext: ['groups' => ['customer:create', 'customer:update']],

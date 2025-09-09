@@ -79,3 +79,6 @@ SEO-дружественный блог
 Генерация sitemap и robots.txt
 
 Ссылка: https://github.com/onwidget/tailnext
+
+# Examples Internationalisation
+Example: https://github.com/amannn/next-intl/blob/main/examples/example-app-router-next-auth/src/middleware.ts
