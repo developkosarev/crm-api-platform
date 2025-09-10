@@ -17,14 +17,19 @@ export async function signInWithCredentials(email: string, password: string) {
   });
 }
 
-export async function loginUser({email, password, router, setError, setIsSubmitting}: LoginUserParams)
-{
+export async function loginUser({
+  email,
+  password,
+  router,
+  setError,
+  setIsSubmitting,
+}: LoginUserParams) {
   setIsSubmitting(true);
   setError(null);
   try {
     const res = await signInWithCredentials(email, password);
     if (res && !res.error) {
-      router.push('/profile');
+      router.push('/personal-account/profile');
     } else if (res) {
       setError(`${res.error} status ${res.status}.`);
     } else {
