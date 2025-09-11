@@ -92,9 +92,15 @@ const CustomerLayout = ({ children }: Props) => {
                   <Image
                     src="/icons/belvexa_logo.svg"
                     alt="Belvexa"
-                    width={100}
-                    height={64}
-                    className="mx-auto"
+                    width={24}
+                    height={24}
+                    className="pr-2"
+                  />
+                  <Image
+                    src="/icons/belvexa_name_light.svg"
+                    alt="Belvexa"
+                    width={80}
+                    height={45}
                   />
                 </div>
                 <nav className="relative flex flex-1 flex-col">
@@ -174,9 +180,15 @@ const CustomerLayout = ({ children }: Props) => {
               <Image
                 src="/icons/belvexa_logo.svg"
                 alt="Belvexa"
-                width={160}
-                height={64}
-                className="mx-auto h-16 w-auto"
+                width={28}
+                height={28}
+                className="pr-2"
+              />
+              <Image
+                src="/icons/belvexa_name_light.svg"
+                alt="Belvexa"
+                width={100}
+                height={28}
               />
             </div>
             <nav className="flex flex-1 flex-col">

@@ -1,5 +1,5 @@
 import { routing } from '@/i18n/routing';
-import { inter, playfair } from '@/styles/fonts';
+import { inter } from '@/styles/fonts';
 import '@/styles/globals.css';
 import { Locale, NextIntlClientProvider, hasLocale } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -20,10 +20,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html
-      lang={locale}
-      className={`${inter.variable} ${playfair.variable} h-full bg-white`}
-    >
+    <html lang={locale} className={`${inter.variable} h-full bg-white`}>
       <head>
         <title>Belvexa Beauty Platform</title>
       </head>

@@ -3,20 +3,14 @@
 import { Link } from '@/i18n/navigation';
 import { ReactNode } from 'react';
 
+import { ProfileDropdown } from '@/_components/molecules';
 import {
   Dialog,
   DialogBackdrop,
   DialogPanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
   TransitionChild,
 } from '@headlessui/react';
-import {
-  ChevronDownIcon,
-  MagnifyingGlassIcon,
-} from '@heroicons/react/20/solid';
+import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import {
   Bars3Icon,
   BellIcon,
@@ -29,6 +23,7 @@ import {
   UsersIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 import { useState } from 'react';
 
 type Props = {
@@ -59,7 +54,7 @@ const teams = [
   { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
 ];
 const userNavigation = [
-  { name: 'Your profile', href: '#' },
+  { name: 'Your profile', href: 'partners/profile' },
   { name: 'Sign out', href: '/partners/login' },
 ];
 
@@ -103,12 +98,16 @@ const PartnerLayout = ({ children }: Props) => {
             {/* Sidebar component, swap this element with another sidebar if you like */}
             <div className="relative flex grow flex-col gap-y-5 overflow-y-auto bg-indigo-600 px-6 pb-4">
               <div className="flex h-16 shrink-0 items-center">
-                <p>belvexa</p>
-                <img
-                  alt="Your Company"
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=white"
-                  className="h-8 w-auto"
+                <Image
+                  src="/icons/belvexa_logo.svg"
+                  alt="Belvexa"
+                  width={28}
+                  height={28}
+                  className="pr-2"
                 />
+                <p className="font-breeSerif text-2xl tracking-wide text-white">
+                  belvexa
+                </p>
               </div>
               <nav className="flex flex-1 flex-col">
                 <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -189,7 +188,16 @@ const PartnerLayout = ({ children }: Props) => {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="relative flex grow flex-col gap-y-5 overflow-y-auto bg-indigo-600 px-6 pb-4">
           <div className="flex h-16 shrink-0 items-center">
-            <h2 className="text-2xl/12 font-semibold text-white">belvexa</h2>
+            <Image
+              src="/icons/belvexa_logo.svg"
+              alt="Belvexa"
+              width={28}
+              height={28}
+              className="pr-2"
+            />
+            <p className="font-breeSerif text-2xl tracking-wide text-white">
+              belvexa
+            </p>
           </div>
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -308,45 +316,7 @@ const PartnerLayout = ({ children }: Props) => {
                 className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
               />
 
-              {/* Profile dropdown */}
-              <Menu as="div" className="relative">
-                <MenuButton className="relative flex items-center">
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">Open user menu</span>
-                  <img
-                    alt=""
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    className="size-8 rounded-full bg-gray-50 outline -outline-offset-1 outline-black/5"
-                  />
-                  <span className="hidden lg:flex lg:items-center">
-                    <span
-                      aria-hidden="true"
-                      className="ml-4 text-sm/6 font-semibold text-gray-900"
-                    >
-                      Tom Cook
-                    </span>
-                    <ChevronDownIcon
-                      aria-hidden="true"
-                      className="ml-2 size-5 text-gray-400"
-                    />
-                  </span>
-                </MenuButton>
-                <MenuItems
-                  transition
-                  className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg outline outline-gray-900/5 transition data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
-                >
-                  {userNavigation.map((item) => (
-                    <MenuItem key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="block px-3 py-1 text-sm/6 text-gray-900 data-focus:bg-gray-50 data-focus:outline-hidden"
-                      >
-                        {item.name}
-                      </Link>
-                    </MenuItem>
-                  ))}
-                </MenuItems>
-              </Menu>
+              <ProfileDropdown userNavigation={userNavigation} />
             </div>
           </div>
         </div>
