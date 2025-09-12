@@ -89,19 +89,21 @@ const CustomerLayout = ({ children }: Props) => {
               {/* Sidebar component, swap this element with another sidebar if you like */}
               <div className="relative flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10">
                 <div className="relative flex h-16 shrink-0 items-center">
-                  <Image
-                    src="/icons/belvexa_logo.svg"
-                    alt="Belvexa"
-                    width={24}
-                    height={24}
-                    className="pr-2"
-                  />
-                  <Image
-                    src="/icons/belvexa_name_light.svg"
-                    alt="Belvexa"
-                    width={80}
-                    height={45}
-                  />
+                  <div className="relative flex shrink-0 items-end">
+                    <Image
+                      src="/icons/belvexa_logo.svg"
+                      alt="Belvexa"
+                      width={24}
+                      height={24}
+                      className="pr-2"
+                    />
+                    <Image
+                      src="/icons/belvexa_name_light.svg"
+                      alt="Belvexa"
+                      width={80}
+                      height={45}
+                    />
+                  </div>
                 </div>
                 <nav className="relative flex flex-1 flex-col">
                   <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -177,19 +179,21 @@ const CustomerLayout = ({ children }: Props) => {
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-black/10 px-6 pb-4">
             <div className="flex h-16 shrink-0 items-center">
-              <Image
-                src="/icons/belvexa_logo.svg"
-                alt="Belvexa"
-                width={28}
-                height={28}
-                className="pr-2"
-              />
-              <Image
-                src="/icons/belvexa_name_light.svg"
-                alt="Belvexa"
-                width={100}
-                height={28}
-              />
+              <div className="flex shrink-0 items-end">
+                <Image
+                  src="/icons/belvexa_logo.svg"
+                  alt="Belvexa"
+                  width={28}
+                  height={28}
+                  className="pr-2"
+                />
+                <Image
+                  src="/icons/belvexa_name_light.svg"
+                  alt="Belvexa"
+                  width={100}
+                  height={28}
+                />
+              </div>
             </div>
             <nav className="flex flex-1 flex-col">
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
