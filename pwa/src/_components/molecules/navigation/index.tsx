@@ -191,7 +191,6 @@ const MenuNavigation = () => {
           >
             Sign in <span aria-hidden="true">&rarr;</span>
           </Link>
-          <p>Test</p>
         </div>
       </nav>
       <Dialog
