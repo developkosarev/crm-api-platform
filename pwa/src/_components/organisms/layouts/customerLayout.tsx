@@ -210,7 +210,7 @@ const CustomerLayout = ({ children }: Props) => {
                   src="/icons/belvexa_name_light.svg"
                   alt="Belvexa"
                   width={100}
-                  height={28}
+                  height={45}
                 />
               </div>
             </div>

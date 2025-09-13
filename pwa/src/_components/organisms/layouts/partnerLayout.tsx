@@ -117,7 +117,7 @@ const PartnerLayout = ({ children }: Props) => {
                   className="pr-2"
                 />
                 <Image
-                  src="/icons/belvexa_name_light.svg"
+                  src="/icons/name-logo-light.svg"
                   alt="Belvexa"
                   width={80}
                   height={45}
@@ -205,14 +205,14 @@ const PartnerLayout = ({ children }: Props) => {
             <Image
               src="/icons/belvexa_logo.svg"
               alt="Belvexa"
-              width={24}
-              height={24}
+              width={28}
+              height={28}
               className="pr-2"
             />
             <Image
-              src="/icons/belvexa_name_light.svg"
+              src="/icons/name-logo-light.svg"
               alt="Belvexa"
-              width={80}
+              width={100}
               height={45}
             />
           </div>
