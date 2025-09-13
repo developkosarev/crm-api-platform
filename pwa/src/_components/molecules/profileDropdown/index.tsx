@@ -5,8 +5,14 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import Image from 'next/image';
 
+type NavigationItemProps = {
+  name: string;
+  href?: string;
+  callback?: () => void;
+};
+
 type ProfileDropdownProps = {
-  userNavigation: Array<{ name: string; href: string }>;
+  userNavigation: Array<NavigationItemProps>;
 };
 
 const ProfileDropdown = ({ userNavigation }: ProfileDropdownProps) => {
@@ -39,16 +45,32 @@ const ProfileDropdown = ({ userNavigation }: ProfileDropdownProps) => {
         transition
         className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg outline outline-gray-900/5 transition data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
       >
-        {userNavigation.map((item) => (
-          <MenuItem key={item.name}>
-            <Link
-              href={item.href}
-              className="block px-3 py-1 text-sm/6 text-gray-900 data-focus:bg-gray-50 data-focus:outline-hidden"
-            >
-              {item.name}
-            </Link>
-          </MenuItem>
-        ))}
+        {userNavigation.map((item) => {
+          if (item.callback !== undefined) {
+            return (
+              <MenuItem key={item.name}>
+                <button
+                  type="button"
+                  onClick={item.callback}
+                  className="block px-3 py-1 text-sm/6 text-gray-900 data-focus:bg-gray-50 data-focus:outline-hidden"
+                >
+                  {item.name}
+                </button>
+              </MenuItem>
+            );
+          } else if (item.href !== undefined) {
+            return (
+              <MenuItem key={item.name}>
+                <Link
+                  href={item.href}
+                  className="block px-3 py-1 text-sm/6 text-gray-900 data-focus:bg-gray-50 data-focus:outline-hidden"
+                >
+                  {item.name}
+                </Link>
+              </MenuItem>
+            );
+          }
+        })}
       </MenuItems>
     </Menu>
   );

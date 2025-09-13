@@ -21,6 +21,7 @@ import {
   UsersIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import { ReactNode, useState } from 'react';
 
@@ -45,9 +46,14 @@ const teams = [
   { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
   { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
 ];
+
+const customerLogOut = () => {
+  signOut({ callbackUrl: '/user-flow' });
+};
+
 const userNavigation = [
   { name: 'Your profile', href: '/personal-account/profile' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Sign out', callback: customerLogOut },
 ];
 
 function classNames(...classes: any[]) {
