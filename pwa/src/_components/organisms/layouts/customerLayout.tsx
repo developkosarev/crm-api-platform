@@ -117,7 +117,7 @@ const CustomerLayout = ({ children }: Props) => {
                       className="pr-2"
                     />
                     <Image
-                      src="/icons/belvexa_name_light.svg"
+                      src="/icons/name-logo-light.svg"
                       alt="Belvexa"
                       width={80}
                       height={45}
@@ -207,7 +207,7 @@ const CustomerLayout = ({ children }: Props) => {
                   className="pr-2"
                 />
                 <Image
-                  src="/icons/belvexa_name_light.svg"
+                  src="/icons/name-logo-light.svg"
                   alt="Belvexa"
                   width={100}
                   height={45}
