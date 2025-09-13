@@ -34,15 +34,20 @@ type Props = {
 const navigation = [
   {
     name: 'Dashboard',
-    href: '/partners/dashboard/',
+    href: '/partners/business-account/',
     icon: HomeIcon,
     current: true,
   },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
+  {
+    name: 'Team',
+    href: '/partners/business-account/team',
+    icon: UsersIcon,
+    current: false,
+  },
   { name: 'Projects', href: '#', icon: FolderIcon, current: false },
   {
     name: 'Calendar',
-    href: '/partners/dashboard/calendar',
+    href: '/partners/business-account/calendar',
     icon: CalendarIcon,
     current: false,
   },
@@ -60,7 +65,7 @@ const partnerLogOut = () => {
 };
 
 const userNavigation = [
-  { name: 'Your profile', href: 'partners/profile' },
+  { name: 'Your profile', href: '/partners/business-account/profile' },
   { name: 'Sign out', callback: partnerLogOut },
 ];
 
@@ -107,13 +112,16 @@ const PartnerLayout = ({ children }: Props) => {
                 <Image
                   src="/icons/belvexa_logo.svg"
                   alt="Belvexa"
-                  width={28}
-                  height={28}
+                  width={24}
+                  height={24}
                   className="pr-2"
                 />
-                <p className="font-breeSerif text-2xl tracking-wide text-white">
-                  belvexa
-                </p>
+                <Image
+                  src="/icons/belvexa_name_light.svg"
+                  alt="Belvexa"
+                  width={80}
+                  height={45}
+                />
               </div>
               <nav className="flex flex-1 flex-col">
                 <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -197,13 +205,16 @@ const PartnerLayout = ({ children }: Props) => {
             <Image
               src="/icons/belvexa_logo.svg"
               alt="Belvexa"
-              width={28}
-              height={28}
+              width={24}
+              height={24}
               className="pr-2"
             />
-            <p className="font-breeSerif text-2xl tracking-wide text-white">
-              belvexa
-            </p>
+            <Image
+              src="/icons/belvexa_name_light.svg"
+              alt="Belvexa"
+              width={80}
+              height={45}
+            />
           </div>
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">

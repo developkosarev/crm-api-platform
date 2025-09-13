@@ -39,7 +39,7 @@ export async function loginUser({
       if (role === 'customer') {
         router.push('/personal-account/dashboard');
       } else if (role === 'partner') {
-        router.push('/partners/dashboard');
+        router.push('/partners/business-account');
       } else {
         router.push('/');
       }

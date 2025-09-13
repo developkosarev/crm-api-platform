@@ -1,11 +1,9 @@
 export default function Page() {
   return (
-    <main className="bg-gray-200 flex min-h-screen flex-col p-6">
-
+    <main className="flex min-h-screen flex-col bg-gray-200 p-6">
       <div className="flex items-center justify-center text-2xl font-bold">
-        DASHBOARD
+        Home dashboard
       </div>
-
     </main>
   );
 }

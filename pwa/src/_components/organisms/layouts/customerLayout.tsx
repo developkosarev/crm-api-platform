@@ -18,7 +18,6 @@ import {
   DocumentDuplicateIcon,
   FolderIcon,
   HomeIcon,
-  UsersIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { signOut } from 'next-auth/react';
@@ -29,9 +28,18 @@ type Props = {
   children?: ReactNode;
 };
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
+  {
+    name: 'Dashboard',
+    href: '/personal-account/',
+    icon: HomeIcon,
+    current: true,
+  },
+  {
+    name: 'Recommendations',
+    href: '/personal-account/recommendations',
+    icon: FolderIcon,
+    current: false,
+  },
   {
     name: 'Appointments',
     href: '/personal-account/appointments',
