@@ -1,28 +1,30 @@
-import type { AuthOptions, User } from 'next-auth'
-import { JWT } from "next-auth/jwt";
-import CredentialsProvider from 'next-auth/providers/credentials'
-import { decodeJwt } from 'jose'
+import { decodeJwt } from 'jose';
+import type { AuthOptions, User } from 'next-auth';
+import { JWT } from 'next-auth/jwt';
+import CredentialsProvider from 'next-auth/providers/credentials';
 
-
-const ROUTE_LOGIN = 'http://php/api/login';
+const ROUTE_PARTNER_LOGIN = 'http://php/api/login';
+const ROUTE_CUSTOMER_LOGIN = 'http://php/api/customers/login';
 const ROUTE_REFRESH = 'http://php/api/token/refresh';
 const CONTENT_TYPE = 'application/ld+json';
+
 enum Roles {
   Admin = 'ROLE_ADMIN',
   User = 'ROLE_USER',
-  Customer = 'ROLE_CUSTOMER'
+  Customer = 'ROLE_CUSTOMER',
 }
 
 interface CrmUser extends User {
-  roles: Roles[]
-  token: string | null,
-  refreshToken: string | null,
-  error?: string | null
+  roles?: Roles[];
+  role?: string;
+  token: string | null;
+  refreshToken: string | null;
+  error?: string | null;
 }
 
 interface CrmJWT extends JWT {
-  refreshToken: string | null,
-  error?: string | null
+  refreshToken: string | null;
+  error?: string | null;
 }
 
 export const authConfig: AuthOptions = {
@@ -30,8 +32,16 @@ export const authConfig: AuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: "Username", type: "email", required: true, placeholder: "user@example.com" },
-        password: { label: "Password", type: "password", required: true }
+        email: {
+          label: 'Username',
+          type: 'email',
+          required: true,
+          placeholder: 'user@example.com',
+        },
+        password: { label: 'Password', type: 'password', required: true },
+        role: {
+          type: 'text',
+        },
       },
       async authorize(credentials, req) {
         //console.log('=============== 00 authorize ======================');
@@ -44,22 +54,28 @@ export const authConfig: AuthOptions = {
         // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
-        const res = await fetch(ROUTE_LOGIN, {
+        const loginRoute =
+          credentials.role === 'customer'
+            ? ROUTE_CUSTOMER_LOGIN
+            : ROUTE_PARTNER_LOGIN;
+        const res = await fetch(loginRoute, {
           method: 'POST',
           body: JSON.stringify(credentials),
-          headers: { 'Content-Type': CONTENT_TYPE }
-        })
-        const data = await res.json()
+          headers: { 'Content-Type': CONTENT_TYPE },
+        });
+        const data = await res.json();
 
         // If no error and we have user data, return it
         if (res.ok && data.token) {
-          const decoded = decodeJwt(data.token)
+          const decoded = decodeJwt(data.token);
           //console.log('00-authorize-decode')
           //console.log(decoded)
           //console.log('00-authorize-data')
           //console.log(data)
 
-          if (!decoded) { return null }
+          if (!decoded) {
+            return null;
+          }
 
           //if (decoded.iat !== undefined) {
           //  const decodeIat = new Date(decoded.iat * 1000);
@@ -83,14 +99,15 @@ export const authConfig: AuthOptions = {
             accessTokenExpires: decoded.exp,
 
             token: data.token,
-            refreshToken: data.refresh_token
-          } as CrmUser
+            refreshToken: data.refresh_token,
+            role: credentials.role,
+          } as CrmUser;
         }
 
         // Return null if user data could not be retrieved
-        return null
-      }
-    })
+        return null;
+      },
+    }),
   ],
 
   callbacks: {
@@ -104,18 +121,23 @@ export const authConfig: AuthOptions = {
 
       //console.log(2222)
       if (user) {
+        const crmUser = user as CrmUser;
         const userToken = (user as { token?: string })?.token;
-        const userRefreshToken = (user as { refreshToken?: string })?.refreshToken;
-        const userAccessTokenExpires = (user as { accessTokenExpires?: number })?.accessTokenExpires;
+        const userRefreshToken = (user as { refreshToken?: string })
+          ?.refreshToken;
+        const userAccessTokenExpires = (user as { accessTokenExpires?: number })
+          ?.accessTokenExpires;
 
         return {
           ...token,
           token: userToken, //user.token,
           refreshToken: userRefreshToken, //user.refreshToken,
           accessTokenExpires: userAccessTokenExpires, //user.accessTokenExpires,
-          name: user.email,
-          email: user.email,
-        }
+          name: crmUser.email,
+          email: crmUser.email,
+          roles: crmUser.roles,
+          role: crmUser.role,
+        };
       }
 
       const now = Math.floor(Date.now() / 1000);
@@ -124,18 +146,19 @@ export const authConfig: AuthOptions = {
       //console.log(now)
       //console.log(token.accessTokenExpires)
 
-      const tokenAccessTokenExpires = (token as { accessTokenExpires?: number })?.accessTokenExpires ?? 0;
+      const tokenAccessTokenExpires =
+        (token as { accessTokenExpires?: number })?.accessTokenExpires ?? 0;
 
       //if (now < token.accessTokenExpires) {
       if (now < tokenAccessTokenExpires) {
-        return token
+        return token;
       }
 
       //return token
 
       //console.log('01-callbacks-token-expires')
       // Обновляем токен
-      return await refreshAccessToken(token)
+      return await refreshAccessToken(token);
     },
 
     //client
@@ -150,8 +173,8 @@ export const authConfig: AuthOptions = {
         return session;
       }
 
-      return {...session, ...token}
-    }
+      return { ...session, ...token };
+    },
 
     //async session({ session, token }) {
     //  console.log(4444)
@@ -184,9 +207,9 @@ export const authConfig: AuthOptions = {
 
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: '/login'
-  }
-}
+    signIn: '/partners/login',
+  },
+};
 
 async function refreshAccessToken(token: JWT) {
   //console.log('=============== 07 refreshAccessToken ======================');
@@ -197,34 +220,33 @@ async function refreshAccessToken(token: JWT) {
     const response = await fetch(ROUTE_REFRESH, {
       method: 'POST',
       headers: {
-        'Content-Type': CONTENT_TYPE
+        'Content-Type': CONTENT_TYPE,
       },
       body: JSON.stringify({
         refresh_token: refreshToken,
-      })
-    })
+      }),
+    });
 
-    const refreshedTokens = await response.json()
+    const refreshedTokens = await response.json();
     //console.log('07-refreshed-token');
     //console.log(refreshedTokens);
 
-    if (!response.ok) throw refreshedTokens
+    if (!response.ok) throw refreshedTokens;
 
-    const decoded = decodeJwt(refreshedTokens.token)
+    const decoded = decodeJwt(refreshedTokens.token);
 
     return {
       ...token,
       token: refreshedTokens.token,
       refreshToken: refreshedTokens.refresh_token,
       accessTokenExpires: decoded.exp,
-    }
-
+    };
   } catch (error) {
     //console.error('07-error-refreshing-access-token:', error)
 
     return {
       ...token,
       error: 'RefreshAccessTokenError',
-    }
+    };
   }
 }

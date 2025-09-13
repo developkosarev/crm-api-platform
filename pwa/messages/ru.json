@@ -41,7 +41,7 @@
   "partner": {
     "loginForm": {
       "title": "Sign in to your business account",
-      "redirectToSignUp": "Don't have an account?",
+      "redirectToSignUp": "Don't have an business account?",
       "redirectLabel": "Sign up",
       "email": "Email address",
       "username": "Username",

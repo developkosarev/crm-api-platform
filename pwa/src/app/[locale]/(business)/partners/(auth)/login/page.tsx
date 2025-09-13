@@ -1,25 +1,26 @@
-import { authConfig } from "@/config/auth";
-import { getServerSession } from "next-auth/next";
-import { redirect, RedirectType } from 'next/navigation'
+import { Locale } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
+import { PartnerLoginPage } from './components/PartnerLoginPage';
 
-import LoginForm from '~/src/_components/dashboard/auth/login-view';
-import { Suspense } from 'react';
+type MetaDataProps = {
+  params: Promise<{ locale: Locale }>;
+};
 
-export default async function LoginPage() {
- /* const session = await getServerSession(authConfig)
+export async function generateMetadata({ params }: MetaDataProps) {
+  const { locale } = await params;
+  console.log('locale', locale);
+  const t = await getTranslations({
+    locale,
+    namespace: 'metadata.clientLogin',
+  });
 
-  if (!session?.user?.email) {
-    console.log('===================redirect=========================')
-    redirect('/dashboard', RedirectType.replace);
-  }*/
+  return {
+    title: t('title'),
+    description: t('description'),
+    keywords: t('keywords'),
+  };
+}
 
-  return (
-    <div className="bg-gray-200 min-h-screen">
-      <div className="flex flex-col justify-center min-h-screen py-12 sm:px-6 lg:px-8">
-        <Suspense>
-          <LoginForm />
-        </Suspense>
-      </div>
-    </div>
-  );
+export default function Page() {
+  return <PartnerLoginPage />;
 }

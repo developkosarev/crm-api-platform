@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "node",
     "jsx": "preserve",
@@ -17,8 +13,8 @@
     "noEmit": true,
     "isolatedModules": true,
     "paths": {
-       "~/*": ["./*"],
-      "@/*": ["./src/*"],
+      "~/*": ["./*"],
+      "@/*": ["./src/*"]
     },
     "allowJs": true,
     "incremental": true,
@@ -32,9 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "@/types/next-auth.d.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

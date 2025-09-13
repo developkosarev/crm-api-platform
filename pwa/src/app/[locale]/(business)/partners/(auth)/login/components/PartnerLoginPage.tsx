@@ -9,8 +9,8 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { Suspense, useState } from 'react';
 
-const CustomerLoginPage = () => {
-  const t = useTranslations('client.loginForm');
+const PartnerLoginPage = () => {
+  const t = useTranslations('partner.loginForm');
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
@@ -19,7 +19,7 @@ const CustomerLoginPage = () => {
     await loginUser({
       email: data.email,
       password: data.password,
-      role: 'customer',
+      role: 'partner',
       router,
       setError,
       setIsSubmitting,
@@ -50,4 +50,4 @@ const CustomerLoginPage = () => {
   );
 };
 
-export { CustomerLoginPage };
+export { PartnerLoginPage };
