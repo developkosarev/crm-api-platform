@@ -1,0 +1,143 @@
+{% trans_default_domain "email" %}
+
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <!-- NAME: 1:2:1 COLUMN -->
+    <!--[if gte mso 15]>
+    <xml>
+    <o:OfficeDocumentSettings>
+        <o:AllowPNG/>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- INSERT CUSTOM INLINE CSS  -->
+    <style>{{ source('/css/new_email_base_ph.css') }}</style>
+</head>
+
+<body>
+<!--*|IF:MC_PREVIEW_TEXT|*-->
+<!--[if !gte mso 9]><!----><span class="mcnPreviewText" style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;">*|MC_PREVIEW_TEXT|*</span><!--<![endif]-->
+<!--*|END:IF|*-->
+<center>
+    <!-- BEGIN BODY TABLE -->
+    <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+        <tr>
+            <td align="center" valign="top" id="bodyCell">
+                <!-- BEGIN TEMPLATE // -->
+                <!--[if (gte mso 9)|(IE)]>
+                <table align="center" border="0" cellspacing="0" cellpadding="0" width="600" style="width:600px;">
+                <tr>
+                    <td align="center" valign="top" width="600" style="width:600px;">
+                <![endif]-->
+
+                {# BODY #}
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainer">
+
+                    <!-- 1. BEGIN PRE HEADER ROW -->
+                    <tr>
+                        <td valign="top" id="templatePreheader">
+                            {% include('emails/includes/header-pre-header.html.twig') %}
+                        </td>
+                    </tr>
+                    <!-- 1. END PRE HEADER ROW -->
+
+                    <!-- 2. BEGIN HEADER ROW -->
+                    <tr>
+                        <td valign="top" id="templateHeader">
+                            {% include('emails/includes/header-logo-header.html.twig') %}
+                        </td>
+                        <!-- END HEADER IMAGE BLOCK -->
+                    </tr>
+                    <!-- 2. END HEADER ROW -->
+
+                    <!-- 3. BEGIN UPPER BODY -->
+                    <tr>
+                        <td valign="top" id="templateUpperBody">
+                            {# BEGIN DIVIDER BLOCK #}
+                            {% include('emails/includes/common-divider-block.html.twig') %}
+                            {# END DIVIDER BLOCK #}
+
+
+                            {# BEGIN SALUTATION BLOCK #}
+                            {% block salutation %}
+                                {#
+                                {% set userSalutation %}
+                                    {% if user.salutation | lower == 'mr' %}
+                                        {{ 'salutation.mister' | trans }}
+                                    {% else %}
+                                        {{ 'salutation.mistress' | trans }}
+                                    {% endif %}
+                                {% endset %}
+
+                                {% set salutation %}
+                                    {% if user.salutation | lower == 'mr' %}
+                                        {{ 'success_approval.male_intro' | trans({'%user_salutation%': userSalutation, '%user_lastname%': user.lastName}) }}
+                                    {% else %}
+                                        {{ 'success_approval.female_intro' | trans({'%user_salutation%': userSalutation, '%user_lastname%': user.lastName}) }}
+                                    {% endif %}
+                                {% endset %}
+
+                                {% set salutation %}
+                                    {% if user.salutation | lower == 'sir' %}
+                                        {% trans with {'%user_salutation%': user.salutation | capitalize, '%user_lastname%': user.lastName} from 'email' into user.locale %}success_approval.male_intro{% endtrans %}
+                                    {% else %}
+                                        {% trans with {'%user_salutation%': user.salutation | capitalize, '%user_lastname%': user.lastName} from 'email' into user.locale %}success_approval.female_intro{% endtrans %}
+                                    {% endif %}
+                                {% endset %}
+
+                                {% include 'emails-ph/includes/body-salutation.html.twig' with {'salutation': salutation} %}
+                                #}
+                            {% endblock %}
+                            {# END SALUTATION BLOCK #}
+
+                            {# BEGIN BODY BLOCK #}
+                            {% block body %}{% endblock %}
+                            {# END BODY BLOCK #}
+
+                            {# BEGIN FOR ANY QUESTIONS PLEASE CONTACT US #}
+                            {% block footerContactUs %}
+                                {% include('emails/includes/body-contact-us.html.twig') %}
+                            {% endblock %}
+                            {# END FOR ANY QUESTIONS PLEASE CONTACT US #}
+
+                            {# BEGIN DIVIDER BLOCK #}
+                            {% include('emails/includes/common-divider-block.html.twig') %}
+                            {# END DIVIDER BLOCK #}
+
+                            <div id="templateLowerBody">
+                                {# BEGIN DISCLAIMER BLOCK #}
+                                {% include('emails/includes/footer-disclaimer-block.html.twig') %}
+                                {# END DISCLAIMER BLOCK #}
+
+                                {# BEGIN DIVIDER BLOCK #}
+                                {% include('emails/includes/common-divider-block.html.twig') %}
+                                {# END DIVIDER BLOCK #}
+
+                                {# BEGIN IMPRESSUM BLOCK #}
+                                {% include('emails/includes/footer-impressum-block.html.twig') %}
+                                {# END IMPRESSUM BLOCK #}
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- 3. END UPPER BODY -->
+
+                </table>
+                {# END BODY #}
+
+                <!--[if (gte mso 9)|(IE)]>
+                </td>
+                </tr>
+                </table>
+                <![endif]-->
+                <!-- // END TEMPLATE -->
+            </td>
+        </tr>
+    </table> <!-- END BODY TABLE -->
+</center>
+</body>
+</html>

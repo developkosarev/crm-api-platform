@@ -1,0 +1,51 @@
+{% trans_default_domain "email" %}
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock footer-message" style="min-width:100%;">
+	<tbody class="mcnTextBlockOuter">
+	<tr>
+		<td valign="top" class="mcnTextBlockInner" style="padding-top:9px;">
+			<!--[if mso]>
+			<table align="left" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
+			<tr>
+			<![endif]-->
+
+			<!--[if mso]>
+			<td valign="top" width="600" style="width:600px;">
+			<![endif]-->
+
+			<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
+				<tbody>
+				<tr>
+					<td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px;color: #8D99A5;font-size: 11px;font-style: normal;font-weight: normal;">
+						<h2 class="null">Impressum</h2>
+						{#
+						<br>
+						{{ 'footer.impressum.paragraph_1' | trans({'%company%': company.name, '%company_name_footer_email%': company.nameFooterEmail}) | raw }}<br>
+						<br>
+						{{ 'footer.impressum.paragraph_3' | trans({'%domain%': company.domain, '%company_name_footer_email%': company.nameFooterEmail}) | raw }}<br>
+						<br>
+						{{ 'footer.impressum.paragraph_4' | trans | raw }}<br>
+						<br>
+						{{ 'footer.impressum.paragraph_5' | trans({'%company_name_footer_email%': company.nameFooterEmail, '%domain%': company.domain}) | raw }}<br>
+						<br>
+						<a href="https://{{ company.domain }}/de/impressum" target="_blank">{{ 'footer.impressum.links.impressum' | trans | raw }}</a>
+						| <a href="https://{{ company.domain }}/de/faq/" target="_blank">{{ 'footer.impressum.links.faq' | trans | raw }}</a>
+						| <a href="https://{{ company.domain }}/de/presse/" target="_blank">{{ 'footer.impressum.links.presse' | trans | raw }}</a>
+						#}
+					</td>
+				</tr>
+				</tbody>
+			</table>
+
+			<!--[if mso]>
+			</td>
+			<![endif]-->
+
+			<!--[if mso]>
+			</tr>
+			</table>
+			<![endif]-->
+		</td>
+	</tr>
+	</tbody>
+</table>

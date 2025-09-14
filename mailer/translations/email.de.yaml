@@ -1,0 +1,9 @@
+reset_password:
+  subject: 'Passwort zurücksetzen'
+  button:
+    title: 'Passwort zurücksetzen'
+    alt: 'Passwort zurücksetzen'
+  description_1: 'wir haben eine Anfrage nach einem neuen Passwort für Ihr Benutzerkonto %email% erhalten.'
+  description_2: 'Falls Sie die Passwortzurücksetzung angefordert haben, klicken Sie auf den untenstehenden Button. Wenn Sie keine Zurücksetzung angefordert haben, ignorieren Sie einfach diese E-Mail.'
+  description_3: 'Falls der Button nicht funktioniert, kopieren Sie bitte die folgende Adresse in Ihren Browser:'
+
