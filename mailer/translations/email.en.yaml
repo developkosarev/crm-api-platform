@@ -1,0 +1,8 @@
+reset_password:
+  subject: 'Reset your password'
+  button:
+    title: 'Reset password'
+    alt: 'Reset password'
+  description_1: 'We received a request to reset the password for your account %email%.'
+  description_2: 'If you requested a password reset process, click the button below. If you didn’t make this request, please ignore this email.'
+  description_3: 'If the button does not work, please copy the following address into your browser:'

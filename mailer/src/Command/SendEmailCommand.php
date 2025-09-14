@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Message\User\UserResetPasswordRequest;
+use App\Service\MailSender;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,6 +19,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class SendEmailCommand extends Command
 {
     public function __construct(
+        private readonly MailSender $mailSender,
         private readonly MessageBusInterface $messageBus,
         ?string $name = null
     ) {
@@ -27,6 +29,8 @@ class SendEmailCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $token = "Token";
+
+        $this->mailSender->resetPassword($token);
 
         $this->messageBus->dispatch(
             message: new UserResetPasswordRequest($token)
