@@ -20,7 +20,9 @@ export default function Page() {
       <div className="mx-auto max-w-7xl px-6 lg:flex lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:max-w-none lg:min-w-full lg:flex-none lg:gap-y-8">
           <div className="lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8">
-            <h2 className="py-8 text-5xl/14 font-semibold">Sign in</h2>
+            <h2 className="py-8 text-5xl/14 font-semibold">
+              Sign in / Sign up
+            </h2>
             <ul
               role="list"
               className="-mt-6 divide-y divide-gray-900/5 border-b border-gray-900/5"

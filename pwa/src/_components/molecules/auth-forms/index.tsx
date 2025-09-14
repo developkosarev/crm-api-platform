@@ -1,2 +1,4 @@
 export * from './customer-login';
-export * from './signup';
+export * from './customer-signup';
+export * from './partner-login';
+export * from './partner-signup';

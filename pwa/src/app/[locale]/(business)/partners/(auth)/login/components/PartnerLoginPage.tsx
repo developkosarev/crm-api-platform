@@ -1,8 +1,8 @@
 'use client';
 
 import {
-  CustomerLoginForm,
-  type CustomerLoginFormProps,
+  PartnerLoginForm,
+  type PartnerLoginFormProps,
 } from '@/_components/molecules/auth-forms';
 import { loginUser } from '@/lib/api/auth';
 import { useTranslations } from 'next-intl';
@@ -15,7 +15,7 @@ const PartnerLoginPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
 
-  const userLogin = async (data: CustomerLoginFormProps) => {
+  const userLogin = async (data: PartnerLoginFormProps) => {
     await loginUser({
       email: data.email,
       password: data.password,
@@ -38,7 +38,7 @@ const PartnerLoginPage = () => {
     <main className="flex items-center justify-center md:h-screen">
       <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
         <Suspense>
-          <CustomerLoginForm
+          <PartnerLoginForm
             labels={labels}
             error={error}
             isLoading={isSubmitting}

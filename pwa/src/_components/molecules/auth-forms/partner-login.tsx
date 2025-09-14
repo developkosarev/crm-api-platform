@@ -1,6 +1,6 @@
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
-import type { FormEventHandler } from 'react';
+import type { FormEvent } from 'react';
 
 type PartnerLoginFormProps = {
   email: string;
@@ -20,7 +20,7 @@ const PartnerLoginForm = ({
   isLoading,
   callback,
 }: FormProps) => {
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
@@ -45,6 +45,14 @@ const PartnerLoginForm = ({
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
             {labels.title}
           </h2>
+          <div className="text-sm">
+            <Link
+              href="/partners/signup"
+              className="font-semibold text-indigo-600 hover:text-indigo-500"
+            >
+              Create your new business account
+            </Link>
+          </div>
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form onSubmit={handleSubmit} method="POST" className="space-y-6">

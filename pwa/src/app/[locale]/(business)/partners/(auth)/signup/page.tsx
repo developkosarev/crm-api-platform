@@ -1,14 +1,11 @@
-import { Suspense } from 'react';
-import { SignupForm } from '~/src/_components/molecules/auth-forms';
+import { PartnerSignupForm } from '@/_components/molecules/auth-forms';
 
-export default function SignUpPage() {
+export default function Page() {
   return (
-    <div className="min-h-screen bg-gray-200">
-      <div className="flex min-h-screen flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <Suspense>
-          <SignupForm />
-        </Suspense>
+    <main className="flex items-center justify-center md:h-screen">
+      <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
+        <PartnerSignupForm />
       </div>
-    </div>
+    </main>
   );
 }
