@@ -10,7 +10,7 @@ framework:
             # sync: 'sync://'
 
             async_mailer:
-                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                dsn: '%env(MESSENGER_TRANSPORT_DSN_MAILER)%'
                 serializer: messenger.transport.symfony_serializer
 
                 # default configuration

@@ -59,15 +59,28 @@ services:
       # On Linux, you may want to comment the following line for improved performance
       WATCHPACK_POLLING: "true"
       
-  mailhog:
-    image: "mailhog/mailhog:latest"
+  #mailhog:
+  #  image: "mailhog/mailhog:latest"
+  #  ports:
+  #    - target: 1025
+  #      published: ${MAILHOG_SMTP_PORT:-1025}
+  #      protocol: tcp
+  #    - target: 8025
+  #      published: ${MAILHOG_HTTP_PORT:-8025}
+  #      protocol: tcp
+
+  mailpit:
+    image: axllent/mailpit
     ports:
       - target: 1025
-        published: ${MAILHOG_SMTP_PORT:-1025}
+        published: ${MAILPIT_SMTP_PORT:-1025}
         protocol: tcp
       - target: 8025
-        published: ${MAILHOG_HTTP_PORT:-8025}
+        published: ${MAILPIT_HTTP_PORT:-8025}
         protocol: tcp
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
         
   rabbitmq:
     image: rabbitmq:3-management-alpine
