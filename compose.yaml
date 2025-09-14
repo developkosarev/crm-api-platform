@@ -35,6 +35,35 @@ services:
         published: ${HTTP3_PORT:-443}
         protocol: udp
 
+  mailer:
+    image: ${IMAGES_PREFIX:-}php-mailer
+    restart: unless-stopped
+    environment:
+      PWA_UPSTREAM: pwa:3000
+      SERVER_NAME: ${SERVER_NAME:-localhost}, mailer:80
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES:-127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}
+      TRUSTED_HOSTS: ${TRUSTED_HOSTS:-^${SERVER_NAME:-example\.com|localhost}|mailer$$}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-!ChangeMe!}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-16}&charset=${POSTGRES_CHARSET:-utf8}
+      CADDY_GLOBAL_OPTIONS: |
+        auto_https off
+
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    ports:
+      # HTTP
+      - target: 80
+        published: ${HTTP_PORT_MAILER:-80}
+        protocol: tcp
+    #  # HTTPS
+    #  - target: 443
+    #    published: ${HTTPS_PORT_MAILER:-443}
+    #    protocol: tcp
+    #  # HTTP/3
+    #  - target: 443
+    #    published: ${HTTP3_PORT_MAILER:-443}
+    #    protocol: udp
+
   pwa:
     image: ${IMAGES_PREFIX:-}app-pwa
     environment:

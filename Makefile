@@ -2,6 +2,7 @@ DOCKER_COMPOSE_DEV = docker compose
 DOCKER_COMPOSE_PROXY = docker compose -f compose.proxy.yml
 
 CONTAINER_NAME_CRM = crm-api-platform-php-1
+CONTAINER_NAME_MAILER = crm-api-platform-mailer-1
 CONTAINER_NAME_PWA = crm-api-platform-pwa-1
 
 args = `arg="$(filter-out $(firstword $(MAKECMDGOALS)),$(MAKECMDGOALS))" && echo $${arg:-${1}}`
@@ -29,6 +30,7 @@ help:
 	@echo "$(call format,stop,'Stop dev')"
 	@echo "$(call format,down,'Down dev')"
 	@echo "$(call format,bash,'Bash dev')"
+	@echo "$(call format,bash-mailer,'Bash mailer dev')"
 	@echo "$(call red,===============================)"
 	@echo "$(call format,restart-pwa,'Restart pwa dev')"
 	@echo "$(call format,bash-pwa,   'Bash pwa dev')"
@@ -66,6 +68,13 @@ down: ## Down dev
 bash: ## Bash dev
 	docker exec -it $(CONTAINER_NAME_CRM) bash
 .PHONY: bash
+
+
+## MAILER
+bash-mailer: ## Bash dev mailer
+	docker exec -it $(CONTAINER_NAME_MAILER) bash
+.PHONY: bash-mailer
+
 
 
 ## PWA
