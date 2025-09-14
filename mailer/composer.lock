@@ -4,8 +4,28 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d5562261691c8bc66b2b4fd4e8bf26d7",
+    "content-hash": "722d746501577a2eba90953a18720634",
     "packages": [
+        {
+            "name": "crm/contracts",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../contracts",
+                "reference": "2a34c75beeea178cac13562c4e9be725cf642d5a"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Crm\\Contracts\\": "src/"
+                }
+            },
+            "description": "Shared messages for Symfony Messenger",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
         {
             "name": "doctrine/lexer",
             "version": "3.0.1",
@@ -4139,7 +4159,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "crm/contracts": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

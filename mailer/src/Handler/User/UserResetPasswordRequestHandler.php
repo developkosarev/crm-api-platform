@@ -2,8 +2,8 @@
 
 namespace App\Handler\User;
 
-use App\Message\User\UserResetPasswordRequest;
 use App\Service\MailSender;
+use Crm\Contracts\Message\User\UserResetPasswordRequest;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -20,11 +20,6 @@ class UserResetPasswordRequestHandler
         $token = $userResetPasswordRequest->getToken();
 
         $this->mailSender->resetPassword($token);
-
-        //$msg = "Begin verification of the therapist customerActivationId #{$customerActivationId}";
-        //$this->logger->warning($msg);
-
-        //$customer = $this->verificationCustomerService->verifyBySalesforceCustomerActivationId($customerActivationId);
 
         $msg = "Send email UserResetPasswordRequest #{$token}";
         $this->logger->warning($msg);

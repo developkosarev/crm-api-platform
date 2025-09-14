@@ -38,8 +38,8 @@ class MailSender
         $email = (new Email())
             ->from($this->getSystemEmail())
             ->to($userEmail)
-            ->text('Lorem ipsum...')
-            ->html('<p>Lorem ipsum...</p>');
+            ->text('Reset password')
+            ->html("<p>Reset password: {$resetPasswordUrl} </p>");
 
         //$email = $this->getMailObject()
         //    ->from($this->getSystemEmail())

@@ -1,0 +1,10 @@
+{
+  "name": "crm/contracts",
+  "description": "Shared messages for Symfony Messenger",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Crm\\Contracts\\": "src/"
+    }
+  }
+}

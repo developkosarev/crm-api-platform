@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Message\User\UserResetPasswordRequest;
 use App\Service\MailSender;
+use Crm\Contracts\Message\User\UserResetPasswordRequest;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -30,7 +30,7 @@ class SendEmailCommand extends Command
     {
         $token = "Token";
 
-        $this->mailSender->resetPassword($token);
+        //$this->mailSender->resetPassword($token);
 
         $this->messageBus->dispatch(
             message: new UserResetPasswordRequest($token)
