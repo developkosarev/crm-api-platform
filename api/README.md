@@ -40,3 +40,10 @@ git push --tags
     }
 }
 ```
+
+## Build
+
+```
+docker build --tag crm-app-api:v0.0.1 --file Dockerfile .
+docker build --tag crm-app-api:v0.0.1 --progress=plain --target frankenphp_prod --file Dockerfile .
+```

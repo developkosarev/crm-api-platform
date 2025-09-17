@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\CalendarEvent;
+use App\Entity\Customer;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -19,7 +20,8 @@ class CalendarEventFixtures extends Fixture implements DependentFixtureInterface
         $event->setDescription('event 1');
         $event->setStartAt(new \DateTimeImmutable());
         $event->setEndAt(new \DateTimeImmutable());
-        $event->setUser($this->getReference(UserFixtures::USER_1_REFERENCE, User::class));
+        $event->setCustomer($this->getReference(CustomerFixtures::CUSTOMER_1_REFERENCE, Customer::class));
+        $event->setUser($this->getReference(UserFixtures::USER_3_REFERENCE, User::class));
 
         $manager->persist($event);
         $manager->flush();

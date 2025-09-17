@@ -3,7 +3,7 @@
 namespace App\Handler\User;
 
 use App\Service\MailSender;
-use Crm\Contracts\Message\User\UserResetPasswordRequest;
+use App\Message\User\UserResetPasswordRequest;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -17,11 +17,12 @@ class UserResetPasswordRequestHandler
 
     public function __invoke(UserResetPasswordRequest $userResetPasswordRequest): void
     {
+        $email = $userResetPasswordRequest->getEmail();
         $token = $userResetPasswordRequest->getToken();
 
-        $this->mailSender->resetPassword($token);
+        $this->mailSender->resetPassword($email, $token);
 
-        $msg = "Send email UserResetPasswordRequest #{$token}";
+        $msg = "Send email UserResetPasswordRequest #{$email}";
         $this->logger->warning($msg);
     }
 }

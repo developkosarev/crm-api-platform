@@ -28,16 +28,15 @@ class MailSender
         return $this->systemEmail;
     }
 
-    public function resetPassword(string $resetPasswordUrl): void
+    public function resetPassword(string $email, string $resetPasswordUrl): void
     {
         $locale = $this->translator->getLocale();
-        $userEmail = 'user@example.com';
 
         $subject = $this->translator->trans('reset_password.subject', [], 'email', $locale);
 
         $email = (new Email())
             ->from($this->getSystemEmail())
-            ->to($userEmail)
+            ->to($email)
             ->text('Reset password')
             ->html("<p>Reset password: {$resetPasswordUrl} </p>");
 

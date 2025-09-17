@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Service\MailSender;
-use Crm\Contracts\Message\User\UserResetPasswordRequest;
+//use Crm\Contracts\Message\User\UserResetPasswordRequest;
+use App\Message\User\UserResetPasswordRequest;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

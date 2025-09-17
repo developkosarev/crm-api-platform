@@ -11,8 +11,10 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
+use Symfony\Component\Messenger\MessageBusInterface;
 use SymfonyCasts\Bundle\ResetPassword\Exception\TooManyPasswordRequestsException;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
+use App\Message\User\UserResetPasswordRequest as MessageUserResetPasswordRequest;
 
 /**
  * @implements ProcessorInterface<UserResetPasswordRequestDto, User>
@@ -21,7 +23,8 @@ final class UserResetPasswordRequestProcessor implements ProcessorInterface
 {
     public function __construct(
         private readonly ResetPasswordHelperInterface $resetPasswordHelper,
-        private readonly UserRepository $userRepository
+        private readonly UserRepository $userRepository,
+        private readonly MessageBusInterface $messageBus,
     )
     {
     }
@@ -62,7 +65,12 @@ final class UserResetPasswordRequestProcessor implements ProcessorInterface
         //}
 
         $output = new UserResetPasswordRequest();
+        $output->email = $data->email;
         $output->token = $resetToken->getToken();
+
+        $this->messageBus->dispatch(
+            message: new MessageUserResetPasswordRequest($output->email, $output->token)
+        );
 
         return $output;
     }

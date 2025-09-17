@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
+use App\Entity\Traits\CustomerTrait;
 use App\Repository\CustomerRepository;
 use App\State\CustomerPasswordHasher;
 use DateTime;
@@ -35,6 +36,8 @@ use Symfony\Component\Uid\Uuid;
 #[UniqueEntity('email')]
 class Customer implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use CustomerTrait;
+
     final public const string ROLE_CUSTOMER = 'ROLE_CUSTOMER';
 
     #[Groups(['customer:read'])]

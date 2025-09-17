@@ -36,7 +36,7 @@ framework:
         routing:
             # Route your messages to the transports
             # 'App\Message\YourMessage': async
-            Crm\Contracts\Message\User\UserResetPasswordRequest: async_mailer
+            App\Message\User\UserResetPasswordRequest: async_mailer
 
 # when@test:
 #    framework:

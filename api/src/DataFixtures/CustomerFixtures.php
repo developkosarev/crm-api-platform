@@ -24,12 +24,16 @@ class CustomerFixtures extends Fixture
         foreach ($this->getCustomers() as [$id, $email, $role, $reference]) {
             $user = new Customer();
             $user->setEmail($email);
+            $user->setFirstName('firstName');
+            $user->setLastName('lastName');
 
             $password = $this->hasher->hashPassword($user, self::USER_PLAIN_PASSWORD);
             $user->setPassword($password);
             $user->setRoles($role);
 
             $manager->persist($user);
+
+            $this->addReference($reference, $user);
         }
         $manager->flush();
     }

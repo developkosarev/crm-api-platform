@@ -38,6 +38,10 @@ class CalendarEvent
     private ?string $description = null;
 
     #[Groups(['appointment:create', 'appointment:update'])]
+    #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'customers')]
+    private Customer $customer;
+
+    #[Groups(['appointment:create', 'appointment:update'])]
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'users')]
     private User $user;
 
@@ -116,13 +120,24 @@ class CalendarEvent
         return $this;
     }
 
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(Customer $customer): self
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
 
     public function getUser(): ?User
     {
       return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(User $user): self
     {
       $this->user = $user;
 

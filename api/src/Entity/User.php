@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use App\Entity\Traits\CustomerTrait;
 use App\Repository\UserRepository;
 use App\State\UserPasswordHasher;
 use DateTime;
@@ -42,9 +43,11 @@ use Symfony\Component\Uid\Ulid;
 #[UniqueEntity('email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use CustomerTrait;
+
     final public const string ROLE_ADMIN = 'ROLE_ADMIN';
+    final public const string ROLE_OWNER = 'ROLE_OWNER';
     final public const string ROLE_USER = 'ROLE_USER';
-    final public const string ROLE_CUSTOMER = 'ROLE_CUSTOMER';
 
     //#[Groups(['user:read'])]
     //#[ORM\Id]

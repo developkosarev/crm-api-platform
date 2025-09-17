@@ -6,9 +6,10 @@ services:
       target: frankenphp_dev
     volumes:
       - ./api:/app:cached
-      - /app/var
       - ./api/frankenphp/Caddyfile:/etc/caddy/Caddyfile:ro
       - ./api/frankenphp/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
+      #- ./contracts:/contracts:cached
+      - /app/var
       # If you develop on Mac or Windows you can remove the vendor/ directory
       #  from the bind-mount for better performance by enabling the next line:
       #- /app/vendor
@@ -33,7 +34,7 @@ services:
       - ./mailer:/app:cached
       - ./mailer/frankenphp/Caddyfile:/etc/caddy/Caddyfile:ro
       - ./mailer/frankenphp/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
-      - ./contracts:/contracts:cached
+      #- ./contracts:/contracts:cached
       - /app/var
       # If you develop on Mac or Windows you can remove the vendor/ directory
       #  from the bind-mount for better performance by enabling the next line:

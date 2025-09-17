@@ -35,6 +35,7 @@ help:
 	@echo "$(call format,restart-pwa,'Restart pwa dev')"
 	@echo "$(call format,bash-pwa,   'Bash pwa dev')"
 	@echo "$(call red,===============================)"
+	@echo "$(call format,crm-make-migrate,'Crm make migrate')"
 	@echo "$(call format,crm-fixture,'Crm fixture load')"
 	@echo "$(call format,e2e,'Run e2e test')"
 	@echo "$(call format,vitest,'Run vitest test')"
@@ -92,6 +93,10 @@ typescheck-pwa:
 
 
 ## Tests
+crm-make-migrate:
+	docker exec -it $(CONTAINER_NAME_CRM) php bin/console doctrine:migrations:migrate
+.PHONY: crm-make-migrate
+
 crm-fixture:
 	docker exec -it $(CONTAINER_NAME_CRM) php bin/console doctrine:fixtures:load
 .PHONY: crm-fixture
