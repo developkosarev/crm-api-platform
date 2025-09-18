@@ -41,8 +41,8 @@ help:
 	@echo "$(call format,vitest,'Run vitest test')"
 	@echo "$(call yellow,===========GIT=================)"
 	@echo "$(call format,git-remote-v,'git remote -v')"
-	@echo "$(call format,git-push-origin-belvexa-master,'git push origin-belvexa master')"
-	@echo "$(call format,git-pull-origin-belvexa-master,'git pull origin-belvexa master')"
+	@echo "$(call format,git-push-origin-dk-master,'git push origin-dk master')"
+	@echo "$(call format,git-pull-origin-dk-master,'git pull origin-dk master')"
 
 build: ## Build dev
 	$(DOCKER_COMPOSE_DEV) build --no-cache
